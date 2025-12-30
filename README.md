@@ -1,1 +1,0 @@
-# STT5811StatConcepts
