@@ -1,7 +1,7 @@
 ---
 title: "STT 5811 Statistical Concepts & Applications I (Spring 2026)"
 subtitle: 'Instructor: Dr. Jill E. Thomley'
-date: 'Last updated Sun, Jan 04, 2026 @ 03:43 PM'
+date: 'Last updated Sun, Jan 04, 2026 @ 03:48 PM'
 output:
   html_document:
     theme: yeti
