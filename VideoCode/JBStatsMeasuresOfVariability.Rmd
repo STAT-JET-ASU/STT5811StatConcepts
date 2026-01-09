@@ -1,0 +1,166 @@
+---
+title: "Measures of Variability"
+subtitle: "Companion `R` Code for JB Statistics Video Lesson"
+author: "Created by Jill E. Thomley, Appalachian State University"
+date: "Last updated on `r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: TRUE
+    toc_depth: 4
+---
+
+&#9654; [GO TO VIDEO](https://youtu.be/Cx2tGUze60s)
+
+***
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+## Packages Used
+
+```{r loadpackages}
+library(tidyverse)
+library(kableExtra)
+```
+
+## Datasets Used
+
+### Sample of 4 Observations
+
+```{r}
+sample4 <- tibble(data = c(45, 64, 68, 51))
+glimpse(sample4)
+head(sample4)
+```
+
+### Guinea Pig Survival Data
+
+```{r}
+gp <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/JBStatistics/jbstatsguineapigs.csv")
+glimpse(gp)
+head(gp)
+```
+
+## Example with 4 Observations
+
+### Steps in Calculating MAD and SD
+
+Doing the calculations for deviations the long way. Deviations are the distances of each point from the mean. We use `mutate()` to create new columns from the original `data` column.
+
+#### Calculate all the deviations
+
+```{r}
+devs <- sample4 %>%
+  mutate(
+    deviations = data - mean(data),
+    absolute_devs = abs(deviations),
+    square_devs = deviations^2
+  )
+devs
+```
+
+#### Sum the columns of deviations
+
+```{r}
+sums <- devs %>%
+  summarize(
+    n = n(),
+    sum_devs = sum(deviations),
+    sum_abs_devs = sum(absolute_devs),
+    sum_sqr_devs = sum(square_devs)
+  )
+sums
+```
+
+#### Compute MAD and SD from sums
+
+```{r}
+stats <- sums %>%
+  summarize(
+    MAD = sum_abs_devs / n,
+    s = sqrt(sum_sqr_devs / (n - 1))
+  )
+stats
+```
+
+### `R` Functions for Summarizing Data
+
+We can do many of the same calculations directly using `R`'s built-in functions.
+
+```{r}
+sample4 %>%
+  summarize(
+    n = n(),
+    xbar = mean(data),
+    MAD = sum(abs(data - xbar)) / n,
+    s = sd(data)
+  )
+```
+
+## Example with Guinea Pig Survival Data
+
+Summarize the overall dataset. Base `R` does not have a function for mean absolute deviation.
+
+```{r}
+gp_stats_all <- gp %>%
+  summarize(
+    n = n(),
+    xbar = mean(survivaldays),
+    s = sd(survivaldays),
+    rng = diff(range(survivaldays))
+  )
+gp_stats_all
+```
+
+We can format the output for presentation using `kable()`.
+
+```{r}
+gp_stats_all %>%
+  kable(digits = 2) %>%
+  kable_styling(
+    full_width = FALSE,
+    position = "left",
+    font_size = 14
+  )
+```
+
+Summarize the data by groups.
+
+```{r}
+gp_stats_grp <- gp %>%
+  group_by(group) %>%
+  summarize(
+    n = n(),
+    xbar = mean(survivaldays),
+    s = sd(survivaldays),
+    rng = diff(range(survivaldays))
+  )
+
+gp_stats_grp %>%
+  kable(digits = 2) %>%
+  kable_styling(
+    full_width = FALSE,
+    position = "left",
+    font_size = 14
+  )
+```
+
+## References
+
+Tidyverse: [Create, modify, and delete columns](https://dplyr.tidyverse.org/reference/mutate.html)
+
+Tidyverse: [Summarise each group to fewer rows](https://dplyr.tidyverse.org/reference/summarise.html)
+
+[KableExtra Tutorial](https://rstudio-pubs-static.s3.amazonaws.com/444395_76727eaf9c774fa8bf932bed16500a00.html)
+
+***
+```{r}
+sessionInfo()
+```

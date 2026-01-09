@@ -1,0 +1,202 @@
+---
+title: "Measures of Central Tendency"
+subtitle: "Companion `R` Code for JB Statistics Video Lesson"
+author: "Created by Jill E. Thomley, Appalachian State University"
+date: "Last updated on `r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: TRUE
+    toc_depth: 4
+---
+
+&#9654; [GO TO VIDEO](https://youtu.be/NM_iOLUwZFA)
+
+***
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+## Packages Used
+
+```{r loadpackages}
+library(tidyverse)
+library(kableExtra)
+```
+
+## Datasets Used
+
+### Sample of 4 Observations
+
+```{r}
+# stored as a vector versus a data frame
+
+sample6 <- c(1.4, 3.9, 5.0, 6.2, 8.4, 14.1)
+glimpse(sample6)
+```
+
+### Guinea Pig Survival Data
+
+```{r}
+gp <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/JBStatistics/jbstatsguineapigs.csv")
+glimpse(gp)
+head(gp)
+```
+
+## Example with 6 Observations
+
+### Original Observations
+
+Since the data is a vector rather than a dataset, we are not using `summarize()`.
+
+```{r}
+(xbar <- mean(sample6))
+(xmed <- median(sample6))
+```
+
+<details>
+```{r}
+# https://ggplot2.tidyverse.org/reference/geom_dotplot.html
+# https://ggplot2.tidyverse.org/reference/scale_continuous.html
+# https://ggplot2.tidyverse.org/reference/labs.html
+# https://ggplot2.tidyverse.org/reference/geom_text.html
+# https://ggplot2.tidyverse.org/reference/theme.html
+# https://personal.sron.nl/~pault/#sec:qualitative
+
+dot1 <- ggplot(NULL, aes(x = sample6)) +
+  geom_hline(yintercept = 0) +
+  geom_dotplot(
+    binwidth = 1,
+    dotsize = 0.5,
+    color = "black",
+    fill = "#DDAA33"
+  ) +
+  geom_text(aes(x = sample6, y = 0.1),
+    label = sample6
+  ) +
+  geom_segment(aes(x = xbar, xend = xbar, y = -0.2, yend = 0),
+    arrow = arrow(length = unit(0.3, "cm")),
+    color = "#BB5566"
+  ) +
+  geom_text(aes(x = xbar, y = -0.25),
+    label = paste("mean = ", xbar),
+    fontface = "italic",
+    color = "#BB5566",
+    hjust = 0
+  ) +
+  geom_segment(aes(x = xmed, xend = xmed, y = -0.2, yend = 0),
+    arrow = arrow(length = unit(0.3, "cm")),
+    color = "#004488"
+  ) +
+  geom_text(aes(x = xmed, y = -0.25),
+    label = paste("median = ", xmed),
+    fontface = "italic",
+    color = "#004488",
+    hjust = 1
+  ) +
+  scale_x_continuous(
+    limits = c(0, 27),
+    breaks = seq(from = 0, to = 27, by = 1)
+  ) +
+  scale_y_continuous(breaks = NULL) +
+  labs(
+    title = "dotplot for example of 6 data points",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank())
+```
+</details>
+
+```{r}
+dot1
+```
+
+### Larger Maximum Value
+
+Notice how the mean increases by 2 because of the new larger maximum, but the median does not.
+
+```{r}
+sample6mod <- c(sample6[1:5], 26.1)
+glimpse(sample6mod)
+```
+
+```{r}
+(xbar_mod <- mean(sample6mod))
+(xmed_mod <- median(sample6mod))
+```
+
+## Example with Guinea Pig Survival Data
+
+```{r}
+gp %>%
+  filter(group == "treatment") %>%
+  ggplot(aes(x = survivaldays)) +
+  geom_histogram(
+    breaks = seq(from = 0, to = 600, by = 50),
+    color = "darkgray",
+    fill = "lightblue"
+  ) +
+  labs(
+    title = "Survival times of 60 guinea pigs after being infected with tuberculosis",
+    x = "Lifetime (days)",
+    y = "Frequency"
+  ) +
+  theme_bw()
+```
+
+```{r}
+ggplot(gp, aes(x = survivaldays)) +
+  geom_histogram(
+    breaks = seq(from = 0, to = 800, by = 50),
+    color = "darkgray",
+    fill = "lightblue"
+  ) +
+  facet_grid(group ~ .) +
+  labs(
+    title = "Survival Times of Guinea Pigs",
+    subtitle = "control group vs. treatment group infected with tuberculosis",
+    x = "Lifetime (days)",
+    y = "Frequency"
+  ) +
+  theme_bw()
+```
+
+```{r}
+(gp_stats_grp <- gp %>%
+  group_by(group) %>%
+  summarize(
+    xbar = mean(survivaldays),
+    xmed = median(survivaldays)
+  ))
+
+gp_stats_grp %>%
+  kable(digits = 1) %>% # 1 decimal place
+  kable_styling(
+    full_width = FALSE,
+    position = "left",
+    font_size = 14
+  )
+```
+
+## References
+
+Tidyverse: [Create, modify, and delete columns](https://dplyr.tidyverse.org/reference/mutate.html)
+
+Tidyverse: [Summarise each group to fewer rows](https://dplyr.tidyverse.org/reference/summarise.html)
+
+Tidyverse: [Histograms and Frequency Polygons](https://ggplot2.tidyverse.org/reference/geom_histogram.html)
+
+[KableExtra Tutorial](https://rstudio-pubs-static.s3.amazonaws.com/444395_76727eaf9c774fa8bf932bed16500a00.html)
+
+***
+```{r}
+sessionInfo()
+```
