@@ -40,7 +40,7 @@ The American Statistical Association (ASA) has a [code of ethics](https://www.am
 
 The first work on the guidelines began in 1949, but ASA did not formally adopt any code until 1989. A 1999 update emphasized the rights of human/animal subjects and clear communication. Other revisions addressed new challenges such as Big Data. In the future, ASA will likely have to revise the guidelines again to address topics like artificial intelligence.
 
-<mark>We are expected to follow the guidelines and encourage others to do the same.</mark>
+<div style = "text-align: justify;"><mark>Anyone involved in statistical practice or education is expected to follow these guidelines and encourage others to do the same.</mark></div>
 
 
 ## ASA Ethical Principles
@@ -222,7 +222,9 @@ Each module has a quiz with about 3 multiple choice questions. After you have su
 knitr::include_graphics("CITIimages/CITI_15.jpg", dpi = 130)
 ```
 
-These results will also show up in the overall list of modules in the ***Social/Behavioral Research Course---Basic Course*** and your records page. Check your cumulative percentage! <mark>You need to get ***80% or better*** overall to pass and get credit.</mark>
+These results will also show up in the overall list of modules in the ***Social/Behavioral Research Course---Basic Course*** and your records page. Check your cumulative percentage! 
+
+<mark>You need **80% or more** correct across quizzes to pass/get credit.</mark>
 
 
 ## When You Are Done
