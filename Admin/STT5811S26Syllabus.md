@@ -1,7 +1,7 @@
 ---
 title: "STT 5811 Statistical Concepts & Applications I (Spring 2026)"
 subtitle: 'Instructor: Dr. Jill E. Thomley'
-date: 'Last updated Sun, Jan 04, 2026 @ 03:48 PM'
+date: 'Last updated Fri, Jan 09, 2026 @ 04:05 PM'
 output:
   html_document:
     theme: yeti
@@ -104,11 +104,19 @@ I prefer that you [**book an appointment**](https://calendar.app.google/L5hqPjsU
 
 #### **Textbook & Technology**
 
-Our electronic textbook is ***Introduction to Statistical Investigations (2nd Ed.)*** by Nathan Tintle, Beth Chance, George Cobb, Allan Rossman, Soma Roy, Todd Swanson, and Jill VanderStoep. All course materials will be found on [**AsULearn**](https://asulearn.appstate.edu/) or [**WileyPLUS**](https://www.wileyplus.com/) (which is included in your rental fee). More specific information about individual assignments will be provided on AsULearn.
+Our primary electronic textbook is ***Introduction to Modern Statistics, 2nd Edition*** by Mine Çetinkaya-Rundel and Johanna Hardin. You can download a pdf if you want an offline version, and bound copies can be purchased for $25. Our supplemental electronic textbook is ***Statistical Inference via Data Science: A ModernDive into R and the Tidyverse, 2nd Edition*** by Chester Ismay, Albert Y. Kim, and Arturo Valdivi. All course materials will be found on or linked from [**AsULearn**](https://asulearn.appstate.edu/). More specific information about individual assignments will be provided on AsULearn.
 
-All face-to-face classes will be held in a computer lab. To participate in learning activities and to complete assignments outside of class, you need access to an electronic device on which you can access Zoom, WileyPLUS, web-based simulation applets, and other digital materials. Outside of class, the applets can be used on a cell phone, tablet, or computer. There is no need for cell phones in face-to-face classes, other than for logging into lab computers using Appalachian's dual authentication protocol.
+All face-to-face classes will be held in a computer lab. To participate in learning activities and to complete assignments outside of class, you need access to an electronic device on which you can access Zoom, web-based simulation applets, R and RStudio, our digital textbooks, videos, or other digital materials. There is no need for cell phones in face-to-face classes, other than for logging into lab computers using Appalachian's dual authentication protocol.
 
-Written work typically will be completed using R Markdown, including R programming and LaTeX code as needed.
+Written work typically will be completed using R Markdown, including R programming and LaTeX code as needed. We will use our Appalachian RStudio server in class. You are welcome to download R and RStudio to your own computer to use offline.
+
+**Links (also provided on AsULearn):**
+
+* Introduction to Modern Statistics, 2nd Edition (IMS2E): <https://openintro-ims.netlify.app/>
+* A Modern Dive into R and the Tidyverse, 2nd Edition (MD2E): <https://moderndive.com/v2/>
+* RStudio Server (use your Appalachian credentials): <https://mathr.appstate.edu/> 
+* The R Project for Statistical Computing: <https://www.r-project.org/>
+* Posit---Download RStudio IDE: <https://posit.co/downloads/>
 
 #### **Course Assessments**
 
