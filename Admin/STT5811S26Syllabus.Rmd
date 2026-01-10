@@ -126,17 +126,17 @@ Written work typically will be completed using R Markdown, including R programmi
 
 * <mark>**Homework (10%):**</mark> You will complete several homework assignments, roughly one per week. These are primarily formative assessments of your knowledge and skills, and will be graded on a 5-point scale that reflects accuracy and completion/effort. Submission may be online or printed, as specified in the assignment on AsULearn. Note that **correct** also means there is no extraneous code, output, messages, warnings, or printouts of data.
 
-    * **5** = All problems complete (includes work, steps, or details shown) with $\ge$ 75% fully correct.
+    * **5** = All problems complete (includes work, steps, explanations, or details shown) with $\ge$ 75% fully correct.
 
-    * **4** = All problems complete with 50% to 75% correct; **OR** nearly all problems complete with $\ge$ 75% correct.
+    * **4** = All problems complete with 50--75% correct; **OR** almost all problems complete with $\ge$ 75% correct.
 
-    * **3** = Nearly all problems complete with < 75% correct.
+    * **3** = Almost all problems complete with < 75% correct.
 
-    * **2** = More than half but fewer than all problems complete with $\ge$ 75% correct.
+    * **2** = More than half but not (almost) all complete with $\ge$ 75% correct.
 
-    * **1** = More than half but fewer than all problems complete with < 75% correct; **OR** fewer than half complete.
+    * **1** = More than half but not (almost) all complete with < 75% correct; **OR** fewer than half both complete and correct.
 
-    * **0** = No work submitted; **OR** fewer than half of problems complete.
+    * **0** = No work submitted; **OR** or the work is mostly incomplete and/or incorrect.
 <p></p>
 
 * <mark>**Data Labs (20%):**</mark> You will complete seven lab assignments to apply probability and data analysis skills. These are primarily formative assessments of your knowledge and skills, and will be graded using the same scale as the homework. Submission might be online or paper, depending on the assignment.
