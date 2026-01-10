@@ -1,7 +1,7 @@
 ---
 title: "STT 5811 Statistical Concepts & Applications I (Spring 2026)"
 subtitle: 'Instructor: Dr. Jill E. Thomley'
-date: 'Last updated Fri, Jan 09, 2026 @ 05:37 PM'
+date: 'Last updated Sat, Jan 10, 2026 @ 12:56 PM'
 output:
   html_document:
     theme: yeti
@@ -25,10 +25,10 @@ Please let me know ASAP if you have course any accommodations approved by [**Dis
 
 ### **Instructor Contacts** 
 
-**Office:** Walker Hall 228<br>
-**Phone:** 828-262-2383<br>
-**Email: thomleyje@appstate.edu**<br>
-**Page: <https://jillthomley.github.io/>**
+* **Office:** Walker Hall 228<br>
+* **Phone:** 828-262-2383<br>
+* **Email: thomleyje@appstate.edu**<br>
+* **Page: <https://jillthomley.github.io/>**
 
 ### **Class Meeting Times**
 
@@ -124,19 +124,19 @@ Written work typically will be completed using R Markdown, including R programmi
 
 * <mark>**DataCamp (20%):**</mark> Six DataCamp assignments will introduce and reinforce statistics and R programming concepts. These online modules allow for iterative practice and immediate feedback. For each exercise you complete, you earn XP. If you feel stuck, hints are available at the cost of a few XP. There is also embedded AI help. The goal is to practice and learn. Grading is credit (1)/no credit (0). To get credit, you must earn 80% or more of available XP. You will submit screen shots on AsULearn as evidence of XP earned. DataCamp modules are primarily formative assessments.
 
-* <mark>**Homework (10%):**</mark> You will complete several homework assignments, roughly one per week. These are primarily formative assessments of your knowledge and skills, and will be graded on a 5-point scale that reflects accuracy and completion/effort. Submission might be online or paper, depending on the assignment.
+* <mark>**Homework (10%):**</mark> You will complete several homework assignments, roughly one per week. These are primarily formative assessments of your knowledge and skills, and will be graded on a 5-point scale that reflects accuracy and completion/effort. Submission may be online or printed, as specified in the assignment on AsULearn. Note that **correct** also means there is no extraneous code, output, messages, warnings, or printouts of data.
 
-    * **5** = All problems are complete (with work, steps, or details shown), and $\ge$ 75% are fully correct. Correctness also means that there is no extraneous code, output, messages, warnings, or printouts of data.
+    * **5** = All problems complete (includes work, steps, or details shown) with $\ge$ 75% fully correct.
 
-    * **4** = All problems are complete, and 50 to 75% are correct; **OR** nearly all problems are complete, and $\ge$ 75% are correct.
+    * **4** = All problems complete with 50% to 75% correct; **OR** nearly all problems complete with $\ge$ 75% correct.
 
-    * **3** = Nearly all problems are complete, and < 75% are fully correct.
+    * **3** = Nearly all problems complete with < 75% correct.
 
-    * **2** = More than half but fewer than all problems are complete, and $\ge$ 75% are correct.
+    * **2** = More than half but fewer than all problems complete with $\ge$ 75% correct.
 
-    * **1** = More than half but fewer than all problems are complete, and < 75% are correct; **OR** fewer than half are complete.
+    * **1** = More than half but fewer than all problems complete with < 75% correct; **OR** fewer than half complete.
 
-    * **0** = No work submitted; **OR** fewer than half of problems are complete (missing work, steps, or details).
+    * **0** = No work submitted; **OR** fewer than half of problems complete.
 <p></p>
 
 * <mark>**Data Labs (20%):**</mark> You will complete seven lab assignments to apply probability and data analysis skills. These are primarily formative assessments of your knowledge and skills, and will be graded using the same scale as the homework. Submission might be online or paper, depending on the assignment.
