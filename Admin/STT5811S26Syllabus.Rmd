@@ -44,21 +44,23 @@ This course provides a more detailed treatment of topics taught in introductory 
 
 <mark>**Students will be able to:**</mark>
 
-* use and discuss selected methods for exploring, describing, and comparing data;
+* use and discuss selected methods for exploring, describing, and comparing data.
 
-* use and discuss selected methods for making inferences and estimations from data;
+* use and discuss selected methods for making inferences and estimations from data.
 
-* use and discuss selected methods for modeling categorical and quantitative relationships; 
+* use and discuss selected methods for modeling categorical and quantitative relationships. 
 
-* compare, connect, and assess simulation-based and theory-based methods of investigation;
+* compare, connect, and assess simulation-based and theory-based methods of investigation.
 
-* discuss the roles and impact of randomness in statistical processes, sampling, and study design;
+* discuss the roles and impact of randomness in statistical processes, sampling, and study design.
 
-* apply and discuss axiomatic probability, probability distributions, and sampling distributions;
+* apply and discuss axiomatic probability, probability distributions, and sampling distributions.
 
-* communicate concepts and results using statistical frameworks, vocabulary, and symbols;
+* communicate concepts and results using statistical frameworks, vocabulary, and symbols.
 
-* use statistical thinking to evaluate scholarly research and selected media content; and
+* use statistical thinking to evaluate scholarly research and selected media content.
+
+* use a statistical programming language for simulation, analysis, and reporting.
 
 * connect course content to professional standards and pedagogical practices.
 
