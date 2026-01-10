@@ -1,0 +1,137 @@
+---
+title: "STT 5811 HW01 (IMS2E Section 2.5)"
+subtitle: "PUT YOUR NAME HERE"
+date: 'Last updated `r format(Sys.time(), "%a, %b %d, %Y @ %I:%M %p")`'
+output:
+  pdf_document:
+    toc: true
+    toc_depth: '5'
+---
+
+# Instructions
+
+Complete all of the even-numbered exercises in [**Introduction to Modern Statistics (2e), Section 2.5**](https://openintro-ims.netlify.app/data-design#sec-chp2-exercises). Use complete sentences and explain your answers for those questions where you are asked to do so.
+
+# Exercises
+
+## Exercise 2
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 4
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 6
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 8
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 10
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 12
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 14
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 16
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 18
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 20
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
+e. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 22
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 24
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
+e. ERASE AND TYPE YOUR ANSWER HERE
+
+f. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 26
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
+e. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 28
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 30
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
+e. ERASE AND TYPE YOUR ANSWER HERE
+
+# Session Information
+
+```{r echo = FALSE}
+sessionInfo()
+```
