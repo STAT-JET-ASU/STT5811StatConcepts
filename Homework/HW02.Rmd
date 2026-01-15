@@ -168,3 +168,8 @@ d. ERASE AND TYPE YOUR ANSWER HERE
 
 e. ERASE AND TYPE YOUR ANSWER HERE
 
+# Session Information
+
+```{r echo = FALSE}
+sessionInfo()
+```
