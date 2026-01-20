@@ -1,0 +1,180 @@
+---
+title: "Samples & Study Design"
+subtitle: "STT 5811 Statistical Concepts and Applications"
+author: "Author: Jill E. Thomley | Appalachian State University"
+date: "`r format(Sys.time(), '%B %d, %Y @ %I:%M %p')`"
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r, global_options, include = FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  comment = NA
+)
+library(tidyverse)
+```
+
+
+## Population vs Sample
+
+**<mark>population</mark> :** the entire collection of observational units we are interested in (*as determined by the research question*)
+
+**<mark>parameter</mark> :** a numerical summary measure for a population or long-run process (*e.g., the long-run behavior of a six-sided die*)
+
+**<mark>sample</mark> :** a subset of a population on which we actually observe and record data
+
+**<mark>statistic</mark> :** a numerical value that summarizes results in a sample (*i.e., results in a set of observed data*)
+
+**<mark>census</mark> :** when we collect data on all individuals in a population (*this is the intention of the decennial Census in the U.S.*)
+
+A sample *statistic* is one way to estimate a population *parameter*.
+
+
+# Sampling Principles
+
+## Bias in Sampling
+
+Any population subset, no matter how it is chosen, is a sample. However, not all samples yield the same quality of information.
+
+Data from samples are prone to different kinds/sources of bias.
+
+* **selection :** how we choose the sample from the population
+
+* **non-response :** whether or not we collect data from all units in our chosen sample (*we might quantify non-response rate*)
+
+* **response :** whether or not all of the responses are accurate
+
+**<mark>nonsampling concerns</mark> :** sources of bias that are not related to the way the sample was selected, including non-response and response biases (e.g., poorly worded survey questions, people misremembering, people lying, missing data)
+
+
+## Random Sampling
+
+Our sampling method is ***<mark>biased</mark>*** if we calculate the same statistic from different samples and those statistics tend to  *overestimate* or tend to *underestimate* the population parameter that we are interested in. *Non-random* samples tend to be biased.
+
+**<mark>random sample</mark> :** a subset of observational units chosen using a probability device or method; not all units have to have an equal chance to be chosen, just a *known probability* of being chosen (*it is sometimes called a probability sample*)
+
+**<mark>simple random sample</mark> :** a subset of observational units chosen so that every sample of a given size ($n$) is equally likely to be the sample we select from the population; **also**, each observational unit has the same chance of being chosen 
+
+The term simple random sample is often abbreviated using **<mark>SRS</mark>**.
+
+
+##
+
+**<mark>stratified random sample</mark> :** a type of random sample where the population is divided into non-overlapping subgroups (strata) by some meaningful variable, and then a SRS is selected from each subgroup, sometimes proportional to the sizes of the strata
+
+**<mark>cluster sample</mark> :** a type of random sample where the population is divided into naturally-occurring subgroups (clusters), usually for reasons of time or cost, and then a SRS of clusters is chosen; all units in each sampled cluster are included
+
+**<mark>multistage sample</mark> :** after the clusters are chosen, a SRS is taken from each cluster, rather than using all units in sampled clusters
+
+Members of a given strata are usually more homogeneous than the population as a whole (e.g., political parties), so stratification helps achieve a representative sample. Members of a cluster are meant to be like mini-populations, similar to one another. Using clusters is more about issues of economy and access.
+
+
+##
+
+**<mark>sampling frame</mark> :** a roster or "master list" of every observational unit in a given population of interest; we need this (*or a proxy*) in order to be able to choose a random sample
+
+<hr>
+
+Non-random samples include anecdotal evidence, convenience samples, and volunteer samples.
+
+**<mark>convenience sample</mark> :** units are chosen because they are easily accessible; snowball sampling, where a small number of chosen units refer other potential units, is one variation
+
+**<mark>volunteer sample</mark> :** participants choose themselves rather than being chosen (e.g., mail-in or call-in surveys)
+
+Nonprobability samples exclude some part of the population of interest, and we generally cannot define the probability that any given unit will be chosen. This introduces unknown bias.
+
+
+# Statistical Studies
+
+
+## Variables in Studies
+
+**<mark>explanatory variable</mark> :** this is the variable that explains changes in the response variable; may also be called **independent variable** or **predictor variable**
+
+**<mark>response variable</mark> :** this variable is impacted by the explanatory variable; also known as a **dependent** or **predicted variable**
+
+**<mark>confounding variable</mark> :** a variable related to the explanatory and response variables in such a way that its effects on the response variable cannot be separated from the effects of the explanatory variable---which means that it (*problematically*) provides another possible explanation for the observed results 
+
+You may also see references to what is called a **<mark>lurking variable</mark>**. The distinction sometimes made is that a lurking variables is a confounding variable *not measured or accounted for* in a study. 
+
+
+## Variable Associations
+
+Two variables are said to be associated (related) if the value of one variable gives you information about the value of the other variable. When comparing groups, the relevant statistic for one variable (**response** or **dependent** variable) are different within sub-groups created by the **explanatory** variable).
+
+<hr>
+
+The relationship or ***association*** we are trying to study...
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("images/confound01.png", dpi = 115)
+```
+<br><div style = "text-align: center; font-size: 18px;">Image from [*Statology: What is a Confounding Variable?*](https://www.statology.org/confounding-variable/) by Zach Bobbitt </div>
+
+
+## Confounding: Alternative Explanation
+
+Does regular exercise reduce blood pressure? An example of a ***confounding*** variable (i.e., a possible alternative explanation).
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("images/confound02.png", dpi = 220)
+```
+
+<br><div style = "text-align: center; font-size: 18px;">Image from [*Statology: What is a Confounding Variable?*](https://www.statology.org/confounding-variable/) by Zach Bobbitt </div>
+
+
+## Confounding: Another Example
+
+Does buying ice cream cause a person to be more vulnerable to shark attack? I really hope not... 😬
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("images/confound03.png", dpi = 120)
+```
+
+<br><div style = "text-align: center; font-size: 18px;">Image from [*Statology: What is a Confounding Variable?*](https://www.statology.org/confounding-variable/) by Zach Bobbitt </div>
+
+
+## Design Principles to Reduce Confounds
+
+**<mark>control</mark> :** assign treatments to units and try to control any other differences between the groups as much as possible (e.g., use standardized procedures, have a control group with a placebo, use single- or double-blind setup)
+
+**<mark>randomization</mark> :** randomly assign treatments to units to account for confounding variables that cannot be controlled
+
+**<mark>replication</mark> :** in a single study, use a sufficiently large sample to observe the effect multiple times and estimate variability; also refers to redoing an entire experiment to verify earlier findings
+
+**<mark>blocking</mark> :** group units into blocks based on some variable, then randomize cases within each block to the treatment groups; this requires more work up front in design and after in data analysis (but may be worth it if there is a major confounding variable)
+
+
+## Types of Statistical Studies
+
+**<mark>observational study</mark> :** study in which the researchers observe individuals and measure variables of interest, but they do not intervene or control anything to try to influence responses
+
+**<mark>experiment</mark> :** a study in which the researchers manipulate the explanatory variable and actively assign study participants (i.e., subjects or experimental units) to treatment groups
+
+**<mark>randomized experiment</mark> :** a study where experimental units are *randomly* assigned to two or more treatment conditions and the explanatory variable is actively imposed on the subjects
+
+**<mark>block study design (randomized block design)</mark> :** a study design that begins by forming blocks consisting of individuals that are similar in a way that may be confounding; random assignment of treatments is then carried out separately in each block
+
+
+## Random Sampling & Assignment
+
+Using random sampling and/or random assignment (or not) has implications for the conclusions we can draw from data.
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("images/randtable.png", dpi = 210)
+```
+
+<br><div style = "text-align: center; font-size: 16px;">Image from [*Introduction to Modern Statistics (2e)*](https://openintro-ims.netlify.app/data-design#sec-chp2-review) by by Mine Çetinkaya-Rundel and Johanna Hardin</div>
+
+
+
+
+
+
+
+
+
+

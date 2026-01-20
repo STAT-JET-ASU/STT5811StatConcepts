@@ -1,0 +1,358 @@
+---
+title: "Introduction to Datasets"
+subtitle: "STT 5811 Statistical Concepts and Applications"
+author: "Author: Jill E. Thomley | Appalachian State University"
+date: "`r format(Sys.time(), '%B %d, %Y @ %I:%M %p')`"
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r, global_options, include = FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  comment = NA
+)
+library(tidyverse)
+```
+
+
+# Dataset Structure
+
+## Essential Vocabulary
+
+* A ***variable*** is some characteristic we are interested in that can differ between individuals in a population.
+
+* A **unit of observational** (or ***observation***) is a single individual, object, or entity about which we collect data, to describe one or more of its characteristics (variables).
+
+* An observation may be called a case, subject, or participant.
+
+* Ideally, each observational unit has a value for each variable.
+
+A ***dataset*** is a collection of data values for the observations and variables in a study (e.g., survey or experiment). A common way to arrange data is to put variables in columns and observations in rows. This is what we call ***tidy*** data. 
+
+
+## Numerical Variables
+
+Variables that can take on a range of numerical values, where it is sensible and meaningful to perform mathematical operations on those values, are **numerical** or **quantitative** variables. These often will include units of measure.
+
+A **discrete** variable is a numerical variable that can only take on a finite or countably infinite number of distinct, separate values. These are often whole numbers or counts.
+
+A **continuous** variable is a numerical variable that can have any value within a given range. The set of possible values is infinite. These include concepts like time, temperature, speed, or weight, which are limited in decimals only by our ability to measure.
+
+Some variables that use numbers are not truly numerical, such as area codes or social security numbers.
+
+
+## Categorical Variables
+
+At the name suggests, **categorical** variables are categories into which we group characteristics, or labels for observation units, such as eye color, gender, or state names.
+
+Categories that have a natural ordering, such as the grade levels freshman, sophomore, junior, and senior, are called **ordinal**. 
+
+If categories do not have a natural or meaningful ordering, then we call that a **nominal** categorical variable. Our IMS2E textbook treats all categorical variables as nominal.
+
+For convenience, we could use numbers to represent categories, such as Democrat = 1, Republican = 2, Independent = 3, but they would still be categorical. We have to be careful of this when we use software for data analysis.
+
+
+## "Levels of Measurement"
+
+Some textbooks refer to a variable's "level of measurement" and identify numerical variables as being **interval** or **ratio** type. 
+
+A **ratio** variable has a true zero, in the sense that zero means an absence of the characteristic that is being counted or measured. For example, if I have a bank balance of \$0, I have no money, or a water level of zero in a reservoir means there is no water.
+
+For a ratio variable, values have the proportions we expect from the real number line. For example, \$6.00 is twice as much actual value as \$3.00 (the ratio of quantities is 6/3 = 2).
+
+An **interval** variable has fixed-sized units, but no true zero. For example, 0°C is not an absence of temperature (kinetic energy), and 100°C is not twice as hot as 50°C. However, each 1°C added is the same amount of additional energy.
+
+
+## Hierarchy of Values
+
+The levels of measurement framework has an innate hierarchy.
+
+**levels:** nominal &rarr; ordinal &rarr; interval (discrete or continuous) &rarr; ratio (discrete or continuous)
+
+Older versions of some data analysis programs like SPSS used to use these levels of measurement. Now SPSS uses three levels of measurement: Nominal, Ordinal, and Scale (grouping numerical Interval and Ratio scales together).
+
+`R` does not make this variable distinction in quite the same way. We will discuss this when we use `R` to explore data.
+
+
+## What is "Tidy" Data?
+
+<p style="text-align:center; font-size: 18px;"><img src="https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png" width = 775><br>
+Tidy data graphic from [*R for Data Science: Tidy Data*](http://r4ds.had.co.nz/tidy-data.html)</p>
+
+<p>Most of the datasets we will work with are already **tidy**, though there may be missing data and other issues we have to address before conducting analyses.</p>
+
+<p>Real life data is often quite messy. We may explore a few ways to make datasets more tidy during this course.</p>
+
+
+## Variable Vectors in `R`
+
+Each variable (column) in a tibble or dataset is a vector. These vectors may be of different types. It is helpful to visualize this when planning how to manipulate data.
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("images/dataframevectors.png", dpi = 140)
+```
+
+<div style = "text-align: center; font-size: 18px;">Data Frame Columns are Vectors (from [*Hands-On Programming with R*](https://rstudio-education.github.io/hopr/r-objects.html#data-frames))</div>
+
+
+## The Six Main Types of Vectors
+
+| typeof (...)                           | mode (...) | storage.mode (...) |
+|:--------------------------------------:|:----------:|:------------------:|
+| logical (`TRUE` = `1` / `FALSE` = `0`) | logical    | logical            |
+| integer                                | numeric    | integer            |
+| double                                 | numeric    | double*            |
+| complex                                | complex    | complex            |
+| character (alphanumeric, string)       | character  | character          |
+| raw (contains raw bytes)               | raw        | raw                |
+
+\* double precision floating point (a method by which computers store decimal numbers; 64 bits or 8 bytes of memory)
+
+
+# Exploring Datasets
+
+## What's in a Dataset?
+
+Before doing any kind of data modeling or inference, you need to examine your dataset and become familiar with its structure and contents---this is ***exploratory data analysis (EDA)***.
+
+John Tukey (1915–2000), author of the seminal book *Exploratory Data Analysis* (1977), referred to EDA as numerical, counting, and graphical detective work. He is also credited with introducing the now-familiar terms "bit" and "software" while working with early computers at Bell Labs.
+
+We will use the ***dplyr*** and ***ggplot2*** packages for manipulation and visualization. These tools and more are part of the [tidyverse](https://www.tidyverse.org/).
+
+`R` has many functions that help us explore datasets and discover their properties/variables.
+
+
+## Datasets in `R`
+
+A data frame or tibble is a two dimensional structure/array in `R`. It is a special case of a list where each component (column) has equal length and can contain a different variable type.
+
+The core installation of `R` (i.e., `{base} R`) includes many built-in datasets. We can get a list using the `data()` function.
+
+Entering `data()` in the Console pane of RStudio will open a new tab/window listing the names of all the built-in datasets. 
+
+We can get a list of the datasets found in other packages using `data(package = "packagename")`. For example, all the data in ggplot2 can be found using `data(package = "ggplot2")`.
+
+Try `data(package = .packages(all.available = TRUE))` .
+
+
+## Example Dataset
+
+Consider the `Nightingale` dataset from the HistData package.
+
+Load the HistData package using the `library()` function. Let's assign the dataset to an object in our environment.
+
+```{r}
+library(HistData)
+nightingale <- Nightingale   # all lowercase can be more convenient
+```
+
+Examine the dataset in your **Environment** pane.
+
+* How many variables (columns) are there?
+* What is the vector type for each of the variables?
+* How many observational units/cases (rows) are there? What does each case represent?
+
+
+## Environment Pane
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("images/nightenvironment.png", dpi = 90)
+```
+
+
+## `View()` the Dataset
+
+Use `View(nightingale)` or click on the name of the dataset in the Environment pane to visualize the structure; the rows (units of observation) and columns (variables). Works best for smaller datasets, with a few variables that fit into the window view.
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("images/nighttidydisplay.png", dpi = 100)
+```
+
+
+## Some Functions for Exploring
+
+The environment pane is using functions behind the scenes to display some of the information we can see. We can use these functions directly to explore dataset structure.
+
+`head()` / `tail()` are closely related; so are `str()` / `glimpse()` 
+
+```{r eval = FALSE}
+head(nightingale)     # this function is part of base R code
+```
+
+```{r eval = FALSE}
+tail(nightingale)     # this function is part of base R code
+```
+
+```{r eval = FALSE}
+str(nightingale)      # this function is part of base R code
+```
+
+```{r eval = FALSE}
+library(tidyverse)
+glimpse(nightingale)  # this function is from package dplyr
+```
+
+
+## Visualize Structure
+
+What information does `str()` give you about the dataset?
+
+```{r}
+str(nightingale)     # this function is part of base R code
+```
+
+
+## 
+
+How are the outputs of `str()` and `glimpse()` similar? How are they different? Which does the RStudio Environment pane use?
+
+```{r}
+glimpse(nightingale)
+```
+
+
+## Other Useful Functions
+
+A few functions for exploring dataset structure are given below. What information does each give you?
+
+* `attributes()`
+* `names()`
+* `dim()`
+* `nrow()`
+* `ncol()`
+* `head()`
+* `tail()`
+* `sum(complete.cases())` # this is two nested functions
+* `sum(!complete.cases())` # what does the ! do?
+
+
+## 
+
+```{r}
+attributes(nightingale)
+```
+
+```{r}
+names(nightingale)
+```
+
+
+## 
+
+```{r}
+row.names(nightingale)
+```
+
+```{r}
+class(nightingale)
+```
+
+```{r}
+typeof(nightingale)
+```
+
+```{r}
+dim(nightingale)
+```
+
+
+## Explore some more datasets!
+
+Try exploring some of the datasets in the HistData package, or those you can find in `R` and the tidyverse packages. You will see some of these pop up in DataCamp courses.
+
+Practice to become proficient in loading data and investigating structure so you can start the important work of transforming raw data into useful information and knowledge.
+
+These functions also will be useful when you manipulate data. They can help you can check that you achieve the structure you want/need. For example...
+
+* Did you create a new variable properly? 
+* Did you filter out any cases you did not want?
+* Did you successfully rearrange or "tidy" the data?
+
+
+# Build from Scratch
+
+## Using `data.frame()`
+
+We can build a dataset from scratch (i.e., from vectors) using the `data.frame()` function.
+
+Within the `data.frame()` function, we specify *variable name* = *a vector of values for the variable*. All the vectors must be the same length (i.e., same number of cases).
+
+
+```{r}
+dataset1 <- data.frame(
+  ID = 1:5,
+  gender = c("male", "male", "female", "female", "nonbinary"),
+  height = c(71, 73, 64, 64, 66),
+  weight = c(175, 225, 130, 125, 165)
+)
+```
+
+Notice the structure of the code, including the indenting and `()`.
+
+##
+
+```{r}
+glimpse(dataset1)
+head(dataset1)
+```
+
+## Using `tibble()`
+
+A tibble is an "upgraded" dataset structure from the tidyverse. However, it works very similarly to `data.frame()`.
+
+```{r}
+dataset2 <- tibble(
+  ID = 1:5,
+  gender = c("male", "male", "female", "female", "nonbinary"),
+  height = c(71, 73, 64, 64, 66),
+  weight = c(175, 225, 130, 125, 165)
+)
+```
+
+One major difference between `data.frame()` and `tibble()` is the way it formats the vectors. The `tibble()` function generally imposes *less* structure. For example, it does not turn character data into a factor vector by default.
+
+How else are the different? Use your exploratory functions!
+
+
+##
+
+```{r}
+glimpse(dataset1)
+```
+
+```{r}
+glimpse(dataset2)
+```
+
+
+## Example with Missing Data
+
+`NA` is `R`'s system character for missing data, similar to how `NULL` means that there is no vector (vector of length zero).
+
+```{r}
+library(tidyverse)
+dataset3 <- tibble(
+  ID = c(1, 2, 4, 5, 7),
+  sex = c("male", "male", "female", "nonbinary", NA),
+  visits = c(1, 2, 4, 12, 2),
+  checkup = c(1, 1, 1, 1, 1),
+  follow_up = c(NA, 0, 1, 2, 0),
+  illness = c(0, 0, 2, 7, 1 ),
+  surgery = c(0, 0, 0, 2, 0),
+  ER = c(0, 1, 0, 0, NA),
+  Test = NULL
+)
+```
+
+
+## 
+
+```{r}
+glimpse(dataset3)
+```
+
+Use your other exploratory functions. Also, what happened to the `Test` variable?
+
