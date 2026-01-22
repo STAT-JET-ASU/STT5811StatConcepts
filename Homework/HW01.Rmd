@@ -1,11 +1,11 @@
 ---
-title: "STT 5811 HW01 Data and Study Design"
-subtitle: "PUT YOUR NAME HERE"
+title: "STT 5811 HW01: Data Basics and Study Design"
+subtitle: PUT YOUR NAME HERE
 date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
 output:
   pdf_document:
     toc: true
-    toc_depth: '5'
+    toc_depth: '2'
 ---
 
 # Instructions

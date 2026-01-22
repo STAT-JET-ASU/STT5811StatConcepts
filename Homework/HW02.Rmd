@@ -5,7 +5,7 @@ date: 'Last updated `r format(Sys.time(), "%a, %b %d, %Y @ %I:%M %p")`'
 output:
   pdf_document:
     toc: true
-    toc_depth: '5'
+    toc_depth: '2'
 ---
 
 # Instructions

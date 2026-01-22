@@ -1,0 +1,220 @@
+---
+title: "STT 5811 Lab01: Data Basics and Study Design"
+subtitle: PUT YOUR NAME HERE
+date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+output:
+  pdf_document:
+    highlight: zenburn
+    toc: true
+    toc_depth: '5'
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+# Instructions
+
+This data lab is adapted from the [**Intro to R - Birth Rates**](https://openintrostat.github.io/oilabs-tidy/01_intro_to_r/intro_to_r.html) lab in [**Section 3.4**](https://openintro-ims.netlify.app/data-applications#sec-data-labs) of the IMS2E textbook. Read through the textbook's version of the lab (you can skip the videos), then complete your analysis here. Use complete sentences when answering questions.
+
+
+# Packages Used
+
+Load the `tidyverse` and `openintro` packages.
+```{r packages}
+library(tidyverse)
+library(openintro)
+```
+
+
+# Arbuthnot Dataset
+
+## Dataset Description
+
+The `arbuthnot` dataset in the `openintro` package comes from the work of Dr. John Arbuthnot (1667-1735), an 18th century physician, writer, and mathematician. He investigated the ratio of newborn boys to girls, because he believed boys and girls were not born in equal numbers. If that was shown to be true beyond what was explainable by random chance, he asserted it would demonstrate "divine providence." This study is one of the earliest extant examples of a researcher using real-world data and probability to test a hypothesis. For data, Arbuthnot gathered baptismal records for babies born in London between 1629 and 1710.
+
+Arbuthnot, John. (1710). An argument for Devine Providence, taken from the constant Regularity observ'd in the Births of both Sexes. *Philosophical Transactions*, 27, 186-190. **<https://doi.org/10.1098/rstl.1710.0011>**
+
+
+## Explore the Dataset
+
+Assign the `arbuthnot` dataset to an object named `arbuthnot` in your Environment.
+```{r}
+arbuthnot <- arbuthnot
+```
+
+Use `glimpse()` to explore the dataset.
+```{r}
+glimpse(arbuthnot)
+```
+
+Use `head()` to print out the first five rows of the dataset.
+```{r}
+glimpse(arbuthnot)
+```
+
+Extract the column representing boys from the dataset using `$` and `sum()` the values.
+```{r}
+sum(arbuthnot$boys)
+```
+
+Extract the column representing girls from the dataset using `$` and `sum()` the values.
+```{r}
+sum(arbuthnot$girls)
+```
+
+QUESTIONS
+
+1. How many observational units are there? What does each unit (row) represent?
+
+> ERASE AND TYPE YOUR ANSWER HERE (leave the >)
+
+2. How many variables are there? What variable type is each? What vector type?
+
+> ERASE AND TYPE YOUR ANSWER HERE
+
+3. What piece of information does each variable tell you for each observation?
+
+> ERASE AND TYPE YOUR ANSWER HERE
+
+4. What are the total numbers of boys and girls? Which total is larger?
+
+> ERASE AND TYPE YOUR ANSWER HERE
+
+
+## Create New Variables
+
+Create a new variable to represent total births. Reassign the dataset to save the change.
+```{r}
+arbuthnot <- arbuthnot |>
+  mutate(total = boys + girls)
+```
+
+Create a new variable to represent the ratio of boys to girls. Be sure to save the change.
+```{r}
+arbuthnot <- arbuthnot |>
+  mutate(ratio = boys/girls)
+```
+
+Create a new variable to represent the proportion of boys. Be sure to save the change.
+```{r}
+arbuthnot <- arbuthnot |>
+  mutate(prop = boys/total)
+```
+
+Create a new variable to represent whether boys > girls. Be sure to save the change.
+```{r}
+arbuthnot <- arbuthnot |>
+  mutate(greater = boys > girls)
+```
+
+Use `glimpse()` to verify the new structure of your dataset with the added variables.
+```{r}
+glimpse(arbuthnot)
+```
+
+QUESTIONS
+
+1. How many observational units are there? Why does this make sense?
+
+> ERASE AND TYPE YOUR ANSWER HERE
+
+2. What are the variable and vector types for your new variables?
+
+> ERASE AND TYPE YOUR ANSWER HERE
+
+
+## Total Baptisms Over Time
+
+Insert your total variable name to plot total number of children baptized over time.
+```{r}
+ggplot(data = arbuthnot, aes(x = year, y = VARIABLENAME)) +
+  geom_line() +
+  geom_point()
+```
+
+Use code to find and display the 10 years with the lowest total numbers of children.
+```{r}
+
+```
+
+QUESTIONS
+
+1. Is there an apparent trend (or trends)  over the years in the number of girls that were baptized? Describe what you see in words. Are there any notable intervals of time or deviations?
+
+> ERASE AND TYPE YOUR ANSWER HERE
+
+2. What was happening in England between 1640 and 1660 that might explain what the graph shows?
+
+> ERASE AND TYPE YOUR ANSWER HERE
+
+3. What major event happened in England in 1703 that might explain the data point for 1704?
+
+> ERASE AND TYPE YOUR ANSWER HERE
+
+
+## Comparing Boys and Girls
+
+Create a plot of the proportion of boys over time using both points and a line. 
+```{r}
+ggplot(data = arbuthnot, aes(x = year, y = prop)) +
+  geom_line() +
+  geom_point()
+```
+
+Create a plot of the ratio of boys to girls over time using both points and a line. 
+```{r}
+ggplot(data = arbuthnot, aes(x = year, y = ratio)) +
+  geom_line() +
+  geom_point()
+```
+
+Use `count()` to find out how many observed years had a larger number of boys than girls.
+```{r}
+arbuthnot |>
+  count(greater)
+```
+
+Insert variables names to make a scatterplot of the ratio of boys as a function of total.
+```{r}
+ggplot(data = arbuthnot, aes(x = total, y = ratio)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+QUESTIONS
+
+1. How do the analyses support the idea that more boys than girls were born between 1629 and 1710? Explain, using information from your plots and counts to support your answer.
+
+> ERASE AND TYPE YOUR ANSWER HERE
+
+2. Does the scatterplot suggest that boys-to-girls ratio might be related to the total number of babies? Explain, using information from the plot to support your answer.
+
+> ERASE AND TYPE YOUR ANSWER HERE
+
+
+## Think and Reflect on the Data
+
+QUESTIONS
+
+1. Arbuthnot used baptismal records rather than birth records, which would not have existed at the time, and only from Anglican churches in London. How might this impact his data, with respect to what he was trying to measure and investigate (i.e., is his sample biased)?
+
+> ERASE AND TYPE YOUR ANSWER HERE
+
+2. In his paper, Arbuthnot described his methodology: "Let there be a Die of Two sides, M and F...to find all the Chances of any determinate Number of such Dice, let the Binome M + F be raised to the Power, whose Exponent is the Number of Dice given...For Example, in Two Dice of Two sides M + F, the Chances are $M^2 + 2 MF + F^2$, that is, One Chance for M double, One for F double, and Two for M single and F single..." M is defined as observing more boys than girls in a given year, while F is more girls than boys. What probability model does this sound like? If boys and girls are truly equally likely, how could you use this model to calculate the probability of the ratios you saw in Arbuthnot's data? You do not have to do the calculation, just describe how you would.
+
+> ERASE AND TYPE YOUR ANSWER HERE
+
+
+# Session Information
+
+Reproducibility in statistics means being able to get the same results using the same data, code, and methods as the original researchers. It is a way ensure scientific transparency and verifiability. Session information is a snapshot of the `R` working environment you used. This helps with reproducibility and code debugging, since software evolves. Even with the same data and methods, code and analyses implemented using older or newer versions of `R` and its packages may behave differently and give different results.
+
+```{r}
+sessionInfo()
+```
+
