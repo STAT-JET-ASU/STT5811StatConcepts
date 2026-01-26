@@ -10,7 +10,7 @@ output:
 
 # Instructions
 
-Do exercises 1, 2, 3, 4 and 8 in [**IMS2E Section 1.4**](https://openintro-ims.netlify.app/data-hello#sec-chp1-exercises) and even-numbered exercises in [**IMS2E Section 2.5**](https://openintro-ims.netlify.app/data-design#sec-chp2-exercises). Use complete sentences and explain your answers for those questions where you are asked to do so.
+Do exercises 1, 2, 3, 4, and 8 in [**IMS2E Section 1.4**](https://openintro-ims.netlify.app/data-hello#sec-chp1-exercises) and all even-numbered exercises in [**IMS2E Section 2.5**](https://openintro-ims.netlify.app/data-design#sec-chp2-exercises). Use complete sentences and explain your answers for those questions where you are asked to do so.
 
 # Section 1.4 Exercises
 

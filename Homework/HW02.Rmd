@@ -1,7 +1,7 @@
 ---
-title: "STT 5811 HW01 Data and Study Design"
-subtitle: "PUT YOUR NAME HERE"
-date: 'Last updated `r format(Sys.time(), "%a, %b %d, %Y @ %I:%M %p")`'
+title: "STT 5811 HW02: Categorical Data"
+subtitle: PUT YOUR NAME HERE
+date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
 output:
   pdf_document:
     toc: true
@@ -10,35 +10,11 @@ output:
 
 # Instructions
 
-Do exercises 1, 2, 3, 4 and 8 in [**IMS2E Section 1.4**](https://openintro-ims.netlify.app/data-hello#sec-chp1-exercises) and even-numbered exercises in [**IMS2E Section 2.5**](https://openintro-ims.netlify.app/data-design#sec-chp2-exercises). Use complete sentences and explain your answers for those questions where you are asked to do so.
+Do all even-numbered exercises in [**IMS2E Section 4.8**](https://openintro-ims.netlify.app/explore-categorical#sec-chp4-exercises). Use complete sentences and explain your answers for those questions where you are asked to do so.
 
-# Section 1.4 Exercises
-
-## Exercise 1
-
-ERASE AND TYPE YOUR ANSWER HERE
+# Section 4.8 Exercises
 
 ## Exercise 2
-
-ERASE AND TYPE YOUR ANSWER HERE
-
-## Exercise 4
-
-a. ERASE AND TYPE YOUR ANSWER HERE
-
-b. ERASE AND TYPE YOUR ANSWER HERE
-
-c. ERASE AND TYPE YOUR ANSWER HERE
-
-## Exercise 6
-
-a. ERASE AND TYPE YOUR ANSWER HERE
-
-b. ERASE AND TYPE YOUR ANSWER HERE
-
-c. ERASE AND TYPE YOUR ANSWER HERE
-
-## Exercise 8
 
 a. ERASE AND TYPE YOUR ANSWER HERE
 
@@ -50,12 +26,6 @@ d. ERASE AND TYPE YOUR ANSWER HERE
 
 e. ERASE AND TYPE YOUR ANSWER HERE
 
-# Section 2.5 Exercises
-
-## Exercise 2
-
-ERASE AND TYPE YOUR ANSWER HERE
-
 ## Exercise 4
 
 a. ERASE AND TYPE YOUR ANSWER HERE
@@ -68,6 +38,10 @@ a. ERASE AND TYPE YOUR ANSWER HERE
 
 b. ERASE AND TYPE YOUR ANSWER HERE
 
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
 ## Exercise 8
 
 a. ERASE AND TYPE YOUR ANSWER HERE
@@ -75,8 +49,6 @@ a. ERASE AND TYPE YOUR ANSWER HERE
 b. ERASE AND TYPE YOUR ANSWER HERE
 
 c. ERASE AND TYPE YOUR ANSWER HERE
-
-d. ERASE AND TYPE YOUR ANSWER HERE
 
 ## Exercise 10
 
@@ -84,92 +56,7 @@ a. ERASE AND TYPE YOUR ANSWER HERE
 
 b. ERASE AND TYPE YOUR ANSWER HERE
 
-## Exercise 12
-
-a. ERASE AND TYPE YOUR ANSWER HERE
-
-b. ERASE AND TYPE YOUR ANSWER HERE
-
-c. ERASE AND TYPE YOUR ANSWER HERE
-
-## Exercise 14
-
-ERASE AND TYPE YOUR ANSWER HERE
-
-## Exercise 16
-
-a. ERASE AND TYPE YOUR ANSWER HERE
-
-b. ERASE AND TYPE YOUR ANSWER HERE
-
-## Exercise 18
-
-ERASE AND TYPE YOUR ANSWER HERE
-
-## Exercise 20
-
-a. ERASE AND TYPE YOUR ANSWER HERE
-
-b. ERASE AND TYPE YOUR ANSWER HERE
-
 c. ERASE AND TYPE YOUR ANSWER HERE
 
 d. ERASE AND TYPE YOUR ANSWER HERE
 
-e. ERASE AND TYPE YOUR ANSWER HERE
-
-## Exercise 22
-
-ERASE AND TYPE YOUR ANSWER HERE
-
-## Exercise 24
-
-a. ERASE AND TYPE YOUR ANSWER HERE
-
-b. ERASE AND TYPE YOUR ANSWER HERE
-
-c. ERASE AND TYPE YOUR ANSWER HERE
-
-d. ERASE AND TYPE YOUR ANSWER HERE
-
-e. ERASE AND TYPE YOUR ANSWER HERE
-
-f. ERASE AND TYPE YOUR ANSWER HERE
-
-## Exercise 26
-
-a. ERASE AND TYPE YOUR ANSWER HERE
-
-b. ERASE AND TYPE YOUR ANSWER HERE
-
-c. ERASE AND TYPE YOUR ANSWER HERE
-
-d. ERASE AND TYPE YOUR ANSWER HERE
-
-e. ERASE AND TYPE YOUR ANSWER HERE
-
-## Exercise 28
-
-a. ERASE AND TYPE YOUR ANSWER HERE
-
-b. ERASE AND TYPE YOUR ANSWER HERE
-
-c. ERASE AND TYPE YOUR ANSWER HERE
-
-## Exercise 30
-
-a. ERASE AND TYPE YOUR ANSWER HERE
-
-b. ERASE AND TYPE YOUR ANSWER HERE
-
-c. ERASE AND TYPE YOUR ANSWER HERE
-
-d. ERASE AND TYPE YOUR ANSWER HERE
-
-e. ERASE AND TYPE YOUR ANSWER HERE
-
-# Session Information
-
-```{r echo = FALSE}
-sessionInfo()
-```

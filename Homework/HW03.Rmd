@@ -1,0 +1,94 @@
+---
+title: "STT 5811 HW03: Numerical Data"
+subtitle: PUT YOUR NAME HERE
+date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: '2'
+---
+
+# Instructions
+
+Do all even-numbered exercises in [**IMS2E Section 5.10**](https://openintro-ims.netlify.app/explore-numerical#sec-chp5-exercises). Use complete sentences and explain your answers for those questions where you are asked to do so.
+
+# Section 5.10 Exercises
+
+## Exercise 2
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 4
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 6
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 8
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 10
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 12
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 14
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 16
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
+e. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 18
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 20
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 22
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 24
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 26
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
