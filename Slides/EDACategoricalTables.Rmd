@@ -1,7 +1,7 @@
 ---
-title: "EDA &#9654; Categorical Data<br>Tabulating Data"
+title: "Categorical Data:<br>Tabulating Data"
 subtitle: "STT 5811 Statistical Concepts and Applications"
-author: "Author: Jill E. Thomley | Appalachian State University"
+author: "Jill E. Thomley | Appalachian State University"
 output: 
   ioslides_presentation:
     logo: images/logoASU.jpg
@@ -20,9 +20,8 @@ These slides are not meant to be standalone information. You should take notes t
 **Related Materials**
 
 * Ch 2 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
-* Ch 2 of [*Modern Dive*](https://moderndive.com/2-viz.html)
-* Ch 3 of [*Modern Dive*](https://moderndive.com/3-wrangling.html)
-* Ch 4 of [*Modern Dive*](https://moderndive.com/4-tidy.html)
+* Ch 2 of [*Modern Dive*](https://moderndive.com/v2/viz.html)
+* Ch 3 of [*Modern Dive*](https://moderndive.com/v2/wrangling.html)
 * DataCamp [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
 
 
@@ -43,7 +42,7 @@ knitr::include_graphics("images/Fisher.jpg", dpi = 100)
 
 Summaries based on *counting* how often categories occur.
 
-**Quantitative Variables**
+**Numerical Variables**
 
 * shape
 * center
@@ -96,9 +95,9 @@ This kind of table may be used for several different types of data summaries, su
 
 In the early 1970s, UC Berkeley was concerned about possible sex discrimination in grad school admissions. The [berkeley.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv) dataset contains fall 1973 data for the six largest departments. Click the link to get the URL for the dataset.
 
-The Berkeley dataset is an example of a statistical phenomena called [Simpson's Paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox).
+The Berkeley data is an example of a concept in statistics called [Simpson's Paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox).
 
-Load the dataset into `R` from its URL:
+You can load the data into `R` using the URL and the code below.
 
 `library(tidyverse)`
 
@@ -135,7 +134,7 @@ whether the applicant was accepted or rejected
 
 <hr>
 
-Each *observation* in the dataset represents one applicant, with a total of `r nrow(berkdata)` observations. 
+Each **observation** in the dataset represents one applicant, with a total of `r nrow(berkdata)` observations.  
 
 
 ## Frequency Tables
@@ -343,7 +342,7 @@ students <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/ma
 students %>% count(AY)
 ```
 
-Dr. Thomley has taught different numbers of STT3850 sections in the various years. Section sizes ranged from 25 to 45 (as an FYI---you can't tell number or size directly from the dataset).
+Dr. Thomley has taught different numbers of STT3850 sections in various years. (Numbers/sizes of sections are not in the data).
 
 
 ## What Majors? Oh, so many...
@@ -361,7 +360,7 @@ students %>%
   mutate(percents = 100 * prop.table(n))   # compute percentages
 ```
 
-So, it looks like the largest group overall is computer science majors. Has the % been constant across academic years?
+The largest group overall is computer science majors. Has the % been constant across academic years?
 
 
 ## 

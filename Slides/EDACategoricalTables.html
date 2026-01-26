@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EDA ▶ Categorical Data Tabulating Data</title>
+  <title>Categorical Data: Tabulating Data</title>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -19,7 +19,7 @@
     var SLIDE_CONFIG = {
       // Slide settings
       settings: {
-                title: 'EDA ▶ Categorical Data<br>Tabulating Data',
+                title: 'Categorical Data:<br>Tabulating Data',
                         subtitle: 'STT 5811 Statistical Concepts and Applications',
                 useBuilds: true,
         usePrettify: true,
@@ -31,7 +31,7 @@
       // Author information
       presenters: [
             {
-        name:  'Author: Jill E. Thomley | Appalachian State University' ,
+        name:  'Jill E. Thomley | Appalachian State University' ,
         company: '',
         gplus: '',
         twitter: '',
@@ -3232,9 +3232,8 @@ line-height: 1.9;
 
 <ul>
 <li>Ch 2 of <em>Mathematical Statistics with Resampling and R, 2<sup>nd</sup> Ed.</em></li>
-<li>Ch 2 of <a href='https://moderndive.com/2-viz.html' title=''><em>Modern Dive</em></a></li>
-<li>Ch 3 of <a href='https://moderndive.com/3-wrangling.html' title=''><em>Modern Dive</em></a></li>
-<li>Ch 4 of <a href='https://moderndive.com/4-tidy.html' title=''><em>Modern Dive</em></a></li>
+<li>Ch 2 of <a href='https://moderndive.com/v2/viz.html' title=''><em>Modern Dive</em></a></li>
+<li>Ch 3 of <a href='https://moderndive.com/v2/wrangling.html' title=''><em>Modern Dive</em></a></li>
 <li>DataCamp <a href='https://www.datacamp.com/courses/introduction-to-the-tidyverse' title=''>Introduction to the Tidyverse</a></li>
 </ul>
 
@@ -3254,7 +3253,7 @@ line-height: 1.9;
 
 <p>Summaries based on <em>counting</em> how often categories occur.</p>
 
-<p><strong>Quantitative Variables</strong></p>
+<p><strong>Numerical Variables</strong></p>
 
 <ul>
 <li>shape</li>
@@ -3309,9 +3308,9 @@ line-height: 1.9;
 
 <p>In the early 1970s, UC Berkeley was concerned about possible sex discrimination in grad school admissions. The <a href='https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv' title=''>berkeley.csv</a> dataset contains fall 1973 data for the six largest departments. Click the link to get the URL for the dataset.</p>
 
-<p>The Berkeley dataset is an example of a statistical phenomena called <a href='https://en.wikipedia.org/wiki/Simpson%27s_paradox' title=''>Simpson’s Paradox</a>.</p>
+<p>The Berkeley data is an example of a concept in statistics called <a href='https://en.wikipedia.org/wiki/Simpson%27s_paradox' title=''>Simpson’s Paradox</a>.</p>
 
-<p>Load the dataset into <code>R</code> from its URL:</p>
+<p>You can load the data into <code>R</code> using the URL and the code below.</p>
 
 <p><code>library(tidyverse)</code></p>
 
@@ -3360,7 +3359,7 @@ $ status     &lt;chr&gt; &quot;accepted&quot;, &quot;accepted&quot;, &quot;accep
 
 <hr>
 
-<p>Each <em>observation</em> in the dataset represents one applicant, with a total of 4526 observations.</p>
+<p>Each <strong>observation</strong> in the dataset represents one applicant, with a total of 4526 observations.</p>
 
 </article></slide><slide class=""><hgroup><h2>Frequency Tables</h2></hgroup><article  id="frequency-tables">
 
@@ -3640,7 +3639,7 @@ FALSE  TRUE
 7 2020-2021    61
 8 2021-2022    98</pre>
 
-<p>Dr. Thomley has taught different numbers of STT3850 sections in the various years. Section sizes ranged from 25 to 45 (as an FYI—you can’t tell number or size directly from the dataset).</p>
+<p>Dr. Thomley has taught different numbers of STT3850 sections in various years. (Numbers/sizes of sections are not in the data).</p>
 
 </article></slide><slide class=""><hgroup><h2>What Majors? Oh, so many…</h2></hgroup><article  id="what-majors-oh-so-many">
 
@@ -3675,7 +3674,7 @@ FALSE  TRUE
 3 Other                    25     3.27
 4 Other Sciences          138    18.1 </pre>
 
-<p>So, it looks like the largest group overall is computer science majors. Has the % been constant across academic years?</p>
+<p>The largest group overall is computer science majors. Has the % been constant across academic years?</p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-4">
 

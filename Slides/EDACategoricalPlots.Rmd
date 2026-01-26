@@ -1,7 +1,7 @@
 ---
-title: "EDA &#9654; Categorical Data<br>Basics of Barplots"
+title: "Categorical Data:<br>Basics of Barplots"
 subtitle: "STT 5811 Statistical Concepts and Applications"
-author: "Author: Jill E. Thomley | Appalachian State University"
+author: "Jill E. Thomley | Appalachian State University"
 date: "`r format(Sys.time(), '%B %d, %Y @ %I:%M %p')`"
 output: 
   ioslides_presentation:
@@ -16,16 +16,15 @@ library(tidyverse)
 
 ## Before We Begin...
 
-These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations to make connections.
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own notes and explorations to make connections.
 
 **Related Materials**
 
 * Ch 2 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
-* Ch 2 of [*Modern Dive*](https://moderndive.com/2-viz.html)
-* Ch 3 of [*Modern Dive*](https://moderndive.com/3-wrangling.html)
-* Ch 4 of [*Modern Dive*](https://moderndive.com/4-tidy.html)
+* Ch 2 of [*Modern Dive*](https://moderndive.com/v2/viz.html)
+* Ch 3 of [*Modern Dive*](https://moderndive.com/v2/wrangling.html)
 * DataCamp [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
-
+* [R Graphics Cookbook, 2nd Edition (2022)](https://r-resources.massey.ac.nz/rgcookbook/)
 
 ## 
 
@@ -44,7 +43,7 @@ knitr::include_graphics("images/Fisher.jpg", dpi = 100)
 
 Summaries based on *counting* how often categories occur.
 
-**Quantitative Variables**
+**Numerical Variables**
 
 * shape
 * center
@@ -74,9 +73,9 @@ Statisticians rarely use pie charts, but they are popular in media.
 
 In the early 1970s, UC Berkeley was concerned about possible sex discrimination in grad school admissions. The [berkeley.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv) dataset contains fall 1973 data for the six largest departments. Click the link to get the URL for the dataset.
 
-The Berkeley dataset is an example of a statistical phenomena called [Simpson's Paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox).
+The Berkeley data is an example of a concept in statistics called [Simpson's Paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox).
 
-Yiou can load the dataset into `R` from its URL:
+You can load the data into `R` using the URL and the code below.
 
 `library(tidyverse)`
 
@@ -113,10 +112,10 @@ whether the applicant was accepted or rejected
 
 <hr>
 
-Each *observation* in the dataset represents one applicant, with a total of `r nrow(berkdata)` observations. 
+Each **observation** in the dataset represents one applicant, with a total of `r nrow(berkdata)` observations. 
 
 
-## What is "grammar of graphics"?
+## What is the "grammar of graphics"?
 
 * R's `ggplot2` is a system for creating graphics, based on the concepts introduced in the book [The Grammar of Graphics](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448/ref=as_li_ss_tl?ie=UTF8&qid=1477928463&sr=8-1&keywords=the+grammar+of+graphics&linkCode=sl1&tag=ggplot2-20&linkId=f0130e557161b83fbe97ba0e9175c431) (2005) --- metastructure and connected visualizations
 
@@ -129,13 +128,13 @@ Each *observation* in the dataset represents one applicant, with a total of `r n
 * *facets* allow us to visualize the same graphical elements for important groups or subsets of data 
 
 
-## Barplots using ggplot2
+## Basic Barplots Using `ggplot2`
 
 ```{r fig.height=3.4}
-library(ggplot2) # even better, use library(tidyerse)
+library(ggplot2)             # even better, use library(tidyerse)
 
-ggplot(berkdata, aes(x = sex)) +  # the data we want to plot
-  geom_bar()                      # how we want to plot data
+ggplot(berkdata, aes(x = sex)) +       # the data we want to plot
+  geom_bar()                           # how we want to plot data
 ```
 
 
@@ -171,7 +170,7 @@ Now some color! Try to choose colorblind-friendly options.
 
 ```{r fig.height=2.9}
 ggplot(berkdata, aes(x = sex)) + 
-  geom_bar(fill = "skyblue", color = "gray") +
+  geom_bar(fill = "skyblue", color = "darkgray") +
   labs(title = "Berkeley Grad School Applicants F73", 
        subtitle = "applicants to the largest six departments only",
        x = "applicant sex (as per 1970s definitions)",
@@ -183,13 +182,13 @@ ggplot(berkdata, aes(x = sex)) +
 
 ```{r fig.height=2.9}
 ggplot(berkdata, aes(x = sex, fill = sex)) + # add fill for 2 colors
-  geom_bar() +            # you can add an outline color if you want
-  scale_fill_manual(values = c("blue", "skyblue")) + # choose colors
+  geom_bar(color = "black") +                    # add outline color
+  scale_fill_manual(values = c("orange", "skyblue")) + # pick colors
   labs(title = "Berkeley Grad School Applicants F73", 
        subtitle = "applicants to the largest six departments only",
-       x = "applicant sex (as per 1970s definitions)",
+       x = "applicant sex (per 1970s definitions)",
        caption = "source: berkeley.csv dataset") +
-  theme(legend.position = "none")    # removes redundant fill legend
+  theme(legend.position = "none")     # remove unneeded fill legend
 
 ```
 
@@ -215,25 +214,28 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
 ```
 
 
-## Bars Side-by-Side (Dodged) vs. Stacked
+## Bars Side-by-Side (`dodge`) vs. Stacked
 
 ```{r fig.height=4}
 ggplot(berkdata, aes(x = sex, fill = status)) + 
-  geom_bar(position = "dodge")
+  geom_bar(position = "dodge")        # dodge separates the bars
 ```
 
 
-## Proportions vs. Counts
+## Proportions (`fill`) Instead of Counts
 
-```{r fig.height=4}
+The bars are set to 100% and divided proportionally.
+
+```{r fig.height=3.1}
 ggplot(berkdata, aes(x = sex, fill = status)) + 
-  geom_bar(position = "fill") + labs(y = "proportion")
+  geom_bar(position = "fill") + 
+  labs(y = "proportion")
 ```
 
 
 ## Barplots from Summarized Data
 
-We can still make a barplot if we have summarized vs. raw data.
+We can make a barplot using summarized (tabled) vs. raw data.
 
 ```{r fig.height=2.75}
 dept_tab <- count(berkdata, department)
@@ -272,7 +274,7 @@ This is a generally colorblind-safe pair of colors, as is the default cyan (#00B
 
 ## Three Variables? Use Faceting
 
-Faceting creates multiple "panes" in a plot according to some chosen grouping variable. Each pane displays the same kind of plot for a given subgroup. Use [`facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html) or [`facet_grid()`](https://ggplot2.tidyverse.org/reference/facet_grid.html) (more structured) to achieve different configurations.
+Faceting creates multiple "panes" in a plot using some chosen grouping variable(s). Each pane displays the same kind of plot for a given subgroup. Use `facet_wrap()` ([documentation](https://ggplot2.tidyverse.org/reference/facet_wrap.html)) or `facet_grid()` ([documentation](https://ggplot2.tidyverse.org/reference/facet_grid.html)), depending on your need.
 
 ```{r plotcolor2, eval=FALSE}
 ggplot(berkdata, aes(x = sex, fill = status)) +
@@ -289,7 +291,7 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
 
 ##
 
-Six plots configured into a faceted grid show `status` for men and women, with one plot (row) for each department.
+Six plots configured into a faceted grid show `status` for men vs. women, with one plot (row) for each department.
 
 ```{r plotcolor2a, ref.label='plotcolor2', echo=FALSE, fig.height=4.7}
 
@@ -298,7 +300,7 @@ Six plots configured into a faceted grid show `status` for men and women, with o
 
 ##
 
-We can switch the orientation of the facets, so departments are columns. What are the pros and cons of this plot versus the one where departments are rows?
+We can switch the orientation of the facets, so departments are columns. What are the pros and cons of this plot versus the one where departments are rows? Can you discern any patterns?
 
 ```{r plotcolor2b, echo=FALSE, fig.height = 4.4}
 ggplot(berkdata, aes(x = sex, fill = status)) +
@@ -341,6 +343,54 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
 ```
 
 
+## Mosaic Plot
+
+We can make a [mosaic plot](https://cran.r-project.org/web/packages/vcdExtra/vignettes/a4-mosaics.html) using the `mosaic()` function from the `vcd` (visualizing categorical data) package. A mosaic plot is an area-proportional visualization of a frequency table where tile sizes represent counts. Bigger tiles are more cases.
+
+First we have to tabulate the data using `structable()`. As the name suggests, it produces a structured table for two or more categorical variables.
+
+```{r}
+library(vcd)
+berktab <- structable(status ~ department + sex, data = berkdata)
+```
+
+Notice the output of this function on the next slide. The `status` variable is the columns of the table, and the other two variables form the table's rows.
+
+##
+
+```{r}
+berktab
+```
+
+
+## 
+
+The table structure determines the layout. What does it show?
+
+```{r}
+mosaic(berktab) 
+```
+
+
+##
+
+We can rotate the category labels for (possibly) easier reading. 
+
+```{r}
+mosaic(berktab, labeling = labeling_border(rot_labels = c(0, 0, 90))) 
+```
+
+
+##
+
+We can force a different structure for another visualization. 
+
+```{r fig.height=4}
+# department and sex are now the columns, aka vertical or "v"
+mosaic(berktab, direction = c("v","v","h")) 
+```
+
+
 ## Drawing Conclusions
 
 * Women were more likely to apply to departments that were harder to get into. There were far fewer female applicants to A and B, which accept more than 60% of all applicants. What looks like an overall bias is a result of this phenomenon. The individual departments sometimes *favor* women (which you will see when we revisit this dataset).
@@ -353,10 +403,3 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
 
 Bickel, P. J., Hammel, E. A., & O’Connell, J. W. (1975). Sex bias in graduate admissions: Data from Berkeley. _Science_, 187(4175), 398–404. http://doi.org/10.1126/science.187.4175.398 ↩
 
-##
-
-```{r, echo = FALSE, fig.align="center"}
-knitr::include_graphics("https://miro.medium.com/max/500/1*tGVbx_My4et523b8OL2iKQ.png", dpi = 50)
-```
-
-Bar plot of languages for GitHub projects with descriptions that contain “cats” from ["How to Meaningfully Play With Data"](https://medium.com/data-science/how-to-meaningfully-play-with-data-f5183fe82539)
