@@ -127,7 +127,7 @@ Each **observation** in the dataset represents one applicant, with a total of `r
 * *facets* allow us to visualize the same graphical elements for important groups or subsets of data 
 
 
-## Basic Barplots Using `ggplot2`
+## Basic Barplots Using ggplot2
 
 ```{r fig.height=3.4}
 library(ggplot2)             # even better, use library(tidyerse)
@@ -318,7 +318,7 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
 
 Statisticians and others have struggled with how to effectively and efficiently visualize *multivariate data*. We often use colors or shapes, but the result can be messy.
 
-The `facet_grid()` function creates separate plots for a given variable or variables and arranges them in a grid or matrix, as specified by (`rowvariable` ~ `columnvariable`). When you use only one variable, substitute a `.` for the missing one. The grid dimensions are determined by how many levels (categories or unique values) each variable has.
+The `facet_grid()` function creates separate plots for a given variable or variables and arranges them in a grid or matrix, as specified by row and column variables. The grid dimensions are determined by how many levels (categories or unique values) each variable has.
 
 The `facet_wrap()` function tries to optimize for a rectangular arrangement of the resulting plots.
 
@@ -384,7 +384,7 @@ mosaic(berktab, labeling = labeling_border(rot_labels = c(0, 0, 90)))
 
 We can force a different structure for another visualization. 
 
-```{r fig.height=4.1}
+```{r fig.height=4.2}
 # department and sex are now the columns, aka vertical or "v"
 mosaic(berktab, direction = c("v","v","h")) 
 ```
@@ -407,7 +407,7 @@ The `unite()` function inputs are the name of the new column you are making, the
 
 ##
 
-Our rounded percentages add to 99, so the waffle plot will have 99 versus 100 squares. There will be four colors, on for each combined sex-status category.
+Our rounded percentages add to 99, so the waffle plot will have 99 versus 100 squares. There will be four colors in the plot, one for each combined sex-status category.
 
 ```{r}
 waffledat
@@ -431,7 +431,7 @@ ggplot(waffledat, aes(fill = sex_status, values = pct)) +
 
 * Women were more likely to apply to departments that were harder to get into. There were far fewer female applicants to A and B, which accept more than 60% of all applicants. What looks like an overall bias is a result of this phenomenon. The individual departments sometimes *favor* women (which you will see when we revisit this dataset).
 
-* Do you prefer tables or barplots for exploring the data? Why?
+* Do you prefer tables or plots for exploring these data? Why?
 
 * Are there other summaries that would help you understand these data better? What other data would you like to have?
 
