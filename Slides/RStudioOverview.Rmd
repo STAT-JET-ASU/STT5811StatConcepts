@@ -1,7 +1,7 @@
 ---
 title: "Welcome to RStudio!<br>IDE Overview & Setup"
 subtitle: "STT 5811 Statistical Concepts and Applications"
-author: "Author: Jill E. Thomley | Appalachian State University"
+author: "Jill E. Thomley | Appalachian State University"
 date: "`r format(Sys.time(), '%B %d, %Y @ %I:%M %p')`"
 output: 
   ioslides_presentation:
