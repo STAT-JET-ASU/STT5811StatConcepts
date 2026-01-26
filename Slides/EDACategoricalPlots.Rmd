@@ -60,13 +60,12 @@ Summaries based on *counting* how often categories occur.
 * contingency table
 * [bar chart / barplot](https://ggplot2.tidyverse.org/reference/geom_bar.html)
 * mosaic plot
+* waffle plot
 * ~~pie chart~~
 
-Statisticians rarely use pie charts, but they are popular in media.
+Statisticians rarely use pie charts, but they are popular in media. “There is no data that can be displayed in a pie chart that cannot be displayed better in some other type of chart.”
 
-“There is no data that can be displayed in a pie chart that cannot be displayed better in some other type of chart.”
-
-(*Some people attribute this quote to John Tukey. While it cannot be verified, it is generally a true statement.*)
+(*Quote attributed to John Tukey. It is unverified, but generally true.*)
 
 
 ## Berkeley Data
@@ -385,9 +384,46 @@ mosaic(berktab, labeling = labeling_border(rot_labels = c(0, 0, 90)))
 
 We can force a different structure for another visualization. 
 
-```{r fig.height=4}
+```{r fig.height=4.1}
 # department and sex are now the columns, aka vertical or "v"
 mosaic(berktab, direction = c("v","v","h")) 
+```
+
+
+## Waffle Plots
+
+We can make waffle plots using `geom_waffle()` option from the `waffle` package. Create a proportion (percentage) table of data to be plotted. We will merge the two categorical variable names so there is a vector of categories and a vector of corresponding rounded percentages.
+
+```{r}
+waffledat <- berkdata %>% 
+  count(sex, status) %>%
+  mutate(pct = round(100 * prop.table(n))) %>%    # find percents
+  select(-n) %>%                          # drop the count column
+  unite(col = sex_status, sex, status, sep = " ")
+```
+
+The `unite()` function inputs are the name of the new column you are making, the columns you are combining, and how you want the column contents separated (space, underscore, etc).
+
+
+##
+
+Our rounded percentages add to 99, so the waffle plot will have 99 versus 100 squares. There will be four colors, on for each combined sex-status category.
+
+```{r}
+waffledat
+```
+
+As you will see on the next slide, the columns will serve as the aesthetic inputs: `aes(fill = sex_status, values = pct)`.
+
+
+##
+
+```{r fig.height=4}
+library(waffle)
+ggplot(waffledat, aes(fill = sex_status, values = pct)) +
+  geom_waffle(color = "white", size = 0.5) + #format grid spaces
+  coord_equal() +                  # spaces axes to make squares
+  theme_void()                        # eliminates axis markings
 ```
 
 

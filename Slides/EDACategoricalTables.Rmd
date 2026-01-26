@@ -59,13 +59,12 @@ Summaries based on *counting* how often categories occur.
 * contingency table
 * [bar chart / barplot](https://ggplot2.tidyverse.org/reference/geom_bar.html)
 * mosaic plot
+* waffle plot
 * ~~pie chart~~
 
-Statisticians rarely use pie charts, but they are popular in media.
+Statisticians rarely use pie charts, but they are popular in media. “There is no data that can be displayed in a pie chart that cannot be displayed better in some other type of chart.”
 
-“There is no data that can be displayed in a pie chart that cannot be displayed better in some other type of chart.”
-
-(*Some people attribute this quote to John Tukey. While it cannot be verified, it is generally a true statement.*)
+(*Quote attributed to John Tukey. It is unverified, but generally true.*)
 
 
 ## Frequency Table
