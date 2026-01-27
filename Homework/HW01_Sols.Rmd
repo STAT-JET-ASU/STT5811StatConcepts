@@ -24,11 +24,11 @@ The dataset has 19,961 observations and 9 variables.
 
 ## Exercise 4
 
-a. The research question is: “Does explicitly telling children not to cheat affect whether or not they cheat?” (Variations on this wording are possible/acceptable, as long as the meaning is the same.)
+a. Based on the study findings in (c), the research question would be something like: “Does explicitly telling children not to cheat affect whether or not they cheat?” This is because the instructions seem to be the explanatory variable in the experiment. However, using only the initial description at the top of the exercise, it would be: "Do characteristics like age, sex, or only-child status impact honesty/cheating." However, those are not variables the researchers can randomize in an experiment, and are more like confounding variables. (Variations on this answer are possible/acceptable.)
 
 b. The subjects are 160 children between the ages of 5 and 15.
 
-c. There are four variables in this study: (1) age (continuous numerical), (2) sex (categorical), (3) whether or not they are an only child (categorical), and (4) whether or not they cheated (categorical).
+c. There are five variables recorded in this study: (1) age (continuous numerical), (2) sex (categorical), (3) only child or not (categorical), (4) cheated or not (categorical), and (5) type of instructions given (categorical). Note: Type of instructions is the explanatory variable; cheated or not is the response.
 
 ## Exercise 6
 
@@ -36,8 +36,7 @@ a. The research question is: “Is there a difference in unethical behavior betw
 
 b. The cases are 129 University of California at Berkeley undergraduates.
 
-c. Two variables are: (1) social-class rank (categorical) and (2) number of candies taken
-(discrete numerical).
+c. Two variables are: (1) low or high social class (categorical) and (2) number of candies the participant took (discrete numerical). The research scenario mentions money, education level and job respectability, but these were not variables; they were questions used to determine social class.
 
 ## Exercise 8
 
@@ -47,9 +46,9 @@ b. The percent of control group participants who reported improvement is 65/81 =
 
 c. There was a (slightly) higher percentage of improvement in the control group.
 
-d. Even if the two treatments were equally effective, it is unlikely that we would observe *exactly* the same improvement rates in the two groups. The difference of 2.6%, which equates to only about one or two participants, seems like it could be due to just random chance.
+d. Even if the two treatments were in fact equally effective, it is unlikely that we would observe *exactly* the same improvement rates in the two experimental groups. The difference of 2.6%, which equates to only about one or two participants, seems like it could be due to just random chance.
 
-e. The explanatory variable is the type of treatment the participant received (antibiotics or placebo). The response variable is improvement in sinusitis symptoms.
+e. The explanatory variable is the type of treatment the participant received (antibiotics versus placebo). The response variable is improvement in sinusitis symptoms.
 
 # Section 2.5 Exercises
 
@@ -59,13 +58,13 @@ The population mean is 5.5 hours and the sample mean is 6.25 hours.
 
 ## Exercise 4
 
-a. The population of interest is all children aged 5 and 15. The sample is 160 children in this age group.
+a. Based on the scenario description, the population of interest is presumably all children aged 5 and 15. The sample is 160 children in this age group.
 
-b. It is unlikely that the participants are a random sample from the population, so the results are probably not generalizable. This study is an experiment, so if participants were randomly assigned to treatment groups (no cheating or no instructions), the findings can be used to establish causal relationships. 
+b. It is unlikely that the participants are a random (or representative) sample from the population, so the results are probably not generalizable. This study is an experiment, so if participants were randomly assigned to treatment groups (no cheating versus no instructions), the findings can be used to establish causal relationships, since that helps to eliminate confounding variables like age, sex, or singleton status. Refer back to Figure 2.8 in [**Section 2.4**](https://openintro-ims.netlify.app/data-design#sec-chp2-review).
 
 ## Exercise 6
 
-a. The actual population of interest is probably people in general. However, since the sample consists of 129 UC Berkeley undergraduates, the target population is limited to UC Berkeley undergraduates.
+a. The population of interest is probably people in general. However, since the sample consists of 129 UC Berkeley undergraduates, the target population is limited to UC Berkeley undergraduates.
 
 b. If the students in this sample (who are likely not randomly sampled) can be considered representative of UC Berkeley undergraduates, then the results are generalizable to the UC Berkeley undergraduate population. If students from this school can be considered representative of all college students, or all people, we could generalize to these populations as well. However, being representative of all people is quite unlikely. The study is observational (participants were not randomly assigned to lower and upper class groups), so the findings cannot be used to establish causal relationships.
 
@@ -101,11 +100,11 @@ Sampling from the phone book would introduce bias since it would not include unl
 
 a. This is an observational study.
 
-b. The friend's statement is not justified because it implies a causal association between sleep disorders and bullying, which we cannot infer from an observational study. However, it is reasonable to say that the variables are related. A better statement about this might be: “School children identified as bullies are more likely to suffer from sleep disorders than children not identified as bullies.”
+b. The friend's statement is not justified because it implies a causal association between sleep disorders and bullying, which we cannot infer from an observational study. However, it is reasonable to say that the variables are related. A better statement might be: “School children identified as bullies are more likely to be found to suffer from sleep disorders than children not identified as bullies.”
 
 ## Exercise 18
 
-The estimate will be biased and tend to overestimate the true family size. Families without children have zero probability of being sampled using the proposed strategy. If a family has two children, it is twice as likely to be sampled as a family that has one child, since there are twice as many children available. Increasingly larger families will have a proportionally larger chance of being sampled.
+The estimate will be biased and tend to overestimate true family size. Families without children have zero chance of being sampled. A family with two children is twice as likely as a family with one, since there are twice as many kids in school. Even bigger families will have a proportionally larger chance.
 
 ## Exercise 20
 
@@ -117,11 +116,11 @@ c. The participants were blinded, since they did not know which treatment they r
 
 d. The study was double-blind with respect to the researchers who were assessing the participants, but the nurses who interacted with participants during the distribution of the medication were not blinded. 
 
-e. Participants were randomly and blinded, so we would expect about an equal number in each group to not to take their pills. Thus, non-adherence would not be a confounding variable in the study.
+e. Participants were randomly assigned and blinded, so we would expect a similar number in each group to not to take their pills. Thus, non-adherence would not be a confounding variable in the study.
 
 ## Exercise 22
 
-Recruit participants and randomly assign them to three treatment groups: no music, instrumental music, and music with lyrics. Have each person read a passage to learn a new concept, then give them each the same quiz to assess what they learned. Compare the number of questions they get correct (on average) across the three groups. (This is only one example. The important aspects are that the treatment groups are the music, the participants learn something, and the amount they learn is assessed as the response variable. Random selection of participants is not feasible, but random assignment should be used.)
+Randomly assign participants to treatment groups: no music, instrumental, or music with lyrics. Have each person study a new concept. Give them the same quiz to assess what they learned. Compare the number of questions they get correct (on average) across the groups. (This is only one example. The important aspects are that the treatment groups are the music, participants learn the same thing and are assessed as the response variable. Random selection is not feasible, but random assignment should be used.)
 
 ## Exercise 24
 
@@ -133,29 +132,29 @@ c. Yes, the study uses blocking. The blocking variable is age group (18-30, 31-4
 
 d. The study is not blinded. Patients definitely will know whether or not they are exercising.
 
-e. This is an experiment, so we can make causal inferences. Since the sample is random, the causal statement can be generalized to the population at large. However, we should be cautious about any causal statement, because there may be a placebo effect (the participants are not blinded).
+e. This is an experiment, so we can make causal inferences from the data. Because the sample is random, cause-and-effect can be generalized (cautiously, due to lack of blinding) to the population.
 
-f. We cannot ethically require any randomly selected people to be participants in a study.
+f. We cannot ethically require randomly selected people to be participants in a study. It also might not be ethical to tell people not to exercise, or impossible due to jobs or life circumstances.
 
 ## Exercise 26
 
-a. This is a simple random sample (SRS). Generally, the SRS method is effective in achieving a sample that is representative of the population. However, given the broad diversity (variability) in neighborhoods, in this case it might miss some neighborhoods with distinct characteristics.
+a. This is a simple random sample (SRS). Generally, the SRS method is effective in achieving a sample that is representative of the population. However, given the broad diversity (variability) in neighborhoods, a SRS might miss some neighborhoods that have distinct characteristics.
 
 b. This is a stratified random sample. It would be an effective method, given the neighborhood variability. The sample will include representation from each neighborhood. However, it requires more work.
 
-c. This is a cluster sample. It would *not* be an effective method, given the variability. Clusters should be similar to one another and the population as a whole. The sample definitely would exclude many neighborhoods with distinct characteristics, and thus not be representative.
+c. This is a cluster sample. It would *not* be an effective method, given the stated broad variability. Clusters should be similar to one another and the population as a whole. The sample definitely would exclude many neighborhoods with distinct characteristics, and thus not be representative.
 
-d. This is a multi-stage sample. It is based on a cluster sample, and therefore it has the same flaws.
+d. This is a multi-stage sample. It starts with a cluster sample, and therefore it has the same flaws.
 
 e. This is a convenience sample. It is not an effective method. Houses that are not close to the city council offices have zero probability of being chosen. It likely would represent only one neighborhood. 
 
 ## Exercise 28
 
-a. The explanatory variable is the percent of the population that has a bachelor’s degree. The response variable is per capita income (in thousands). In a scatterplot, we typically think of the response variable (Y) as being a function of the explanatory variable (X).
+a. The explanatory variable is the percentage of the population with a bachelor’s degree. The response variable is per capita income (in thousands). In a scatterplot, we usually think of a response variable (Y) as being a function of an explanatory variable (X).
 
 b. There is a strong positive linear relationship between the variables. As the percent of the population with a bachelor’s degree increases, the per capita income increases. There are very few counties where more than 60% of the population have a bachelor’s degree and very few countries that have a more than $50,000 in per capita income (upper right of the plot).
 
-c. This is an observational study, so we cannot make a causal statement using these data. However, we can reasonably say that having a higher percent of the population with bachelor’s degree is associated with having a higher per capita income (positive association).
+c. This is an observational study, so we cannot make a causal statement using these data. However, we can reasonably say that having a higher percent of the population with bachelor’s degree is associated with having a higher per capita income (positive association). For example, in some cases, having a higher income or coming from a family with a higher income facilitates getting a bachelor's degree, which is the reverse of the initially suggested causation.
 
 
 ## Exercise 30
@@ -166,7 +165,7 @@ b. The explanatory variables are screen time, the child’s sex and age, and the
 
 c. The response variable is psychological well-being.
 
-d. The data come from a "nationally representative" sample, so results can be generalized to the population.
+d. The data come from a "nationally representative" sample, so results can be generalized to the population from which these samples were drawn.
 
 e. Because this is an observational study, the results cannot be used to establish any causal relationships.
 
