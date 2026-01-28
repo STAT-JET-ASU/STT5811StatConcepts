@@ -1,6 +1,6 @@
 ---
-title: "STT 5811 Lab01: Data Basics and Study Design"
-subtitle: PUT YOUR NAME HERE
+title: 'STT 5811 Lab01: Data Basics and Study Design'
+subtitle: "SOLUTIONS"
 date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
 output:
   pdf_document:
@@ -54,7 +54,7 @@ glimpse(arbuthnot)
 
 Use `head()` to print out the first five rows of the dataset.
 ```{r}
-glimpse(arbuthnot)
+head(arbuthnot, n = 5)
 ```
 
 Extract the column representing boys from the dataset using `$` and `sum()` the values.
@@ -71,22 +71,24 @@ QUESTIONS
 
 1. How many observational units are there? What does each unit (row) represent?
 
-> ERASE AND TYPE YOUR ANSWER HERE (leave the >)
+> There are `r nrow(arbuthnot)` observational units. Each row represents one year between 1629 and 1710 (inclusive).
 
 2. How many variables are there? What variable type is each? What vector type?
 
-> ERASE AND TYPE YOUR ANSWER HERE
+> There are `r ncol(arbuthnot)` variables. All of them are discrete quantitative variables and are stored as integers. 
 
 3. What piece of information does each variable tell you for each observation?
 
-> ERASE AND TYPE YOUR ANSWER HERE
+> The dataset contains annual counts of chidren who were baptized over a period of 82 years in Anglican churches in London. The variable `year` indicates what year the baptism counts come from; `boys` is the number of boys baptised that year and `girls` is the number of girls baptized.
 
 4. What are the total numbers of boys and girls? Which total is larger?
 
-> ERASE AND TYPE YOUR ANSWER HERE
+> Overall, there are `r format(sum(arbuthnot$boys), big.mark = ",")` boys and `r format(sum(arbuthnot$girls), big.mark = ",")` girls. The total count of boys is larger by `r format(sum(arbuthnot$boys)-sum(arbuthnot$girls), big.mark = ",")`.
 
 
 ## Create New Variables
+
+NOTE: Your choice of variable names may differ from those below. In general, you should choose names that are at least somewhat descriptive and make sense in context. Use of either pipe operator is acceptable.
 
 Create a new variable to represent total births. Reassign the dataset to save the change.
 ```{r}
@@ -97,19 +99,19 @@ arbuthnot <- arbuthnot |>
 Create a new variable to represent the ratio of boys to girls. Be sure to save the change.
 ```{r}
 arbuthnot <- arbuthnot |>
-  mutate(ratio = boys/girls)
+  mutate(ratiobg = boys/girls)
 ```
 
 Create a new variable to represent the proportion of boys. Be sure to save the change.
 ```{r}
 arbuthnot <- arbuthnot |>
-  mutate(prop = boys/total)
+  mutate(propboys = boys/total)
 ```
 
 Create a new variable to represent whether boys > girls. Be sure to save the change.
 ```{r}
 arbuthnot <- arbuthnot |>
-  mutate(greater = boys > girls)
+  mutate(moreboys = boys > girls)
 ```
 
 Use `glimpse()` to verify the new structure of your dataset with the added variables.
@@ -121,54 +123,56 @@ QUESTIONS
 
 1. How many observational units are there? Why does this make sense?
 
-> ERASE AND TYPE YOUR ANSWER HERE
+> There are still `r nrow(arbuthnot)` observational units. This makes sense because we did not add any observations (years) to the dataset.
 
 2. What are the variable and vector types for your new variables?
 
-> ERASE AND TYPE YOUR ANSWER HERE
+> Like the original three variables, the variable that represents the total number of children is a discrete numerical variable stored as an integer. This makes sense, since it is a sum of two integers. The variables that represent the ratio of boys to girls and the proportion of boys are both continuous numerical variables stored as numbers (double-precision floating-point number). This makes sense, because they both arise from the division of two numbers, the results of which may not be an integer. The variable that tells us whether there are more boys than girls is categorical (`TRUE` or `FALSE`) and is stored as a logic vector, because it results from a logical test.
 
 
 ## Total Baptisms Over Time
 
 Insert your total variable name to plot total number of children baptized over time.
-```{r}
-ggplot(data = arbuthnot, aes(x = year, y = VARIABLENAME)) +
+```{r fig.height = 2}
+ggplot(data = arbuthnot, aes(x = year, y = total)) +
   geom_line() +
   geom_point()
 ```
 
 Use code to find and display the 10 years with the lowest total numbers of children.
 ```{r}
-
+arbuthnot |>
+  arrange(total) |>
+  head(n = 10)      # you can also use slice_head() here
 ```
 
 QUESTIONS
 
-1. Is there an apparent trend (or trends)  over the years in the number of girls that were baptized? Describe what you see in words. Are there any notable intervals of time or deviations?
+1. Is there an apparent trend (or trends) over the years in the number of children that were baptized? Describe what you see in words. Are there any notable intervals of time or deviations?
 
-> ERASE AND TYPE YOUR ANSWER HERE
+> The annual number of baptized children generally rose between 1629 and 1710, from about 10,000 to about 15,000, but it was not a continual increase. Beyond the random variations we would expect in real-life data, there is a more sizable dip starting around 1640; the total roughly halved between 1640 and 1650. Baptisms did not return to a value near 1640 levels until after 1660.
 
 2. What was happening in England between 1640 and 1660 that might explain what the graph shows?
 
-> ERASE AND TYPE YOUR ANSWER HERE
+> Civil wars, the execution of King Charles I, and a governmental shift to a Puritan Commonwealth (later dictatorship) under Oliver Cromwell destabilized English society and the Anglican church. There were likely fewer babies born, and when they were, some parents probably delayed baptism. The monarchy and the Anglican church returned when Charles II was crowned in 1660. 
 
 3. What major event happened in England in 1703 that might explain the data point for 1704?
 
-> ERASE AND TYPE YOUR ANSWER HERE
+> In November of 1703, an extratropical cyclone known as the "Great Storm" struck England. It was the most destructive storm in British history, killing thousands of people and destroying countless homes, as well as hundreds of civilian and naval ships. London was particularly affected by widespread flooding, collapsed chimneys, and torn-off roofs. This undoubtedly impacted both the number of children born and baptized in London during the subsequent year 1704.
 
 
 ## Comparing Boys and Girls
 
 Create a plot of the proportion of boys over time using both points and a line. 
-```{r}
-ggplot(data = arbuthnot, aes(x = year, y = prop)) +
+```{r fig.height = 2}
+ggplot(data = arbuthnot, aes(x = year, y = propboys)) +
   geom_line() +
   geom_point()
 ```
 
 Create a plot of the ratio of boys to girls over time using both points and a line. 
-```{r}
-ggplot(data = arbuthnot, aes(x = year, y = ratio)) +
+```{r fig.height = 2}
+ggplot(data = arbuthnot, aes(x = year, y = ratiobg)) +
   geom_line() +
   geom_point()
 ```
@@ -176,25 +180,33 @@ ggplot(data = arbuthnot, aes(x = year, y = ratio)) +
 Use `count()` to find out how many observed years had a larger number of boys than girls.
 ```{r}
 arbuthnot |>
-  count(greater)
+  count(moreboys)
 ```
 
 Insert variables names to make a scatterplot of the ratio of boys as a function of total.
-```{r}
-ggplot(data = arbuthnot, aes(x = total, y = ratio)) +
+```{r fig.height = 3.75}
+ggplot(data = arbuthnot, aes(x = total, y = ratiobg)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE)
+```
+
+NOTE: The following two bits of code were not required, but I used the values in my discussion of the plots. You can also estimate values of data points from the plots themselves.
+```{r}
+# minimum proportion of boys for all years
+arbuthnot |> arrange(propboys) |> head(n = 1)
+# maximum proportion of boys for all years
+arbuthnot |> arrange(desc(propboys)) |> head(n = 1)
 ```
 
 QUESTIONS
 
 1. How do the analyses support the idea that more boys than girls were born between 1629 and 1710? Explain, using information from your plots and counts to support your answer.
 
-> ERASE AND TYPE YOUR ANSWER HERE
+> There were `r format(sum(arbuthnot$boys)-sum(arbuthnot$girls), big.mark = ",")` more boys overall. For every year in the dataset, more boys than girls were baptized, though the margin is sometimes slim. The ratio of boys to girls varies from 1.01 to 1.16. The proportion of baptisms that were boys varies from 0.503 (50.3\%) to 0.536 (53.6\%). However, Arbuthnot assumed that baptisms were a good proxy for births, which may not be true.
 
 2. Does the scatterplot suggest that boys-to-girls ratio might be related to the total number of babies? Explain, using information from the plot to support your answer.
 
-> ERASE AND TYPE YOUR ANSWER HERE
+> The trend line has a negative slope, which suggests that when there is a larger number of baptisms, the ratio of boys to girls is smaller. However, there is also a fairly wide scattering (variability) of points around the trend line in the Y direction, so the relationship is not strong.
 
 
 ## Think and Reflect on the Data
@@ -203,12 +215,22 @@ QUESTIONS
 
 1. Arbuthnot used baptismal records rather than birth records, which would not have existed at the time, and only from Anglican churches in London. How might this impact his data, with respect to what he was trying to measure and investigate (i.e., is his sample biased)?
 
-> ERASE AND TYPE YOUR ANSWER HERE
+> There are several possible sources of bias. Arbuthnot was interested in births for people in general, but he used a convenience sample that was restricted to only London and to children baptized in Anglican churches (though Anglicans tended to be a majority, especially post-1660). He would have collected data by hand, so he may have missed some records or recorded some information incorrectly. The church records themselves may also have had errors. Finally, he assumed that baptisms accurately reflected births, though some babies would have died before being baptized. 
+
+> NOTE: Historically, infant mortality is higher among boys, and there is usually a delay between birth and baptism, so these data might *underestimate* male births. While this sample is sub-optimal in many ways, it was probably the only feasible method in Arbuthnot's time.
 
 2. In his paper, Arbuthnot described his methodology: "Let there be a Die of Two sides, M and F...to find all the Chances of any determinate Number of such Dice, let the Binome M + F be raised to the Power, whose Exponent is the Number of Dice given...For Example, in Two Dice of Two sides M + F, the Chances are $M^2 + 2 MF + F^2$, that is, One Chance for M double, One for F double, and Two for M single and F single..." M is defined as observing more boys than girls in a given year, while F is more girls than boys. What probability model does this sound like? If boys and girls are truly equally likely, how could you use this model to calculate the probability of the ratios you saw in Arbuthnot's data? You do not have to do the calculation, just describe how you would.
 
-> ERASE AND TYPE YOUR ANSWER HERE
+> This sounds like a binomial distribution with parameters $n = 82$, because each year would be one trial, and $p = 0.5$, because Arbuthnot used a "two-sided die" (coin flip) to model equal chances of boys vs. girls. We would have to assume that all the years are independent. The random variable $X$ is the number of years in which boys outnumber girls, and Arbuthnot's outcome is $x = 82$ successes. We can solve for the probability using the binomial pdf.
 
+> NOTE: You did not have to write out the pdf or solve for the answer, but the solution is below. 
+
+$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k} \rightarrow P(X = 82) = \binom{82}{82} 0.5^{82} (1-0.5)^{82-82} = 0.5^{82} = 2.1 \times 10^{-25}$$
+
+```{r}
+# dbinom(x, n, p)
+dbinom(82, 82, 0.5)
+```
 
 # Session Information
 

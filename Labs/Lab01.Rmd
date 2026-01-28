@@ -1,6 +1,6 @@
 ---
 title: "STT 5811 Lab01: Data Basics and Study Design"
-subtitle: PUT YOUR NAME HERE
+subtitle: "PUT YOUR NAME HERE"
 date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
 output:
   pdf_document:
@@ -139,7 +139,7 @@ Use code to find and display the 10 years with the lowest total numbers of child
 
 QUESTIONS
 
-1. Is there an apparent trend (or trends)  over the years in the number of girls that were baptized? Describe what you see in words. Are there any notable intervals of time or deviations?
+1. Is there an apparent trend (or trends)  over the years in the number of children that were baptized? Describe what you see in words. Are there any notable intervals of time or deviations?
 
 > ERASE AND TYPE YOUR ANSWER HERE
 
