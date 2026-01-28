@@ -221,7 +221,13 @@ QUESTIONS
 
 2. In his paper, Arbuthnot described his methodology: "Let there be a Die of Two sides, M and F...to find all the Chances of any determinate Number of such Dice, let the Binome M + F be raised to the Power, whose Exponent is the Number of Dice given...For Example, in Two Dice of Two sides M + F, the Chances are $M^2 + 2 MF + F^2$, that is, One Chance for M double, One for F double, and Two for M single and F single..." M is defined as observing more boys than girls in a given year, while F is more girls than boys. What probability model does this sound like? If boys and girls are truly equally likely, how could you use this model to calculate the probability of the ratios you saw in Arbuthnot's data? You do not have to do the calculation, just describe how you would.
 
-> This sounds like a binomial distribution with parameters $n = 82$, because each year would be one trial, and $p = 0.5$, because Arbuthnot used a "two-sided die" (coin flip) to model equal chances of boys vs. girls. We would have to assume that all the years are independent. The random variable $X$ is the number of years in which boys outnumber girls, and Arbuthnot's outcome is $x = 82$ successes. We can solve for the probability using the binomial pdf.
+> NOTE: I made a slight error in the wording of this question, so there are two possible answers; however, both are binomial models, with different conceptualizations of trials.
+
+> We could think of each child as a trial with two possible outcomes: boy or girl. If boys and girls are equally likely, then the chance of each outcome is 0.5. Assuming children are independent, we could use a binomial model $n = \text{number of children}$ and $p = 0.5$. Each year has a different $n$, we we would need different models, or we could combine the data across all years. 
+
+> NOTE: What is the chance of observing 484,382 boys (or more) out of 938,223 children, if boys and girls are indeed equally likely? Using `pbinom()` in `R`, is about $1.5 \times 10^{-218}$.
+
+> However, if we talk about the ratios we observed for each year, we have a binomial distribution with parameters $n = 82$, because each year would be one trial, and $p = 0.5$, under the assumption that boys and girls are equally likely. In a theoretically perfect world, there would be an equal number each year. If we take randomness into account, then we would expect boys to outnumber girls about half the time (the probability of the counts of boys and girls being exactly equal is vanishingly small for Arbuthnot's yearly sample sizes, as he himself noted). The random variable $X$ is the number of years in which boys outnumber girls, and Arbuthnot's observed outcome is $x = 82$ successes. We can solve for the probability using the binomial pdf.
 
 > NOTE: You did not have to write out the pdf or solve for the answer, but the solution is below. 
 
