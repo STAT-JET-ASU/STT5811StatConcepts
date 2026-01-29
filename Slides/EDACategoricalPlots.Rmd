@@ -15,13 +15,15 @@ library(tidyverse)
 
 ## Before We Begin...
 
-These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own notes and explorations to make connections.
+These slides are not meant to be stand-alone information. You should take notes to flesh out the concepts, including `R` code. 
 
 **Related Materials**
 
-* Ch 2 of [*Modern Dive*](https://moderndive.com/v2/viz.html)
-* Ch 3 of [*Modern Dive*](https://moderndive.com/v2/wrangling.html)
+* Ch04 of [*Introduction to Modern Statistics, 2nd Edition*](https://openintro-ims.netlify.app/explore-categorical)
+* Ch02 of [*Modern Dive, 2nd Edition*](https://moderndive.com/v2/viz.html)
+* Ch03 of [*Modern Dive, 2nd Edition*](https://moderndive.com/v2/wrangling.html)
 * DataCamp [*Introduction to the Tidyverse*](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+* DataCamp [*Introduction to Data Visualization with ggplot2*](https://app.datacamp.com/learn/courses/introduction-to-data-visualization-with-ggplot2)
 * [*R Graphics Cookbook, 2nd Edition*](https://r-resources.massey.ac.nz/rgcookbook/)
 
 ## 

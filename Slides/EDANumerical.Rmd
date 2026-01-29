@@ -27,6 +27,20 @@ These slides are not meant to be stand-alone information. You should take notes 
 * DataCamp [*Data Manipulation with dplyr*](https://app.datacamp.com/learn/courses/data-manipulation-with-dplyr)
 * DataCamp [*Introduction to Data Visualization with ggplot2*](https://app.datacamp.com/learn/courses/introduction-to-data-visualization-with-ggplot2)
 
+##
+
+<p style="text-align:center;"><img src="images/analysispyramid.jpg" width = 650></p>
+
+We process raw ***data*** with statistical methods to extract usable ***information***. But that is only part of the story! To give statistical results meaning and learn from them, we must interpret them in the ***appropriate context***. This includes units of measurement.
+
+## 
+
+<p>John Tukey (1915--2000), noted mathematician, statistician, and computer scientist, author of _Exploratory Data Analysis_ (1977)<p>
+
+<p style="text-align:center;"><img src="images/tukeyquotesEDA.jpg" width = 450></p>
+
+<p>Tukey also advocated for development of computerized tools to facilitate EDA, so people could focus on ***interpreting results***.</p> 
+
 ## How We Describe Data Distributions
 
 **Categorical Variables**
