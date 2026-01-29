@@ -2,6 +2,7 @@
 title: "Categorical Data:<br>Tabulating Data"
 subtitle: "STT 5811 Statistical Concepts and Applications"
 author: "Jill E. Thomley | Appalachian State University"
+date: "`r format(Sys.time(), '%B %d, %Y @ %I:%M %p')`"
 output: 
   ioslides_presentation:
     logo: images/logoASU.jpg
