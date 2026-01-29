@@ -27,7 +27,6 @@ These slides are not meant to be standalone information. You should take notes t
 * DataCamp [Introduction to the Tidyverse](https://learn.datacamp.com/courses/introduction-to-the-tidyverse)
 * DataCamp [Data Manipulation with dplyr](https://learn.datacamp.com/courses/data-manipulation-with-dplyr)
 
-
 # Review: Datasets
 
 ## Dataset Structure

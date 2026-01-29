@@ -13,18 +13,16 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
 library(tidyverse)
 ```
 
-
 ## Before We Begin...
 
 These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own notes and explorations to make connections.
 
 **Related Materials**
 
-* Ch 2 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
 * Ch 2 of [*Modern Dive*](https://moderndive.com/v2/viz.html)
 * Ch 3 of [*Modern Dive*](https://moderndive.com/v2/wrangling.html)
-* DataCamp [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
-* [R Graphics Cookbook, 2nd Edition (2022)](https://r-resources.massey.ac.nz/rgcookbook/)
+* DataCamp [*Introduction to the Tidyverse*](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+* [*R Graphics Cookbook, 2nd Edition*](https://r-resources.massey.ac.nz/rgcookbook/)
 
 ## 
 
@@ -33,7 +31,6 @@ knitr::include_graphics("images/Fisher.jpg", dpi = 100)
 ```
 
 <p>"...the object of statistical methods is the reduction of data. A quantity of data, which usually by its mere bulk is incapable of entering the mind, is to be replaced by relatively few quantities which shall adequately represent the whole, or...shall contain as much as possible, ideally the whole, of the relevant information contained in the original data." ~ R.A. Fisher, 1921</p>
-
 
 ## How We Describe Data Distributions
 
@@ -52,7 +49,6 @@ Summaries based on *counting* how often categories occur.
 
 *Shape*, *center*, and *spread* characterize the distribution pattern of numerical variables. *Outliers* are deviations from the pattern.
 
-
 ## Exploring Categorical Data
 
 * frequency / relative frequency table
@@ -66,7 +62,6 @@ Summaries based on *counting* how often categories occur.
 Statisticians rarely use pie charts, but they are popular in media. “There is no data that can be displayed in a pie chart that cannot be displayed better in some other type of chart.”
 
 (*Quote attributed to John Tukey. It is unverified, but generally true.*)
-
 
 ## Berkeley Data
 
@@ -84,14 +79,12 @@ You can load the data into `R` using the URL and the code below.
 berkdata <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv")
 ```
 
-
 ## Inspect the Dataset
 
 ```{r}
 glimpse(berkdata)
 head(berkdata, n = 3)
 ```
-
 
 ## The Variables
 
@@ -113,7 +106,6 @@ whether the applicant was accepted or rejected
 
 Each **observation** in the dataset represents one applicant, with a total of `r nrow(berkdata)` observations. 
 
-
 ## What is the "grammar of graphics"?
 
 * R's `ggplot2` is a system for creating graphics, based on the concepts introduced in the book [The Grammar of Graphics](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448/ref=as_li_ss_tl?ie=UTF8&qid=1477928463&sr=8-1&keywords=the+grammar+of+graphics&linkCode=sl1&tag=ggplot2-20&linkId=f0130e557161b83fbe97ba0e9175c431) (2005) --- metastructure and connected visualizations
@@ -126,7 +118,6 @@ Each **observation** in the dataset represents one applicant, with a total of `r
 
 * *facets* allow us to visualize the same graphical elements for important groups or subsets of data 
 
-
 ## Basic Barplots Using ggplot2
 
 ```{r fig.height=3.4}
@@ -135,7 +126,6 @@ library(ggplot2)             # even better, use library(tidyerse)
 ggplot(berkdata, aes(x = sex)) +       # the data we want to plot
   geom_bar()                           # how we want to plot data
 ```
-
 
 ##
 
@@ -147,7 +137,6 @@ ggplot(berkdata, aes(x = sex)) +
   labs(title = "Berkeley Grad School Applicants F73", 
        x = "applicant sex (as per 1970s definitions)")
 ```
-
 
 ##
 
@@ -162,7 +151,6 @@ ggplot(berkdata, aes(x = sex)) +
        caption = "source: berkeley.csv dataset")
 ```
 
-
 ##
 
 Now some color! Try to choose colorblind-friendly options.
@@ -175,7 +163,6 @@ ggplot(berkdata, aes(x = sex)) +
        x = "applicant sex (as per 1970s definitions)",
        caption = "source: berkeley.csv dataset")
 ```
-
 
 ##
 
@@ -191,7 +178,6 @@ ggplot(berkdata, aes(x = sex, fill = sex)) + # add fill for 2 colors
 
 ```
 
-
 ## Proportions Instead of Counts
 
 If we want proportions, we have to calculate them in the plot.
@@ -202,7 +188,6 @@ ggplot(berkdata, aes(x = sex)) +
   labs(y = "proportion")   # we also have to fix the y-axis label
 ```
 
-
 ## Barplots for Two Variables
 
 One variable is the bars (`x`), while the other variable is how the bars are split (`fill`).
@@ -212,14 +197,12 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
   geom_bar()
 ```
 
-
 ## Bars Side-by-Side (`dodge`) vs. Stacked
 
 ```{r fig.height=4}
 ggplot(berkdata, aes(x = sex, fill = status)) + 
   geom_bar(position = "dodge")        # dodge separates the bars
 ```
-
 
 ## Proportions (`fill`) Instead of Counts
 
@@ -231,7 +214,6 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
   labs(y = "proportion")
 ```
 
-
 ## Barplots from Summarized Data
 
 We can make a barplot using summarized (tabled) vs. raw data.
@@ -242,7 +224,6 @@ ggplot(dept_tab, aes(x = department, y = n)) +
   geom_col() +   # use geom_col() since we are specifying y values
   labs(y = "count")
 ```
-
 
 ## More About Color
 
@@ -261,7 +242,6 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
        caption = "source: berkeley.csv dataset")
 ```
 
-
 ## Voila! New Colors
 
 This is a generally colorblind-safe pair of colors, as is the default cyan (#00BFC4) and salmon-ish (#F8766D) combination seen in the earlier two-variable plots.
@@ -269,7 +249,6 @@ This is a generally colorblind-safe pair of colors, as is the default cyan (#00B
 ```{r plotcolor1a, ref.label='plotcolor1', echo=FALSE, fig.height=3.7}
 
 ```
-
 
 ## Three Variables? Use Faceting
 
@@ -287,7 +266,6 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
   facet_grid(rows = vars(department))
 ```
 
-
 ##
 
 Six plots configured into a faceted grid show `status` for men vs. women, with one plot (row) for each department.
@@ -295,7 +273,6 @@ Six plots configured into a faceted grid show `status` for men vs. women, with o
 ```{r plotcolor2a, ref.label='plotcolor2', echo=FALSE, fig.height=4.7}
 
 ```
-
 
 ##
 
@@ -313,7 +290,6 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
   facet_grid(cols = vars(department))
 ```
 
-
 ## A Quick Word about Faceting
 
 Statisticians and others have struggled with how to effectively and efficiently visualize *multivariate data*. We often use colors or shapes, but the result can be messy.
@@ -323,7 +299,6 @@ The `facet_grid()` function creates separate plots for a given variable or varia
 The `facet_wrap()` function tries to optimize for a rectangular arrangement of the resulting plots.
 
 Conceptually, faceting in a plot is similar to using `group_by()` when computing summaries.
-
 
 ## Using `facet.wrap()` vs. `facet.grid()`
 
@@ -340,7 +315,6 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
        y = "number of applicants") +
   facet_wrap(vars(department))
 ```
-
 
 ## Mosaic Plot
 
@@ -361,7 +335,6 @@ Notice the output of this function on the next slide. The `status` variable is t
 berktab
 ```
 
-
 ## 
 
 The table structure determines the layout. What does it show?
@@ -369,7 +342,6 @@ The table structure determines the layout. What does it show?
 ```{r}
 mosaic(berktab) 
 ```
-
 
 ##
 
@@ -379,7 +351,6 @@ We can rotate the category labels for (possibly) easier reading.
 mosaic(berktab, labeling = labeling_border(rot_labels = c(0, 0, 90))) 
 ```
 
-
 ##
 
 We can force a different structure for another visualization. 
@@ -388,7 +359,6 @@ We can force a different structure for another visualization.
 # department and sex are now the columns, aka vertical or "v"
 mosaic(berktab, direction = c("v","v","h")) 
 ```
-
 
 ## Waffle Plots
 
@@ -404,7 +374,6 @@ waffledat <- berkdata %>%
 
 The `unite()` function inputs are the name of the new column you are making, the columns you are combining, and how you want the column contents separated (space, underscore, etc).
 
-
 ##
 
 Our rounded percentages add to 99, so the waffle plot will have 99 versus 100 squares. There will be four colors in the plot, one for each combined sex-status category.
@@ -415,7 +384,6 @@ waffledat
 
 As you will see on the next slide, the columns will serve as the aesthetic inputs: `aes(fill = sex_status, values = pct)`.
 
-
 ##
 
 ```{r fig.height=4}
@@ -425,7 +393,6 @@ ggplot(waffledat, aes(fill = sex_status, values = pct)) +
   coord_equal() +                  # spaces axes to make squares
   theme_void()                        # eliminates axis markings
 ```
-
 
 ## Drawing Conclusions
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Data Wrangling, Part 1: dplyr Verbs for Columns</title>
+  <title>Numerical Data: Center, Spread, Z-Scores</title>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -19,7 +19,7 @@
     var SLIDE_CONFIG = {
       // Slide settings
       settings: {
-                title: 'Data Wrangling, Part 1: <code>dplyr</code> Verbs for Columns',
+                title: 'Numerical Data:<br>Center, Spread, Z-Scores',
                         subtitle: 'STT 5811 Statistical Concepts and Applications',
                 useBuilds: true,
         usePrettify: true,
@@ -3221,7 +3221,7 @@ line-height: 1.9;
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Wednesday, January 28, 2026 @ 07:41 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Wednesday, January 28, 2026 @ 08:17 PM</p>
           </hgroup>
   </slide>
 
@@ -3232,409 +3232,498 @@ line-height: 1.9;
 <p><strong>Related Materials</strong></p>
 
 <ul>
-<li>Modern Dive <a href='https://moderndive.com/v2/wrangling.html' title=''>Chapter 3: Data Wrangling</a></li>
-<li>Modern Dive <a href='https://moderndive.com/v2/tidy.html' title=''>Chapter 4: Data Importing and &ldquo;Tidy&rdquo; Data</a></li>
-<li>DataCamp <a href='https://learn.datacamp.com/courses/introduction-to-the-tidyverse' title=''>Introduction to the Tidyverse</a></li>
-<li>DataCamp <a href='https://learn.datacamp.com/courses/data-manipulation-with-dplyr' title=''>Data Manipulation with dplyr</a></li>
+<li>Ch 2 of <a href='https://moderndive.com/2-viz.html' title=''><em>Modern Dive</em></a></li>
+<li>Ch 3 of <a href='https://moderndive.com/3-wrangling.html' title=''><em>Modern Dive</em></a></li>
+<li>Ch 4 of <a href='https://moderndive.com/4-tidy.html' title=''><em>Modern Dive</em></a></li>
+<li>DataCamp <a href='https://www.datacamp.com/courses/introduction-to-the-tidyverse' title=''>Introduction to the Tidyverse</a></li>
 </ul>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Review: Datasets</h2></hgroup><article  id="review-datasets">
+</article></slide><slide class=""><hgroup><h2>How We Describe Data Distributions</h2></hgroup><article  id="how-we-describe-data-distributions">
 
-</article></slide><slide class=""><hgroup><h2>Dataset Structure</h2></hgroup><article  id="dataset-structure">
+<p><strong>Categorical Variables</strong></p>
 
 <ul>
-<li><p>A <strong><em>variable</em></strong> is some characteristic of interest that can differ between individuals in a population.</p></li>
-<li><p>An observational unit (or <strong><em>observation</em></strong>) is a single individual, object, or entity about which collect data, regarding one or more of its characteristics (variables).</p></li>
-<li><p>An observation may be called a case, subject, or participant.</p></li>
-<li><p>Ideally, each observational unit has a value for each variable.</p></li>
+<li>frequency / relative frequency</li>
 </ul>
 
-<p>A <strong><em>dataset</em></strong> is a collection of data values for the observations and variables in a study (e.g., survey or experiment). A common way to arrange data is to put variables in columns and observations in rows. This is what we call <strong><em>tidy</em></strong> data.</p>
+<p>Summaries based on <em>counting</em> how often categories occur.</p>
 
-</article></slide><slide class=""><hgroup><h2>Tidy Data</h2></hgroup><article  id="tidy-data">
-
-<p style="text-align:center; font-size: 18px;">
-
-<img src="https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png" width = 775><br> Tidy data graphic from <a href='http://r4ds.had.co.nz/tidy-data.html' title=''>R for Data Science: Tidy Data</a>
-
-</p>
-
-<p>
-
-Many datasets are already in tidy format, though there may be missing data and other issues we have to address before doing data analysis and visualization.
-
-</p>
-
-<p>
-
-Real life data is usually far messier and can require a great deal of tidying. The dplyr verbs help us to get data into tidy format and to modify it in other ways, such as creating new variables.
-
-</p>
-
-</article></slide><slide class=""><hgroup><h2>Exploring Structure</h2></hgroup><article  id="exploring-structure">
-
-<p>A few functions for exploring dataset structure are given below.</p>
+<p><strong>Numerical Variables</strong></p>
 
 <ul>
-<li><code>glimpse()</code> # requires tidyverse</li>
-<li><code>attributes()</code></li>
-<li><code>dim()</code> # dimensions, rows × columns</li>
-<li><code>names()</code></li>
-<li><code>nrow()</code></li>
-<li><code>ncol()</code></li>
-<li><code>head()</code></li>
-<li><code>tail()</code></li>
-<li><code>sum(complete.cases())</code> # this is two nested functions</li>
-<li><code>sum(!complete.cases())</code> # what does the ! do?</li>
+<li>shape</li>
+<li>center</li>
+<li>spread</li>
+<li>outliers</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Example Dataset</h2></hgroup><article  id="example-dataset">
+<p><em>Shape</em>, <em>center</em>, and <em>spread</em> characterize the distribution pattern of numerical variables. <em>Outliers</em> are deviations from the pattern.</p>
+
+</article></slide><slide class=""><hgroup><h2>Center</h2></hgroup><article  id="center">
 
 <ul>
-<li><p>Statistician Francis Galton (1822-1911), a cousin of Charles Darwin, studied the relationship between parents’ heights and the heights of their offspring. His pioneering <a href='https://galton.org/essays/1880-1889/galton-1886-jaigi-regression-stature.pdf' title=''>1886 article</a> is the first appearance of regression analysis in print.</p></li>
-<li><p>The <code>galtonfamiliesall</code> dataset we will be working with was <a href='http://www.medicine.mcgill.ca/epidemiology/hanley/galton/' title=''>partly reconstructed by Dr. James A. Hanley</a> and his students from <a href='http://www.medicine.mcgill.ca/epidemiology/hanley/galton/notebook/index.html' title=''>original paper notebooks</a> containing handwritten data for 205 families that was gathered by Galton.</p></li>
-<li><p>Galton’s made comments about how he &ldquo;transmuted&rdquo; some of the data for analysis. As with most historical data, gender is a binary variable for both parents and children.</p></li>
+<li>mean
+
+<ul>
+<li>arithmetic mean (&ldquo;average&rdquo;, <em>expected value</em>)</li>
+<li>weighted mean (some points have more &ldquo;weight&rdquo;)</li>
+<li>trimmed mean (some end points are trimmed off)</li>
+<li>geometric mean (n<sup>th</sup> root of the product of n values)</li>
+</ul></li>
+<li>median (50<sup>th</sup> percentile/quantile)</li>
+<li>mode (we use this more with reference to shape)</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Read in the Data</h2></hgroup><article  id="read-in-the-data">
+<p>Mean and median are both the &ldquo;middle&rdquo; of a given distribution, but the two summaries define middle or <em>center</em> differently. They may be very different values when calculated. If a distribution is perfectly symmetric, then the mean and median will be equal.</p>
 
-<p>You can access the Galton data file from the <a href='https://stat-jet-asu.github.io/Datasets/InstructorDescriptions/galtonheightdata.html' title=''>description</a> page, which also contains more context and variable definitions.</p>
+</article></slide><slide class=""><hgroup><h2>Spread (or <em>Variability</em>)</h2></hgroup><article  id="spread-or-variability">
 
-<pre class = 'prettyprint lang-r'>head(galtondata)</pre>
+<ul>
+<li>variance (<em>variance</em> is one specific measure of <em>variability</em>)
 
-<pre ># A tibble: 6 × 6
-  FamilyID Children Father Mother Child    Height
-  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
-1 1               4   78.5   67   Son        73.2
-2 1               4   78.5   67   Daughter   69.2
-3 1               4   78.5   67   Daughter   69  
-4 1               4   78.5   67   Daughter   69  
-5 2               4   75.5   66.5 Son        73.5
-6 2               4   75.5   66.5 Son        72.5</pre>
+<ul>
+<li>population</li>
+<li>sample</li>
+</ul></li>
+<li>standard deviation</li>
+<li>mean absolute deviation (mad)</li>
+<li>median absolute deviation (<em>also</em> mad?)</li>
+<li>interquartile range (IQR)</li>
+<li>range</li>
+</ul>
 
-<p>Question: Why is familyID a character variable?</p>
+<p>Summarizing the deviations of a set of values from some center point (like the mean) is a common technique in statistics. We will see this in many applications.</p>
+
+</article></slide><slide class=""><hgroup><h2>Measures Based on Moments: Mean</h2></hgroup><article  id="measures-based-on-moments-mean">
+
+<p>In physics, a <em>moment of force</em> (or <em>torque</em>) is the turning effect of the force about a central point, as a function of distance from the point. Statistical moments are a similar idea.</p>
+
+<p><strong>mean (first moment)</strong></p>
+
+<ul>
+<li>\(x - \mu\) calculates the distance of point \(x\) from the mean \(\mu\)</li>
+<li>the mean \(\mu\) is the value that makes \(\Sigma(x - \mu)^1 = 0\) true for all points \(x_i\) in a given distribution</li>
+<li>mean is the <strong>center of mass</strong> or <em>balance point</em> of a distribution</li>
+</ul>
+
+<p>Think of the number line as a see-saw and the data points as objects sitting on the see-saw, exerting a downward force. The mean is the fulcrum that perfectly balances all the data points and keeps the see-saw level.</p>
+
+</article></slide><slide class=""><hgroup><h2>Variance and Standard Deviation</h2></hgroup><article  id="variance-and-standard-deviation">
+
+<p><strong>variance (second moment)</strong></p>
+
+<p>\[M_2 = \sigma^2 = \frac{\Sigma(x - \mu)^2}{n}\]</p>
+
+<p>The variance is the average <em>squared</em> distance of all points from the mean. Points that are farther away from \(\mu\) will be weighted somewhat more heavily. Whatever units of measure variable \(X\) has will be squared as well, so it is less useful for description.</p>
+
+<p>\[\text{standard deviation} = \sqrt{\text{variance}} = \sigma \]</p>
+
+<p>While not strictly mathematically true, it is helpful to think of SD as roughly the average distance of all points from the mean. Its units are the same as the mean and the actual data values.</p>
+
+</article></slide><slide class=""><hgroup><h2>Population vs. Sample Variance</h2></hgroup><article  id="population-vs.-sample-variance">
+
+<p>The previous slide shows the formula for <em>population</em> variance.</p>
+
+<p>When computing sample variance, we make a small change to the formula so that it is an <em>unbiased</em> estimator of the population variance (i.e., in the long run, sample variance will neither over-estimate nor under-estimate population variance).</p>
+
+<p>\[\text{sample variance} = s^2 = \frac{\Sigma(x_i - \bar{x})^2}{n-1}\]</p>
+
+<p>\[\text{sample standard deviation} = \sqrt{\text{sample variance}} = s\]</p>
+
+<p>Recall we use different symbols for parameters versus statistics. If you are not yet familiar with the symbols for mean, variance, standard deviation, and sample size, this is a good time to learn!</p>
+
+</article></slide><slide class=""><hgroup><h2>Z-Score (Standardized Score)</h2></hgroup><article  id="z-score-standardized-score">
+
+<p>Mean and standard deviation have the same units as the data points they are summarizing (e.g., data in inches have a mean expressed in inches).</p>
+
+<p>However, standard deviation itself can be a unit of measure. The \(z\)-score tells us how many standard deviations above or below the mean a given point \(x\) is located.</p>
+
+<p>\[z = \frac{x - \mu}{\sigma} \text{ (population)}\]</p>
+
+<p>\[z = \frac{x - \bar{x}}{s} \text{ (in a sample)}\]</p>
+
+<p>The data units cancel out. A \(z\)-score of +2 would be interpreted as &ldquo;two standard deviations above the mean&rdquo;.</p>
+
+</article></slide><slide class=""><hgroup><h2>The Mathematics of Z-Scores</h2></hgroup><article  id="the-mathematics-of-z-scores">
+
+<p>Why are \(z\)-scores <em>standardized</em> scores? The calculation performs a linear transformation (re-scaling) of the values, similar to when we convert degrees Fahrenheit to Celsius. Data points maintain their relative relationships to each other, we are just using a new number line scale as a reference point.</p>
+
+<p>\((x - \mu)\) re-centers the data, and the new mean is always zero</p>
+
+<p>dividing by \(\sigma\) re-scales the number line, so the SD is always one</p>
+
+<p>The act of dividing also cancels out original measurement units. We then talk about data points in terms of how many standard deviations they are above or below the mean. It helps compare variables that may originally have been on very different scales by using a common or <em>standard</em> scale.</p>
+
+</article></slide><slide class=""><hgroup><h2>Why do We Need Z-Scores?</h2></hgroup><article  id="why-do-we-need-z-scores">
+
+<p>As noted, \(z\)-scores help us compare data and distributions that may be measures on different scales, the way we might convert measurements made in inches, feet, and meters to a common set of units to make more direct comparisons.</p>
+
+<p>Our traditional methods of estimation and inference also often rely on using standardized measures so that we can use these same methods in a broad variety of situations. In statistics, our data is an unknown, but the same way scientists calibrate their instruments, we make sure our statistical methods are reliable by validating and &ldquo;calibrating&rdquo; them mathematically.</p>
+
+<p>In the future, one variation you see on \(z\)-scores will be <em>t</em>-scores, used for estimation and inference about means.</p>
+
+</article></slide><slide class=""><hgroup><h2>Skewness and Kurtosis</h2></hgroup><article  id="skewness-and-kurtosis">
+
+<p>skewness (based on the third moment, notice \(z\)-score similarity)</p>
+
+<p>\[M_3 = \frac{\Sigma(X - \mu)^3}{n}\]</p>
+
+<p>\[skewness = \frac{\Sigma(X - \mu)^3}{\sigma^3}\]</p>
+
+<p>kurtosis (based on the fourth moment, notice \(z\)-score similarity)</p>
+
+<p>\[M_4 = \frac{\Sigma(X - \mu)^4}{n}\]</p>
+
+<p>\[kurtosis = \frac{\Sigma(X - \mu)^4}{\sigma^4}\]</p>
+
+</article></slide><slide class=""><hgroup><h2>More on Skewness, Kurtosis, Moments</h2></hgroup><article  id="more-on-skewness-kurtosis-moments">
+
+<p>Skewness and kurtosis help to judge the <em>shape</em> of a distribution.</p>
+
+<ul>
+<li><p>skewness is the degree of asymmetry in the distribution</p></li>
+<li><p>kurtosis is the flatness or peakedness of the distribution</p></li>
+</ul>
+
+<p>They are <em>standardized</em> by dividing the summed deviations by \(\sigma\) raised to the same power as the moment, similar to z-scores.</p>
+
+<p>We use these measures often when trying to judge whether or not we can consider a variable to be approximately bell-shaped, since many of our traditional methods assume that data come from a population with an approximately normal distribution.</p>
+
+<p>Outliers will affect all measures based on moments, so we need to check for them when we calculate these measures.</p>
+
+</article></slide><slide class=""><hgroup><h2>Moment-Based Summaries in R</h2></hgroup><article  id="moment-based-summaries-in-r">
+
+<ul>
+<li><code>mean()</code> — also computes trimmed mean</li>
+<li><code>var()</code></li>
+<li><code>sd()</code></li>
+<li><code>skewness()</code></li>
+<li><code>kurtosis()</code></li>
+</ul>
+
+<p>The <code>var()</code> and <code>sd()</code> functions calculate sample variance and standard deviation. How could you get population variance if your data were a population?</p>
+
+<p>The <code>skewness()</code> and <code>kurtosis()</code> functions are found in the moments package, so you need to use <code>library(moments)</code>.</p>
+
+<p>You should explore the syntax and output of these functions.</p>
+
+</article></slide><slide class=""><hgroup><h2>Measures Based on Ordered Counts</h2></hgroup><article  id="measures-based-on-ordered-counts">
+
+<ul>
+<li>five-number-summary
+
+<ul>
+<li>minimum — smallest data point</li>
+<li>first quartile (Q<sub>1</sub>) — 25% of data is below, 75% is above</li>
+<li>median — 50% of data is below, 50% is above (&ldquo;center&rdquo;)</li>
+<li>third quartile (Q<sub>3</sub>) — 75% of data is below, 25% is above</li>
+<li>maximum — largest data point</li>
+</ul></li>
+<li>interquartile range (IQR) = Q<sub>3</sub> - Q<sub>1</sub> (range of middle 50%)</li>
+<li>range = maximum - minimum (overall width of the dataset)</li>
+<li>percentiles / quantiles — the n<em>th</em> percentile or quantile has n% of the data below it (e.g., Q<sub>1</sub> is the 25th percentile of the dataset and the median is the 50th percentile)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Count-Based Summaries in R</h2></hgroup><article  id="count-based-summaries-in-r">
+
+<ul>
+<li><code>fivenum()</code></li>
+<li><code>min()</code></li>
+<li><code>median()</code></li>
+<li><code>max()</code></li>
+<li><code>IQR()</code></li>
+<li><code>range()</code></li>
+<li><code>diff(range())</code> — using just <code>range()</code> gives the min and max</li>
+<li><code>quantile()</code> – quantiles can also be referred to as percentiles</li>
+</ul>
+
+<p>Again, you should explore the syntax, parameters, and output of each function to understand how it works.</p>
+
+</article></slide><slide class=""><hgroup><h2>Summarizing Using dplyr</h2></hgroup><article  id="summarizing-using-dplyr">
+
+<p>You can add/remove summary functions as needed. The <code>na.rm</code> ignores any <code>NA</code> (missing) values, else you get <code>NA</code> as output.</p>
+
+<pre class = 'prettyprint lang-r'>datasetname %&gt;% 
+  summarize(n     = n(),
+            xbar  = mean(variablename, na.rm = TRUE),
+            s     = sd(variablename, na.rm = TRUE),
+            xmin  = fivenum(variablename)[1],
+            Q1    = fivenum(variablename)[2],
+            xmed  = fivenum(variablename)[3],                  
+            Q3    = fivenum(variablename)[4],
+            xmax  = fivenum(variablename)[5],
+            iqr   = IQR(variablename, na.rm = TRUE),
+            rng   = diff(range(variablename, na.rm = TRUE)),
+            total = sum(variablename, na.rm = TRUE),
+            skew  = skewness(variablename, na.rm = TRUE),
+            kurt  = kurtosis(variablename, na.rm = TRUE))</pre>
+
+</article></slide><slide class=""><hgroup><h2>About the <code>fivenum()</code> Function</h2></hgroup><article  id="about-the-fivenum-function">
+
+<p>Most summary functions like <code>mean()</code> and <code>sd()</code> produce only a single value as output. However, <code>fivenum()</code> produces a vector of length 5. The [ ] notation accesses the correct location in the output vector, since each step of a <code>summarize()</code> function must only output a single value.</p>
+
+<pre class = 'prettyprint lang-r'>library(resampledata)
+fivenum(FlightDelays$FlightLength) # output is min, Q1, med, Q3, max</pre>
+
+<pre >[1]  68 155 163 228 295</pre>
+
+<pre class = 'prettyprint lang-r'>fivenum(FlightDelays$FlightLength)[3] # output is location 3, median</pre>
+
+<pre >[1] 163</pre>
+
+</article></slide><slide class=""><hgroup><h2>Some Data to Summarize</h2></hgroup><article  id="some-data-to-summarize">
+
+<p>Read datasets <a href='https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/gasmileage.csv' title=''>gasmileage.csv</a> and <a href='https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/happyface.csv' title=''>happyface.csv</a> into RStudio. Remember you need <code>library(tidyverse)</code> for many functions we will use, and <code>library(moments)</code> for skewness and kurtosis. In coming slides they will be referred to by the following names.</p>
+
+<ul>
+<li><p><code>mileage</code>: results of 100 EPA gas mileage tests for a particular model of car, in miles per gallon (mpg)</p></li>
+<li><p><code>happyf</code>: results for an experiment where some servers drew happy faces on the back of customer’s restaurant checks and others did not, with the tip percentage they received</p></li>
+</ul>
+
+<p>In <code>happyf</code> the sex of the server is recorded as a binary variable <code>male</code> or <code>female</code>, since it is an older dataset (<a href='https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1559-1816.1996.tb01847.x' title=''>published in 1996</a>). Much of the data we encounter in real life is time-sensitive; we need to keep this in mind when we interpret/discuss it.</p>
+
+</article></slide><slide class=""><hgroup><h2>Explore the Datasets</h2></hgroup><article  id="explore-the-datasets">
+
+<pre class = 'prettyprint lang-r'>glimpse(mileage)</pre>
+
+<pre >Rows: 100
+Columns: 1
+$ mpg &lt;dbl&gt; 36.3, 41.0, 36.9, 37.1, 44.9, 36.8, 30.0, 37.2, 42.1, 36.7, 32.7, …</pre>
+
+<pre class = 'prettyprint lang-r'>glimpse(happyf)</pre>
+
+<pre >Rows: 89
+Columns: 3
+$ Message &lt;chr&gt; &quot;HappyFace&quot;, &quot;HappyFace&quot;, &quot;HappyFace&quot;, &quot;HappyFace&quot;, &quot;HappyFace…
+$ Sex     &lt;chr&gt; &quot;Female&quot;, &quot;Female&quot;, &quot;Female&quot;, &quot;Female&quot;, &quot;Female&quot;, &quot;Female&quot;, &quot;F…
+$ TipPct  &lt;dbl&gt; 23.44, 16.51, 28.33, 72.46, 33.49, 33.61, 20.63, 64.52, 44.44,…</pre>
+
+</article></slide><slide class=""><hgroup><h2>Summarizing <code>mpg</code></h2></hgroup><article  id="summarizing-mpg">
+
+<p>I removed <code>skewness()</code> and <code>kurtosis()</code> here. I also know for sure that there are no missing values in this dataset, so I took out the <code>na.rm = TRUE</code> statements for simplicity.</p>
+
+<pre class = 'prettyprint lang-r'>mileage %&gt;% 
+  summarize(n     = n(),
+            xbar  = mean(mpg),
+            s     = sd(mpg),
+            min   = fivenum(mpg)[1],
+            Q1    = fivenum(mpg)[2],
+            med   = fivenum(mpg)[3],                  
+            Q3    = fivenum(mpg)[4],
+            max   = fivenum(mpg)[5],
+            iqr   = IQR(mpg),
+            rng   = diff(range(mpg)),
+            total = sum(mpg))</pre>
+
+</article></slide><slide class=""><hgroup><h2>The Output is a <code>tibble</code></h2></hgroup><article  id="the-output-is-a-tibble">
+
+<p>Both the input and output are datasets, but the components of the output are the summaries computed from the input dataset. Each summary measure is a variable, with a single observation. You can <code>filter()</code> and <code>select()</code> and otherwise manipulate this <code>tibble</code>, especially if you save it as an object.</p>
+
+<pre ># A tibble: 1 × 11
+      n  xbar     s   min    Q1   med    Q3   max   iqr   rng total
+  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1   100  37.0  2.42    30  35.7    37  38.3  44.9  2.65  14.9 3699.</pre>
+
+<p>Where is the <em>center</em> of this distribution? How <em>spread</em> out is it? Keep in mind the units of measure when discussing the data and its summaries in context.</p>
+
+<p>We need to use visualizations to check for <em>shape</em> and <em>outliers</em>.</p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
 
-<p>What are the variable names?</p>
+<pre class = 'prettyprint lang-r'>mpg_summaries &lt;- mileage %&gt;% 
+  summarize(n     = n(),
+            xbar  = mean(mpg),
+            s     = sd(mpg),
+            min   = fivenum(mpg)[1],
+            Q1    = fivenum(mpg)[2],
+            med   = fivenum(mpg)[3],                  
+            Q3    = fivenum(mpg)[4],
+            max   = fivenum(mpg)[5],
+            iqr   = IQR(mpg),
+            rng   = diff(range(mpg)),
+            total = sum(mpg))
+mpg_summaries %&gt;% 
+  select(n, xbar, s) # remember, select chooses columns (variables) </pre>
 
-<pre class = 'prettyprint lang-r'>names(galtondata)</pre>
+<pre ># A tibble: 1 × 3
+      n  xbar     s
+  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1   100  37.0  2.42</pre>
 
-<pre >[1] &quot;FamilyID&quot; &quot;Children&quot; &quot;Father&quot;   &quot;Mother&quot;   &quot;Child&quot;    &quot;Height&quot;  </pre>
+</article></slide><slide class=""><hgroup><h2>Summarizing by Groups Using dplyr</h2></hgroup><article  id="summarizing-by-groups-using-dplyr">
 
-<p>How many observations are there?</p>
+<p>Use <code>group_by()</code> before the <code>summarize()</code> function to group the observations into subgroups by one or more other variables of interest. Here I use two grouping variables, since the original experiment analyzed both together.</p>
 
-<pre class = 'prettyprint lang-r'>nrow(galtondata)</pre>
+<pre class = 'prettyprint lang-r'>happyf %&gt;% 
+  group_by(Sex, Message) %&gt;% 
+  summarize(n    = n(),
+            xbar = mean(TipPct),
+            s    = sd(TipPct),
+            min  = fivenum(TipPct)[1],
+            Q1   = fivenum(TipPct)[2],
+            med  = fivenum(TipPct)[3],                  
+            Q3   = fivenum(TipPct)[4],
+            max  = fivenum(TipPct)[5])</pre>
 
-<pre >[1] 934</pre>
+</article></slide><slide class=""><hgroup><h2>Output for Grouped Summaries</h2></hgroup><article  id="output-for-grouped-summaries">
 
-<p>Are there any cases with <code>NA</code> values?</p>
+<p>The output is a tibble with four observations, or one for each group. We could use a <code>filter()</code> to choose only certain rows after summarizing.</p>
 
-<pre class = 'prettyprint lang-r'>sum(!complete.cases(galtondata))</pre>
+<pre ># A tibble: 4 × 10
+# Groups:   Sex [2]
+  Sex    Message       n  xbar     s   min    Q1   med    Q3   max
+  &lt;chr&gt;  &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 Female HappyFace    22  33.0 14.0  16.5   24.2  28.4  40.4  72.5
+2 Female None         23  27.8  7.77  8     22.6  27.7  32.2  44.8
+3 Male   HappyFace    23  17.8  5.57  9.09  14.6  16.8  21.0  31.1
+4 Male   None         21  21.4 12.6   0     16.3  21.2  27.3  48  </pre>
 
-<pre >[1] 0</pre>
-
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>dplyr Verbs for Variables<br>(Manipulating Columns)</h2></hgroup><article  id="dplyr-verbs-for-variables-manipulating-columns">
+<p>You will usually see more decimal places in RStudio versus when you <code>knit()</code>. You can also format output using <code>kable()</code> styling.</p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1">
 
-<ul>
-<li><a href='https://dplyr.tidyverse.org/reference/mutate.html' title=''><code>mutate()</code></a> / <a href='https://dplyr.tidyverse.org/reference/mutate.html' title=''><code>transmute()</code></a></li>
-</ul>
-
-<p>Use to create, modify, and/or delete columns (variables).</p>
-
-<ul>
-<li><a href='https://dplyr.tidyverse.org/reference/pull.html' title=''><code>pull()</code></a></li>
-</ul>
-
-<p>Use to extract a single column (variable) into a vector.</p>
-
-<ul>
-<li><a href='https://dplyr.tidyverse.org/reference/rename.html' title=''><code>rename()</code></a></li>
-</ul>
-
-<p>Use to rename columns (variables).</p>
-
-<ul>
-<li><a href='https://dplyr.tidyverse.org/reference/relocate.html' title=''><code>relocate()</code></a></li>
-</ul>
-
-<p>Use to change the order of columns.</p>
-
-<ul>
-<li><a href='https://dplyr.tidyverse.org/reference/select.html' title=''><code>select()</code></a></li>
-</ul>
-
-<p>Use to subset columns; can also change order or rename.</p>
-
-</article></slide><slide class=""><hgroup><h2>Mutating Mother Height</h2></hgroup><article  id="mutating-mother-height">
-
-<p>Galton &ldquo;transmuted the female statures to their corresponding male equivalents&rdquo; by multiplying them by <code>1.08</code>. We can do this for the variable <code>Mother</code> by using <a href='https://dplyr.tidyverse.org/reference/mutate.html' title=''><code>mutate()</code></a> to create <code>MotherT</code>.</p>
-
-<pre class = 'prettyprint lang-r'>galtondataA &lt;- galtondata %&gt;%
-  mutate(MotherT = 1.08 * Mother)
-head(galtondataA, n = 5)</pre>
-
-<pre ># A tibble: 5 × 7
-  FamilyID Children Father Mother Child    Height MotherT
-  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-1 1               4   78.5   67   Son        73.2    72.4
-2 1               4   78.5   67   Daughter   69.2    72.4
-3 1               4   78.5   67   Daughter   69      72.4
-4 1               4   78.5   67   Daughter   69      72.4
-5 2               4   75.5   66.5 Son        73.5    71.8</pre>
-
-</article></slide><slide class=""><hgroup><h2>Mutating Daughter Height</h2></hgroup><article  id="mutating-daughter-height">
-
-<p>Both daughters’ and sons’ heights are stored in <code>Height</code>. We can <code>mutate()</code> conditionally for daughters using <a href='https://dplyr.tidyverse.org/reference/if_else.html' title=''><code>if_else()</code></a>.</p>
-
-<pre class = 'prettyprint lang-r'>galtondataA &lt;- galtondataA %&gt;%
-  mutate(HeightT = if_else(Child == &quot;Daughter&quot;, 1.08 * Height, Height))
-head(galtondataA)</pre>
-
-<pre ># A tibble: 6 × 8
-  FamilyID Children Father Mother Child    Height MotherT HeightT
-  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 1               4   78.5   67   Son        73.2    72.4    73.2
-2 1               4   78.5   67   Daughter   69.2    72.4    74.7
-3 1               4   78.5   67   Daughter   69      72.4    74.5
-4 1               4   78.5   67   Daughter   69      72.4    74.5
-5 2               4   75.5   66.5 Son        73.5    71.8    73.5
-6 2               4   75.5   66.5 Son        72.5    71.8    72.5</pre>
-
-</article></slide><slide class=""><hgroup><h2>Computing Midparent Height</h2></hgroup><article  id="computing-midparent-height">
-
-<p>Galton also calculated the midpoint of the parents’ heights.</p>
-
-<pre class = 'prettyprint lang-r'>galtondataA &lt;- galtondataA %&gt;%
-  mutate(Midparent = (Father + MotherT) / 2)
-head(galtondataA, n = 5)</pre>
-
-<pre ># A tibble: 5 × 9
-  FamilyID Children Father Mother Child    Height MotherT HeightT Midparent
-  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-1 1               4   78.5   67   Son        73.2    72.4    73.2      75.4
-2 1               4   78.5   67   Daughter   69.2    72.4    74.7      75.4
-3 1               4   78.5   67   Daughter   69      72.4    74.5      75.4
-4 1               4   78.5   67   Daughter   69      72.4    74.5      75.4
-5 2               4   75.5   66.5 Son        73.5    71.8    73.5      73.7</pre>
-
-</article></slide><slide class=""><hgroup><h2>All Variables in One <code>mutate()</code></h2></hgroup><article  id="all-variables-in-one-mutate">
-
-<p>You can create all three variables in one <code>mutate()</code> statement.</p>
-
-<pre class = 'prettyprint lang-r'>galtondataB &lt;- galtondata %&gt;%
-  mutate(
-    MotherT = 1.08 * Mother,
-    HeightT = if_else(Child == &quot;Daughter&quot;, 1.08 * Height, Height),
-    Midparent = (Father + MotherT) / 2
-  )</pre>
-
-<p>Next you could pipe (<code>%&gt;%</code>) this into a <code>select()</code> step to reduce the number of variables in the dataset, or perform some other other operation. The output is always a tibble.</p>
-
-<p>In general, our data manipulations may contain several steps, depending on the format of the original data and our goals in terms of any research questions and data analyses.</p>
-
-</article></slide><slide class=""><hgroup><h2>Are They The Same?</h2></hgroup><article  id="are-they-the-same">
-
-<pre class = 'prettyprint lang-r'>identical(galtondataA, galtondataB)</pre>
-
-<pre >[1] TRUE</pre>
-
-<pre class = 'prettyprint lang-r'>all.equal(galtondataA, galtondataB)</pre>
-
-<pre >[1] TRUE</pre>
-
-<p>In this case, our choice of manipulation(s) produced the exact same final dataset structure.</p>
-
-<p>First develop code that works for your goals, one step at a time, then you can rearrange and condense to make your code more readable, reproducible, and efficient.</p>
-
-</article></slide><slide class=""><hgroup><h2>What if we use <code>transmute()</code>?</h2></hgroup><article  id="what-if-we-use-transmute">
-
-<p>The <a href='https://dplyr.tidyverse.org/reference/transmute.html' title=''><code>transmute()</code></a> function deletes all columns <em>except</em> for those included in <code>transmute()</code>. (<strong>note:</strong> this function is <em>superseded</em>)</p>
-
-<pre class = 'prettyprint lang-r'>galtondataC &lt;- galtondata %&gt;%
-  transmute(
-    Father,
-    MotherT = 1.08 * Mother,
-    Midparent = (Father + MotherT) / 2,
-    HeightT = if_else(Child == &quot;Daughter&quot;, 1.08 * Height, Height)
-  )
-head(galtondataC, n = 1)</pre>
-
-<pre ># A tibble: 1 × 4
-  Father MotherT Midparent HeightT
-   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-1   78.5    72.4      75.4    73.2</pre>
-
-</article></slide><slide class=""><hgroup><h2>Using <code>select()</code></h2></hgroup><article  id="using-select">
-
-<p>We can use <a href='https://dplyr.tidyverse.org/reference/select.html' title=''><code>select()</code></a> to choose a subset of our columns. For example, the variables <code>Midparent</code> and <code>HeightT</code> would help us recreate Galton’s original work.</p>
-
-<pre class = 'prettyprint lang-r'>galtondataD &lt;- galtondataA %&gt;%
-  select(
-    FamilyID,
-    Midparent,
-    HeightT
-  )
-head(galtondataD, n = 1)</pre>
-
-<pre ># A tibble: 1 × 3
-  FamilyID Midparent HeightT
-  &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;
-1 1             75.4    73.2</pre>
-
-</article></slide><slide class=""><hgroup><h2>Multipurpose <code>select()</code></h2></hgroup><article  id="multipurpose-select">
-
-<p>We can choose columns, reorder, and rename at the same time with <code>select()</code>. The order in which columns are selected will be their new order. Rename by assigning <code>newname = oldname</code>.</p>
-
-<pre class = 'prettyprint lang-r'>galtondataD &lt;- galtondataA %&gt;%
-  select(
-    family_id = FamilyID,    # change to lowercase and _ name
-    ht_parent = Midparent,   # change to more consistent name
-    ht_child = HeightT       # change to more consistent name
-  )
-head(galtondataD, n = 1)</pre>
-
-<pre ># A tibble: 1 × 3
-  family_id ht_parent ht_child
-  &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;
-1 1              75.4     73.2</pre>
-
-</article></slide><slide class=""><hgroup><h2>UN-<code>select()</code></h2></hgroup><article  id="un-select">
-
-<p>Sometimes the list of variables to get rid of is shorter than the list to keep. We can use <code>select()</code> to delete unwanted columns instead of listing columns to keep by using <code>-</code>.</p>
-
-<pre class = 'prettyprint lang-r'>galtondataE &lt;- galtondataA %&gt;%
-  select(
-    -Mother,   # delete Mother, since we have the mutated MotherT
-    -Height    # delete Height, since we have the mutated HeightT
-  )
-head(galtondataE, n = 1)</pre>
-
-<pre ># A tibble: 1 × 7
-  FamilyID Children Father Child MotherT HeightT Midparent
-  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-1 1               4   78.5 Son      72.4    73.2      75.4</pre>
-
-</article></slide><slide class=""><hgroup><h2>Using <code>relocate()</code></h2></hgroup><article  id="using-relocate">
-
-<p>The <a href='https://dplyr.tidyverse.org/reference/relocate.html' title=''><code>relocate()</code></a> function moves columns, using syntax similar to <code>select()</code>. Recall that in <code>galtondataA</code>, the new variables we made with <code>mutate()</code> were placed after the existing variables.</p>
-
-<pre class = 'prettyprint lang-r'>galtondataF &lt;- galtondataA %&gt;% 
-  relocate(MotherT, .after = Mother) %&gt;% 
-  relocate(Midparent, .after = MotherT)
-head(galtondataF, n = 1)</pre>
-
-<pre ># A tibble: 1 × 9
-  FamilyID Children Father Mother MotherT Midparent Child Height HeightT
-  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-1 1               4   78.5     67    72.4      75.4 Son     73.2    73.2</pre>
-
-<p>Sometimes we move columns to take advantage of block/group functions, like specifying a range of columns.</p>
-
-</article></slide><slide class=""><hgroup><h2><code>relocate()</code> Multiple Columns</h2></hgroup><article  id="relocate-multiple-columns">
-
-<p>You can also <code>select()</code> or <code>relocate()</code> a block or set of columns together, using some common criteria they all share.</p>
-
-<p>For example, I can move all the numeric variables to the front of the dataset using <a href='https://tidyselect.r-lib.org/reference/where.html' title=''><code>where()</code></a>. You can also use a function such as <a href='https://tidyselect.r-lib.org/reference/starts_with.html' title=''><code>starts_with()</code></a> or <code>contains()</code> to choose variables by name(s).</p>
-
-<pre class = 'prettyprint lang-r'>galtondataG &lt;- galtondata %&gt;% 
-  relocate(where(is.numeric))
-head(galtondataG, n = 1)</pre>
-
-<pre ># A tibble: 1 × 6
-  Children Father Mother Height FamilyID Child
-     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
-1        4   78.5     67   73.2 1        Son  </pre>
-
-</article></slide><slide class=""><hgroup><h2>Another <code>relocate()</code> Example</h2></hgroup><article  id="another-relocate-example">
-
-<pre class = 'prettyprint lang-r'>head(galtondataD, n = 1)</pre>
-
-<pre ># A tibble: 1 × 3
-  family_id ht_parent ht_child
-  &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;
-1 1              75.4     73.2</pre>
-
-<pre class = 'prettyprint lang-r'>galtondataH &lt;- galtondataD %&gt;% 
-  relocate(starts_with(&quot;ht&quot;))   # variables with ht moved to front
-head(galtondataH, n = 1)</pre>
-
-<pre ># A tibble: 1 × 3
-  ht_parent ht_child family_id
-      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    
-1      75.4     73.2 1        </pre>
-
-</article></slide><slide class=""><hgroup><h2>Another <code>relocate()</code> Example</h2></hgroup><article  id="another-relocate-example-1">
-
-<pre class = 'prettyprint lang-r'>head(galtondataF, n = 1)</pre>
-
-<pre ># A tibble: 1 × 9
-  FamilyID Children Father Mother MotherT Midparent Child Height HeightT
-  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-1 1               4   78.5     67    72.4      75.4 Son     73.2    73.2</pre>
-
-<pre class = 'prettyprint lang-r'>galtondataJ &lt;- galtondataF %&gt;% 
-  relocate(Child:HeightT)   # columns Child through HeightT to front
-head(galtondataJ, n = 1)</pre>
-
-<pre ># A tibble: 1 × 9
-  Child Height HeightT FamilyID Children Father Mother MotherT Midparent
-  &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-1 Son     73.2    73.2 1               4   78.5     67    72.4      75.4</pre>
-
-</article></slide><slide class=""><hgroup><h2>Note: Functions Altered Only Columns</h2></hgroup><article  id="note-functions-altered-only-columns">
-
-<p>Note: All the datasets include the same number of rows (934).</p>
-
-<pre class = 'prettyprint lang-r'>dim(galtondata) # original data, 6 variables total</pre>
-
-<pre >[1] 934   6</pre>
-
-<pre class = 'prettyprint lang-r'>dim(galtondataA) # used mutate to add 3 new variables to original</pre>
-
-<pre >[1] 934   9</pre>
-
-<pre class = 'prettyprint lang-r'>dim(galtondataB) # used mutate to add 3 new variables to original</pre>
-
-<pre >[1] 934   9</pre>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-2">
-
-<pre class = 'prettyprint lang-r'>dim(galtondataC) # used transmute to add variables / delete some old</pre>
-
-<pre >[1] 934   4</pre>
-
-<pre class = 'prettyprint lang-r'>dim(galtondataD) # used select to choose 3 variables to keep</pre>
-
-<pre >[1] 934   3</pre>
-
-<pre class = 'prettyprint lang-r'>dim(galtondataE) # used select to remove 2 of 9 variables </pre>
-
-<pre >[1] 934   7</pre>
-
-<pre class = 'prettyprint lang-r'>dim(galtondataF) # using relocate to reorder 9 variables</pre>
-
-<pre >[1] 934   9</pre>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-3">
-
-<pre class = 'prettyprint lang-r'>dim(galtondataG) # using relocate to reorder 6 variables</pre>
-
-<pre >[1] 934   6</pre>
-
-<pre class = 'prettyprint lang-r'>dim(galtondataH) # using relocate to reorder 3 variables</pre>
-
-<pre >[1] 934   3</pre>
-
-<pre class = 'prettyprint lang-r'>dim(galtondataJ) # using relocate to reorder 9 variables</pre>
-
-<pre >[1] 934   9</pre>
-
-<hr>
-
-<p>Overall, make a plan for the variables you need, then consider how to get them from the variables you have.</p></article></slide>
+<pre class = 'prettyprint lang-r'># using summaries output that I saved as the object happyfsummaries
+library(knitr)
+kable(happyfsummaries, digits = 2) # digits = decimal places</pre>
+
+<table class = 'rmdtable'>
+<col width="11.290323%" />
+<col width="16.129032%" />
+<col width="4.838710%" />
+<col width="9.677419%" />
+<col width="9.677419%" />
+<col width="9.677419%" />
+<col width="9.677419%" />
+<col width="9.677419%" />
+<col width="9.677419%" />
+<col width="9.677419%" />
+<tr class="header">
+<th align="left">Sex</th>
+<th align="left">Message</th>
+<th align="right">n</th>
+<th align="right">xbar</th>
+<th align="right">s</th>
+<th align="right">min</th>
+<th align="right">Q1</th>
+<th align="right">med</th>
+<th align="right">Q3</th>
+<th align="right">max</th>
+</tr>
+<tr class="odd">
+<td align="left">Female</td>
+<td align="left">HappyFace</td>
+<td align="right">22</td>
+<td align="right">33.04</td>
+<td align="right">14.02</td>
+<td align="right">16.51</td>
+<td align="right">24.19</td>
+<td align="right">28.44</td>
+<td align="right">40.40</td>
+<td align="right">72.46</td>
+</tr>
+<tr class="even">
+<td align="left">Female</td>
+<td align="left">None</td>
+<td align="right">23</td>
+<td align="right">27.78</td>
+<td align="right">7.77</td>
+<td align="right">8.00</td>
+<td align="right">22.55</td>
+<td align="right">27.71</td>
+<td align="right">32.16</td>
+<td align="right">44.78</td>
+</tr>
+<tr class="odd">
+<td align="left">Male</td>
+<td align="left">HappyFace</td>
+<td align="right">23</td>
+<td align="right">17.78</td>
+<td align="right">5.57</td>
+<td align="right">9.09</td>
+<td align="right">14.55</td>
+<td align="right">16.81</td>
+<td align="right">21.03</td>
+<td align="right">31.13</td>
+</tr>
+<tr class="even">
+<td align="left">Male</td>
+<td align="left">None</td>
+<td align="right">21</td>
+<td align="right">21.41</td>
+<td align="right">12.64</td>
+<td align="right">0.00</td>
+<td align="right">16.28</td>
+<td align="right">21.21</td>
+<td align="right">27.27</td>
+<td align="right">48.00</td>
+</tr>
+</table>
+
+<p><br></p>
+
+<p>Can you describe the center and spread for the four groups and make comparisons between them?</p>
+
+</article></slide><slide class=""><hgroup><h2>The <code>quantile()</code> Function</h2></hgroup><article  id="the-quantile-function">
+
+<p>Within the <code>quantile()</code> function, you can specify one or more quantiles to compute. Here we are finding the deciles of the <code>mpg</code> distribution. Creating vectors with functions like <code>seq()</code> can often make programming more efficient.</p>
+
+<pre class = 'prettyprint lang-r'>quantile(mileage$mpg, probs = c(.1, .2, .3, .4, .5, .6, .7, .8, .9))</pre>
+
+<pre >  10%   20%   30%   40%   50%   60%   70%   80%   90% 
+33.89 35.18 36.07 36.66 37.00 37.34 37.93 38.84 40.11 </pre>
+
+<pre class = 'prettyprint lang-r'>quantile(mileage$mpg, probs = seq(from = 0.1, to = 0.9, by = 0.1))</pre>
+
+<pre >  10%   20%   30%   40%   50%   60%   70%   80%   90% 
+33.89 35.18 36.07 36.66 37.00 37.34 37.93 38.84 40.11 </pre>
+
+</article></slide><slide class=""><hgroup><h2>Z-Scores with dplyr</h2></hgroup><article  id="z-scores-with-dplyr">
+
+<p>Recall from earlier the formula for \(z\)-scores. Here we create a new variable that contains the \(z\)-score for every <code>mpg</code> value.</p>
+
+<pre class = 'prettyprint lang-r'>mileage &lt;- mileage %&gt;% 
+  mutate(zscores = (mpg - mean(mpg)) / sd(mpg))
+head(mileage)</pre>
+
+<pre ># A tibble: 6 × 2
+    mpg zscores
+  &lt;dbl&gt;   &lt;dbl&gt;
+1  36.3 -0.287 
+2  41    1.66  
+3  36.9 -0.0389
+4  37.1  0.0438
+5  44.9  3.27  
+6  36.8 -0.0802</pre>
+
+</article></slide><slide class=""><hgroup><h2>Better Way with <code>scale()</code> Function</h2></hgroup><article  id="better-way-with-scale-function">
+
+<p>The <code>scale()</code> function is better here, because you can also use it with <code>group_by()</code> to get \(z\)-scores within groups.</p>
+
+<pre class = 'prettyprint lang-r'>mileage &lt;- mileage %&gt;% 
+  mutate(zscores = scale(mpg))
+head(mileage)</pre>
+
+<pre ># A tibble: 6 × 2
+    mpg zscores[,1]
+  &lt;dbl&gt;       &lt;dbl&gt;
+1  36.3     -0.287 
+2  41        1.66  
+3  36.9     -0.0389
+4  37.1      0.0438
+5  44.9      3.27  
+6  36.8     -0.0802</pre>
+
+</article></slide><slide class=""><hgroup><h2>More on the <code>scale()</code> Function</h2></hgroup><article  id="more-on-the-scale-function">
+
+<p>The <code>scale()</code> function attaches some additional information to the <code>zscores</code> column. Note that the attributes <code>center</code> and <code>scale</code> are the mean and standard deviation of <code>mpg</code>.</p>
+
+<pre class = 'prettyprint lang-r'>str(mileage)</pre>
+
+<pre >tibble [100 × 2] (S3: tbl_df/tbl/data.frame)
+ $ mpg    : num [1:100] 36.3 41 36.9 37.1 44.9 36.8 30 37.2 42.1 36.7 ...
+ $ zscores: num [1:100, 1] -0.287 1.6568 -0.0389 0.0438 3.2698 ...
+  ..- attr(*, &quot;scaled:center&quot;)= num 37
+  ..- attr(*, &quot;scaled:scale&quot;)= num 2.42</pre></article></slide>
 
 
   <slide class="backdrop"></slide>
