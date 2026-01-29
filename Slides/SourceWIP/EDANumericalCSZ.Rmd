@@ -20,10 +20,9 @@ These slides are not meant to be standalone information. You should take notes t
 
 **Related Materials**
 
-* Ch 2 of [*Modern Dive*](https://moderndive.com/2-viz.html)
-* Ch 3 of [*Modern Dive*](https://moderndive.com/3-wrangling.html)
-* Ch 4 of [*Modern Dive*](https://moderndive.com/4-tidy.html)
-* DataCamp [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+* Ch 2 of [*Modern Dive*](https://moderndive.com/v2/viz.html)
+* Ch 3 of [*Modern Dive*](https://moderndive.com/v2/wrangling.html)
+* DataCamp [*Introduction to the Tidyverse*](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
 
 ## How We Describe Data Distributions
 
