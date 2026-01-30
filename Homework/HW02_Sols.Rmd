@@ -2,15 +2,18 @@
 title: "STT 5811 HW02: Categorical Data"
 subtitle: PUT YOUR NAME HERE
 date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+fontsize: 12pt
+geometry: margin=0.75in
 output:
   pdf_document:
     toc: true
     toc_depth: '2'
+    latex_engine: xelatex
 ---
 
 # Instructions
 
-Do all even-numbered exercises in [**IMS2E Section 4.8**](https://openintro-ims.netlify.app/explore-categorical#sec-chp4-exercises). Use complete sentences and explain your answers for those questions where you are asked to do so.
+Do all even-numbered exercises in [**IMS2E Section 4.8**](https://openintro-ims.netlify.app/explore-categorical#sec-chp4-exercises). Use complete sentences and explain your answers where you are asked to do so.
 
 # Section 4.8 Exercises
 
@@ -54,12 +57,12 @@ c. If one hospital serves mostly older patients and has a higher death rate (at 
 
 ## Exercise 10
 
-a. Democrats lost their most conservative members, so overall Democratic membership is now more liberal.
+a. Democrats lost their most conservative members, so the overall Democratic membership would be more liberal.
 
-b. Republicans gained more liberal-side members, so overall Republican membership is now more liberal.
+b. Republicans gained only liberal members, so their overall membership would be more liberal.
 
-c. Even though both groups individually shifted more liberal, it is also true that the House members that lost were replaced by individuals who were more conservative, so the overall House membership has become more conservative.
+c. Even though both groups shifted toward more liberal when considered separately, all of the House members that lost were replaced by individuals who were more conservative then them, so the overall House membership has become more conservative.
 
-d. If the reporting is about overall votes in the House, the overall membership is more conservative and is likely to pass more conservative measures. If the reporting has to do with policies from only one party, then ideas suggested by each side likely will be more liberal than their party has put forth in the past. This conundrum is known as Simpson’s Paradox.
+d. If we are talking about overall votes in the House, the overall membership is more conservative and is likely to pass more conservative measures. If the reporting has to do with policies from only one party, then ideas suggested by each side are likely to be more liberal than their party put forth in the past. This conundrum is known as Simpson’s Paradox.
 
 

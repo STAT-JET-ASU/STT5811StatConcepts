@@ -1,16 +1,19 @@
 ---
 title: "STT 5811 HW02: Categorical Data"
-subtitle: PUT YOUR NAME HERE
+subtitle: "PUT YOUR NAME HERE"
 date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+fontsize: 12pt
+geometry: margin=0.75in
 output:
   pdf_document:
     toc: true
     toc_depth: '2'
+    latex_engine: xelatex
 ---
 
 # Instructions
 
-Do all even-numbered exercises in [**IMS2E Section 4.8**](https://openintro-ims.netlify.app/explore-categorical#sec-chp4-exercises). Use complete sentences and explain your answers for those questions where you are asked to do so.
+Do all even-numbered exercises in [**IMS2E Section 4.8**](https://openintro-ims.netlify.app/explore-categorical#sec-chp4-exercises). Use complete sentences and explain your answers where you are asked to do so.
 
 # Section 4.8 Exercises
 

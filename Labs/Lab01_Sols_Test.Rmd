@@ -4,6 +4,7 @@ subtitle: "SOLUTIONS"
 date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
 output:
   pdf_document:
+    latex_engine: xelatex
     highlight: zenburn
     toc: true
     toc_depth: '5'
