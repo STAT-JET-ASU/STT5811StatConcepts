@@ -1,6 +1,6 @@
 ---
 title: "STT 5811 HW02: Categorical Data"
-subtitle: PUT YOUR NAME HERE
+subtitle: "SOLUTIONS"
 date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
 fontsize: 12pt
 geometry: margin=0.75in
