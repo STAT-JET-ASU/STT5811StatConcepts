@@ -9,9 +9,12 @@ output:
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE,
+  comment = NA
+)
 library(tidyverse)
-library(moments)
 ```
 
 ## Before We Begin...
@@ -144,23 +147,23 @@ Summarizing the deviations of a set of values from some center point (like the m
 ## Measures Based on Ordered Counts
 
 * five-number-summary
-    * minimum &mdash; smallest data point
-    * first quartile (Q<sub>1</sub>) &mdash; 25% of data is below, 75% is above
-    * median &mdash; 50% of data is below, 50% is above ("center")
-    * third quartile (Q<sub>3</sub>) &mdash; 75% of data is below, 25% is above
-    * maximum &mdash; largest data point
+    * minimum is the smallest data point
+    * first quartile (Q<sub>1</sub>) has 25% of the data below, 75% above
+    * median has 50% of the data below, 50% above ("center")
+    * third quartile (Q<sub>3</sub>) has 75% of data the below, 25% above
+    * maximum is the largest data point
 * interquartile range (IQR) = Q<sub>3</sub> -- Q<sub>1</sub> (range of the middle 50%)
 * range = maximum -- minimum (overall width of the dataset)
-* percentiles / quantiles &mdash; the n*th* percentile or quantile has n% of the data below it (e.g., Q<sub>1</sub> is the 25th percentile of the dataset and the median is the 50th percentile)
+* percentiles / quantiles are quantities where the $n^{th}$ percentile has $n\%$ of the data below it and $n-1\%$ above it (e.g., Q<sub>1</sub> is the 25th percentile and the median is the 50th percentile)
 
 ## Measures Based on Moments: Mean
 
 In physics, a *moment of force* (or *torque*) is the turning effect of the force about a central point, as a function of distance from the point. Statistical moments are a similar idea.
 
-**mean (first moment)**
+**mean (first moment $M_1$)**
 
 * $x - \mu$ calculates the distance of point $x$ from the mean $\mu$
-* $\mu$ is the value that makes $\sum_{\text{all x}}(x - \mu)^1 = 0$ true for all points $x_i$ in a given distribution
+* $\mu$ is the value that makes $\sum_{\text{all x}}(x_i - \mu)^1 = 0$ true for all points $x_i$ in a given distribution
 * this is the distribution's **center of mass** or *balancing point*
 
 Think of the number line as a see-saw and the data points as objects sitting on the see-saw, exerting a downward force. The mean is the fulcrum that perfectly balances all the data points and keeps the see-saw level.
@@ -183,11 +186,11 @@ The previous slide shows the formula for *population* variance.
 
 When we compute sample variance, we make a small change to the formula so that it is an *unbiased* estimator of the population variance. $E(s^2) = \sigma^2$, so in the long run $s$ will not consistently over-estimate or under-estimate $\sigma^2$. For a sample of size $n$ ...
 
-$$\text{sample variance} = s^2 = \frac{\sum_{i-1}^n(x_i - \bar{x})^2}{n-1}.$$ 
+$$\text{sample variance} = s^2 = \frac{\sum_{i=1}^n(x_i - \bar{x})^2}{n-1}.$$ 
 
 $$\text{sample standard deviation} = \sqrt{\text{sample variance}} = s$$
 
-Notice that parameters are usually Greek letters, wile statistics are usually English letters.... but not always. If you are not yet familiar with the symbols, this is a good time to learn!
+Notice that parameters are usually Greek letters, while statistics are usually English letters ... but not quite always. If you are not yet familiar with the symbols, this is a good time to learn!
 
 ## $Z$-Score (Standardized Score)
 
@@ -223,15 +226,15 @@ In the future, one variation you see on $z$-scores will be *t*-scores, used for 
 
 skewness (based on the third moment, notice $z$-score similarity)
 
-$$M_3 = \frac{\sum_{\text{all x}}(x - \mu)^3}{n}$$
+$$M_3 = \frac{\sum_{\text{all x}}(x_i - \mu)^3}{n}$$
 
-$$skewness = \frac{\sum_{\text{all x}}(x - \mu)^3}{\sigma^3}$$
+$$skewness = \frac{\sum_{\text{all x}}(x_i - \mu)^3}{\sigma^3}$$
 
 kurtosis (based on the fourth moment, notice $z$-score similarity)
 
-$$M_4 = \frac{\sum_{\text{all x}}(x - \mu)^4}{n}$$
+$$M_4 = \frac{\sum_{\text{all x}}(xI - \mu)^4}{n}$$
 
-$$kurtosis = \frac{\sum_{\text{all x}}(x - \mu)^4}{\sigma^4}$$
+$$kurtosis = \frac{\sum_{\text{all x}}(x_i - \mu)^4}{\sigma^4}$$
 
 ## More on Skewness, Kurtosis, Moments
 
@@ -246,74 +249,46 @@ We use these measures often when trying to judge whether or not we can consider 
 
 **Outliers affect all measures based on moments**, so we need to check for them. Summaries that are based on counts tend to be more **robust**, but less mathematically tractable for some uses.
 
+## Summarizing Using dplyr
 
-## How Can We Determine Outliers?
+You can add/remove summary functions as needed. The `na.rm` ignores any `NA` (missing) values, else you get `NA` as output.
 
-Recall that the five-number summary is found by counting the ordered data values so that 25% are grouped into each of the four resulting intervals.
-
-* five-number-summary
-    * minimum
-    * first quartile (Q<sub>1</sub>)
-    * median ("center")
-    * third quartile (Q<sub>3</sub>)
-    * maximum
-    
-* interquartile range (IQR) = Q<sub>3</sub> -- Q<sub>1</sub> (range of the middle 50%)
-
-## Visualizing with Boxplots
-
-One of the most common rules for determining outliers is based on the five-number summary. We can visualize the five-number summary and outliers in a boxplot. 
-
-<p style="text-align: center"><img src="https://stat-jet-asu.github.io/Moodlepics/glossary/boxplot.png" width = 350></p>
-
-The mean is not a typical part of a boxplot, but some programs provide it for comparison to the median.
-
-
-## Determining Outliers
-
-The lower and upper fences determine the limits for potential outliers. The fences are based on the IQR, which is the middle 50% of the data enclosed by the box. 
-
-Any point that is more than 1.5 $\times$ IQR from the edges of the box is considered to be an outlier. On a bell curve, the area between fences would enclose the middle 95% of the data. For other data distributions, this percentage will vary.
-
-lower fence = LF = Q<sub>1</sub> -- 1.5 $\times$ IQR 
-
-upper fence = UF = Q<sub>3</sub> + 1.5 $\times$ IQR 
-
-Some people designate any point more than 3 $\times$ IQR from the edges of the box as an *extreme outlier*.
-
-## Drawing the Whiskers
-
-Boxplots are also known as box-and-whisker plots. The whiskers are the lines that extend from the box.
-
-* Any value less than the lower fence is a low outlier
-
-* Any value greater than the upper fence is a high outlier
-
-* Outliers are individually indicated by asterisks, circles, etc.
-
-* The lower whisker extends to the smallest data point that is not an outlier (*not* the LF)
-
-* The upper whisker extends to the largest data point that is not an outlier (*not* the UF)
-
-Overall, outliers are determined by the variability of the dataset.
-
-## Caution!
-
-We have to be cautious about trying to determine shape with boxplots. They "flatten" the data (there is only one quantitative axis) so we can not see several important features.
-
-Other plots we can use to help determine distribution shape (symmetry versus skew, kurtosis, number of modes) include:
-
-* dotplots
-* histograms
-* frequency polygons
-* density plots
-
-However, none of these plots have a related rule for outliers. This is the strength of boxplots, as well as comparisons.
-
-## A Little Boxplot Humor ;)
-
-```{r, echo = FALSE, fig.align="center"}
-knitr::include_graphics("images/xkcd_boyfriend.png", dpi = 100)
+```{r, eval = FALSE}
+datasetname %>%   # skewness and kurtosis require the moments package
+  summarize(n     = n(),
+            xbar  = mean(variablename, na.rm = TRUE),
+            s     = sd(variablename, na.rm = TRUE),
+            xmin  = fivenum(variablename)[1],
+            Q1    = fivenum(variablename)[2],
+            xmed  = fivenum(variablename)[3],                  
+            Q3    = fivenum(variablename)[4],
+            xmax  = fivenum(variablename)[5],
+            iqr   = IQR(variablename, na.rm = TRUE),
+            rng   = diff(range(variablename, na.rm = TRUE)),
+            total = sum(variablename, na.rm = TRUE),
+            skew  = skewness(variablename, na.rm = TRUE),
+            kurt  = kurtosis(variablename, na.rm = TRUE))
 ```
 
+## About the `fivenum()` Function
 
+Most summary functions like `mean()` and `sd()` produce only a single value as output. However, `fivenum()` produces a vector of length 5. The [ ] notation accesses the correct location in the output vector, since each step of a `summarize()` function must only output a single value.
+
+```{r}
+library(resampledata)
+fivenum(FlightDelays$FlightLength) # output is min, Q1, med, Q3, max
+fivenum(FlightDelays$FlightLength)[3] # output is location 3, median
+```
+
+## The `quantile()` Function
+
+With `quantile()` you can specify one or more quantiles to find. The default is the five-number summary. The output is a vector.
+
+```{r}
+quantile(FlightDelays$FlightLength)
+
+quantile(
+  FlightDelays$FlightLength,
+  probs = c(.1, .2, .3, .4, .5, .6, .7, .8, .9)   # deciles
+)
+```
