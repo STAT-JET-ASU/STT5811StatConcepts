@@ -6,14 +6,15 @@ output:
   pdf_document:
     highlight: zenburn
     toc: true
-    toc_depth: '5'
+    toc_depth: '2'
 ---
 
 ```{r globaloptions, include = FALSE}
+# this block will run but not appear in the knitted doc due to include = FALSE
 knitr::opts_chunk$set(
-  message = FALSE,
-  warning = FALSE,
-  comment = NA
+  message = FALSE,     # suppresses R messages when knitting
+  warning = FALSE,     # suppresses R warnings when knitting
+  comment = NA         # eliminates leading ## in code output
 )
 ```
 
