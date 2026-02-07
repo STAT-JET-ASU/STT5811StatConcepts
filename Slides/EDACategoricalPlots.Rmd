@@ -173,7 +173,7 @@ ggplot(berkdata, aes(x = sex)) +
 ##
 
 ```{r fig.height=2.9}
-ggplot(berkdata, aes(x = sex, fill = sex)) + # add fill for 2 colors
+ggplot(berkdata, aes(x = sex, fill = sex)) +     # fill for 2 colors
   geom_bar(color = "black") +                    # add outline color
   scale_fill_manual(values = c("orange", "skyblue")) + # pick colors
   labs(title = "Berkeley Grad School Applicants F73", 
@@ -189,9 +189,9 @@ ggplot(berkdata, aes(x = sex, fill = sex)) + # add fill for 2 colors
 If we want proportions, we have to calculate them in the plot.
 
 ```{r fig.height=3.1}
-ggplot(berkdata, aes(x = sex)) + 
-  geom_bar(aes(y = ..count../sum(..count..))) + # a little clunky
-  labs(y = "proportion")   # we also have to fix the y-axis label
+# tells ggplot2 to make the y-axis proportions of the whole group
+ggplot(berkdata, aes(x = sex, y = after_stat(prop), group = 1)) + 
+  geom_bar()
 ```
 
 ## Barplots for Two Variables
