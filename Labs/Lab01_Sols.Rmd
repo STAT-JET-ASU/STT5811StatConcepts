@@ -143,8 +143,8 @@ ggplot(data = arbuthnot, aes(x = year, y = total)) +
 Use code to find and display the 10 years with the lowest total numbers of children.
 ```{r}
 arbuthnot |>
-  arrange(total) |>
-  head(n = 10)      # you can also use slice_head() here
+  arrange(total) |> # you could choose to use slice_min() instead
+  head(n = 10)      # you can also use slice_head() with arrange()
 ```
 
 QUESTIONS
