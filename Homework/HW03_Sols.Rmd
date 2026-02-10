@@ -19,75 +19,99 @@ Do all even-numbered exercises except exercise 14 in [**IMS2E Section 5.10**](ht
 
 ## Exercise 2
 
-ERASE AND TYPE YOUR ANSWER HERE
+Plots 1 and 3 show positive associations. Plot 1 is linear, Plot 3 is nonlinear. Plot 4 has a negative linear association. Plot 2 has no apparent association, linear or otherwise. 
 
 ## Exercise 6
 
-a. ERASE AND TYPE YOUR ANSWER HERE
+a. We can estimate what proportion of data lie in certain segments of number line using the bar heights. The boundaries between bars are $5, 10, 15 ... 125$ and the midpoints are $0, 10, 20 ... 130$. About $20\%$ of the data fall in the far-left bar and must be less than the upper boundary of $5$. The left two bars hold about $52\%$ of the data. The first four bars represent about $71\%$ and the first five about $79\%$. We can estimate that the $Q_1 \approx 5$, $Q_2 \approx 15$, and $35 < Q_3 < 45$.
 
-b. ERASE AND TYPE YOUR ANSWER HERE
+```{r, echo = FALSE}
+knitr::include_graphics("images/Section5.10.E06.png", dpi = 125)
+```
+
+b. The distribution is right skewed, so we would expect the mean to be larger than the median.
 
 ## Exercise 8
 
-a. ERASE AND TYPE YOUR ANSWER HERE
+a. Both distributions have the same median ($6$) and IQR ($7 - 5 = 2$).
 
-b. ERASE AND TYPE YOUR ANSWER HERE
+```{r echo = FALSE, fig.height = 3}
+boxplot(c(3,5,6,7,9), c(3,5,6,7,10), names = c("A", "B"), horizontal = TRUE)
+```
 
-c. ERASE AND TYPE YOUR ANSWER HERE
+b. Distribution B has a larger median ($7$ vs. $6$) and IQR ($8 - 5 = 3$ vs. $7 - 5 = 2$).
 
-d. ERASE AND TYPE YOUR ANSWER HERE
+```{r echo = FALSE, fig.height = 3}
+boxplot(c(3,5,6,7,9), c(3,5,7,8,9), names = c("A", "B"), horizontal = TRUE)
+```
+
+c. Distribution B has larger median ($8$ vs. $3$), but the IQRs are equal ($4 - 2 = 2$ and $9 - 7 = 2$). Notice that the data in B are the data in A plus 5. The statistics reflect the properties of this kind of linear transformation. 
+
+```{r echo = FALSE, fig.height = 3}
+boxplot(c(1,2,3,4,5), c(6,7,8,9,10), names = c("A", "B"), horizontal = TRUE)
+```
+
+d. Distribution B has larger median ($500$ vs. $50$) and IQR ($600 - 100 = 500$ vs. $60 - 10 = 50$). Notice that the data in B are 10 times those of A. The data distribution and statistics reflect the properties of this kind of linear transformation. 
+
+```{r echo = FALSE, fig.height = 3}
+boxplot(c(0,10,50,60,100), c(0,100,500,600,1000), names = c("A", "B"), horizontal = TRUE)
+```
 
 ## Exercise 10
 
-ERASE AND TYPE YOUR ANSWER HERE
+Distribution (a) is unimodal and symmetric. This matches boxplot 2, since it is roughly symmetric and the whiskers (outer 25% on each side) stretch out farther than the middle segments shown by the box. This is what we would expect to see in a distribution with a single peak and thinner tails. We can also tell by the scaling, which goes from about 50 to 70.
+
+Distribution (b) is roughly uniform between 0 and 100. This matches boxplot 3, since it also ranges from 0 to 100 and each 25% chunk of the boxplot has about the same width, with no outliers.
+
+Distribution (c) is unimodal and right skewed, with a median between 1 and 2 and seemingly some data values as large as about 8. This matches boxplot 1, in which each 25% chunk of the boxplot gets wider as we go from smaller to larger values, with outliers on the larger side.
 
 ## Exercise 12
 
-ERASE AND TYPE YOUR ANSWER HERE
+Using the bar heights to estimate the halfway point, the median seems as if it would be around 80. We would expect the mean to be somewhat smaller, since the distribution is left skewed.
 
 ## Exercise 14
 
-ERASE AND TYPE YOUR ANSWER HERE
+The statement "$50\%$ of Facebook users have over 100 friends" indicates that the median number of friends is 100, which is lower than the mean number of friends (190). This suggests that the number of friends of Facebook users has a right skewed distribution. However, we should be cautious, since we do not know if the distribution is binomial or had othe runusual features.
 
 ## Exercise 16
 
-a. ERASE AND TYPE YOUR ANSWER HERE
+a. The proce distribution is right skewed, with the most expensive houses being potential outliers. Therefore, the median and the IQR are preferable measures of center and spread.
 
-b. ERASE AND TYPE YOUR ANSWER HERE
+b. The distribution is roughly symmetric and has few potentially extreme observations. The mean and standard deviation are preferable measures of center and spread in this case.
 
-c. ERASE AND TYPE YOUR ANSWER HERE
+c. The distribution would be right skewed. Some students would consume no alcohol, and this would be the minimum, since students cannot consume fewer than 0 drinks. A few students would consume many more drinks than their peers, giving the distribution a long right tail. Due to the probably skew, the median and IQR would be the preferable measures.
 
-d. ERASE AND TYPE YOUR ANSWER HERE
+d. The distribution would be right skewed. Most employees would have a salary that is on the order of the median salary, but we would anticipate that some members of uppermost management makes much, much more. The distribution would have a long right tail, and the median and the IQR would be preferable.
 
-e. ERASE AND TYPE YOUR ANSWER HERE
+e. The distribution would be left skewed, because babies can be born many weeks early, compared to the $38$ to $40$ week "standard" pregnancy length, but there is a much shorter upper boundary. The median and IQR would be preferable.
 
 ## Exercise 18
 
-ERASE AND TYPE YOUR ANSWER HERE
+We would expect this distribution to be left skewed. The mean plus one standard deviation gives us the maximum possible score of 100, so there must be a reasonable number of scores much farther below the mean to make the standard deviation as large as it is.
 
 ## Exercise 20
 
-ERASE AND TYPE YOUR ANSWER HERE
+The distribution best actress winners ages is right skewed with a median around 30 years. The distribution of best actor winners is also right skewed, though a bit less so, with a median around 40 years. The difference between the peaks of these distributions suggest that best actress winners are typically younger than best actor winners. The ages of best actress winners are more variable than the ages of best actor winners, based on the standard deviations. There are potential outliers on the older end of both distributions, given the skew and the natural range of human ages.
 
 ## Exercise 22
 
-a. ERASE AND TYPE YOUR ANSWER HERE
+a. The median is a better measure of typical earnings. The mean is larger than the actual yearly income of 40 of the 42 people. Since the mean is an arithmetic average, it is strongly affected by the two extreme incomes. The median is not impacted as much; it is robust to outliers.
 
-b. ERASE AND TYPE YOUR ANSWER HERE
+b. The IQR is a better measure of variability with respect to the amounts earned by nearly all 42 people. Like the mean, standard deviation is strongly affected by the two outlying salaries, but the IQR is robust to these extreme observations.
 
 ## Exercise 24
 
-a. ERASE AND TYPE YOUR ANSWER HERE
+a. The distribution of times is unimodal and symmetric. There do not appear to be any counties with unusually high or low (outlier) times. A log transformation is not necessary.
 
-b. ERASE AND TYPE YOUR ANSWER HERE
+b. Answers will vary. There are some pockets of longer travel time (yellow) around Washington DC, New York City, and some other big cities where people often live far from their jobs. There is also a swath of shorter average commute times (darkest blue) in Midwest farm land, running in a visible band down the center of the country. Many farmers’ homes are near their crop land, so their commutes would be brief and lower the average in their areas.
 
 ## Exercise 26
 
-a. ERASE AND TYPE YOUR ANSWER HERE
+a. The histogram clearly shows that the distribution is bimodal. It suggests outliers on the right side, but we cannot be sure. In contrast, the boxplox clearly shows that there are at least 4 outliers (there may be several points with the same values), but the bimodality is hidden.
 
-b. ERASE AND TYPE YOUR ANSWER HERE
+b. It is likely that men and women have different average marathon times.
 
-c. ERASE AND TYPE YOUR ANSWER HERE
+c. The median time is about 2.2 hours for men and about 2.5 hours for women; men are faster on average. The minimum time for men is around 2.1 hours versus 2.4 hours for women. The maximum time for men is close to 2.5 hours and for women it is 3.1 hours. Both distributions have multiple outliers on the high end.
 
-d. ERASE AND TYPE YOUR ANSWER HERE
+d. It appears that marathon times decreased greatly between 1970 and 1975 and remained fairly steady since. Men have consistently had shorter times than women. From the boxplots of men and women, we could tell that men ran faster “on average”; however, we could not tell that the winning men’s time for each year was faster than the winning women’s time. We also could not tell from the histogram or boxplot how men's and women's times changed across the years. Finally, we could not see the unusual point (with respect to the pattern over time) for the 2020 marathon, which was held virtually due to the COVID-19 pandemic.
 

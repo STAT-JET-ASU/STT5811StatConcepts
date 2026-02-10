@@ -78,8 +78,8 @@ Create a new variable that identifies departures as "on-time" or "delayed," wher
 ```{r}
 flightdata <- flightdata |>
   mutate(
-    dep_type = ifelse(dep_delay < 5, "on-time", "delayed"),
-    arr_type = ifelse(arr_delay < 5, "on-time", "delayed"),
+    dep_type  = ifelse(dep_delay < 5, "on-time", "delayed"),
+    arr_type  = ifelse(arr_delay < 5, "on-time", "delayed"),
     avg_speed = distance/(air_time/60)
   )
 ```
@@ -102,23 +102,39 @@ flightdata |>
 
 Use the `geom_bar()` function to make a barplot showing the proportion of flights from each airport. 
 ```{r fig.height = 2}
-ggplot(flightdata, aes(x = origin)) +
-  geom_bar()
+# Minimal required
+ggplot(flightdata, aes(x = origin, y = after_stat(prop), group = 1)) +
+  geom_bar() +
+  labs(
+    title = "proportion of sampled flights originating from EWR, JFK, and LGA",
+    x = "originating airport",
+    y = "proportion of flights"
+  )
+```
+
+```{r fig.height = 2}
+# Added formatting
+ggplot(flightdata, aes(x = origin, y = after_stat(prop), group = 1)) +
+  geom_bar(width = 0.5, color = "darkgray", fill = "lightblue") +
+  scale_y_continuous(limits = c(0, 0.4)) +
+  theme_minimal() +
+  theme(panel.grid.major.x = element_blank()) +
+  labs(
+    title = "proportion of sampled flights originating from EWR, JFK, and LGA",
+    x = "originating airport",
+    y = "proportion of flights"
+  )
 ```
 
 ## Destination Airports
 
 Use the `n_distinct()` function to find how many different destination airports the data contain. 
 ```{r}
-# Option 1
 n_distinct(flightdata$dest)
 ```
 
 ```{r}
-# Option 2
-flightdata |>
-  pull(dest) |>
-  n_distinct()
+flightdata |> pull(dest) |> n_distinct()
 ```
 
 Make a table to show the top five destinations for departing flights. Include counts and proportions. Save the result as an object in your Environment, but be sure to display it here as well.
@@ -132,8 +148,28 @@ top5dest
 
 Use your saved table and the `geom_col()` function to create a barplot for the top five destinations. Use `reorder()` in the plot aesthetics to sort the bars from largest to smallest.
 ```{r fig.height = 2}
+# Minimal required
 ggplot(top5dest, aes(x = reorder(dest, -n), y = n)) +
-  geom_col()
+  geom_col() +
+  labs(
+    title = "top five destinations for flights originating from EWR, JFK, and LGA",
+    x = "originating airport",
+    y = "number of flights"
+  )
+```
+
+```{r fig.height = 2}
+# Added formatting
+ggplot(top5dest, aes(x = reorder(dest, -n), y = n)) +
+  geom_col(width = 0.5, color = "black", aes(fill = dest)) +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  scale_fill_brewer(palette = "Dark2") +
+  labs(
+    title = "top five destinations for flights originating from EWR, JFK, and LGA",
+    x = "originating airport",
+    y = "number of flights"
+  )
 ```
 
 Make a table to show the top three destinations grouped by airport. Include counts and proportions. Save the result as an object in your Environment, but be sure to display it here as well.
@@ -146,7 +182,7 @@ top3dest <- flightdata |>
 top3dest
 ```
 
-Using `geom_col(position = position_dodge2(preserve = "single"))`, and `fill = origin` in the overall plot aesthetics, create a barplot for the top three destinations grouped by airport. A
+Using `geom_col(position = position_dodge2(preserve = "single"))`, and `fill = origin` in the overall plot aesthetics, create a barplot for the top three destinations grouped by airport.
 ```{r fig.height = 2}
 ggplot(top3dest, aes(x = dest, y = n, fill = origin)) +
   geom_col(position = position_dodge2(preserve = "single"))
