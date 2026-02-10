@@ -1,0 +1,101 @@
+---
+title: "STT 5811 HW04: Linear Regression"
+subtitle: "PUT YOUR NAME HERE"
+date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+fontsize: 12pt
+geometry: margin=0.75in
+output:
+  pdf_document:
+    toc: true
+    toc_depth: '2'
+    latex_engine: xelatex
+---
+
+# Instructions
+
+Do all even-numbered exercises except 6, 8, 12, 20, 26, and 28 in [**IMS2E Section 7.5**](https://openintro-ims.netlify.app/model-slr#sec-chp7-exercises). Use complete sentences and explain your answers where you are asked to do so. Write mathematics in [**LaTeX**](https://rpruim.github.io/s341/S19/from-class/MathinRmd.html) code when you calculate solutions or express the equations for regression models. 
+
+# Section 7.5 Exercises
+
+## Exercise 2
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 4
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
+e. ERASE AND TYPE YOUR ANSWER HERE
+
+f. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 10
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 14
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 16
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 18
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 22
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
+e. ERASE AND TYPE YOUR ANSWER HERE
+
+f. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 24
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
+e. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 30
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 32
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
