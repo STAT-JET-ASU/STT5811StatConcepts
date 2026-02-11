@@ -19,7 +19,7 @@ library(tidyverse)
 
 ## Before We Begin...
 
-These slides are not meant to be stand-alone information. You should take notes to flesh out the concepts, including `R` code. 
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations to make connections.
 
 **Related Materials**
 
