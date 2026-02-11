@@ -1,5 +1,5 @@
 ---
-title: "Regression Modeling:<br>Basic Theory / Math"
+title: "Regression Models: Basic<br>Theory and Mathematics"
 subtitle: "STT 5811 Statistical Concepts and Applications"
 author: "Jill E. Thomley | Appalachian State University"
 date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
