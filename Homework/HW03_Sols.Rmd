@@ -45,13 +45,13 @@ b. Distribution B has a larger median ($7$ vs. $6$) and IQR ($8 - 5 = 3$ vs. $7 
 boxplot(c(3,5,6,7,9), c(3,5,7,8,9), names = c("A", "B"), horizontal = TRUE)
 ```
 
-c. Distribution B has larger median ($8$ vs. $3$), but the IQRs are equal ($4 - 2 = 2$ and $9 - 7 = 2$). Notice that the data in B are the data in A plus 5. The statistics reflect the properties of this kind of linear transformation. 
+c. Distribution B has a larger median ($8$ vs. $3$), but the IQRs are equal ($4 - 2 = 2$ and $9 - 7 = 2$). Notice that $B = A + 5$. The statistics reflect the properties of this kind of linear transformation (the center shifts by the constant but the spread between points is unchanged). 
 
 ```{r echo = FALSE, fig.height = 3}
 boxplot(c(1,2,3,4,5), c(6,7,8,9,10), names = c("A", "B"), horizontal = TRUE)
 ```
 
-d. Distribution B has larger median ($500$ vs. $50$) and IQR ($600 - 100 = 500$ vs. $60 - 10 = 50$). Notice that the data in B are 10 times those of A. The data distribution and statistics reflect the properties of this kind of linear transformation. 
+d. Distribution B has a larger median ($500$ vs. $50$) and IQR ($600 - 100 = 500$ vs. $60 - 10 = 50$). Notice that $B = 10 \times A$. The statistics reflect this kind of linear transformation (the center and spread are both proportionally rescaled by the multiplier). 
 
 ```{r echo = FALSE, fig.height = 3}
 boxplot(c(0,10,50,60,100), c(0,100,500,600,1000), names = c("A", "B"), horizontal = TRUE)
@@ -71,17 +71,17 @@ Using the bar heights to estimate the halfway point, the median seems as if it w
 
 ## Exercise 14
 
-The statement "$50\%$ of Facebook users have over 100 friends" indicates that the median number of friends is 100, which is lower than the mean number of friends (190). This suggests that the number of friends of Facebook users has a right skewed distribution. However, we should be cautious, since we do not know if the distribution is binomial or had othe runusual features.
+The statement "$50\%$ of Facebook users have over 100 friends" indicates that the median number of friends is 100, which is lower than the mean number of friends (190). This suggests that the number of friends of Facebook users has a right skewed distribution. However, we should be cautious, since we do not know if the distribution is binomial or had other unusual features.
 
 ## Exercise 16
 
-a. The proce distribution is right skewed, with the most expensive houses being potential outliers. Therefore, the median and the IQR are preferable measures of center and spread.
+a. The price distribution is right skewed, with the most expensive houses being potential outliers. Therefore, the median and the IQR are preferable measures of center and spread.
 
 b. The distribution is roughly symmetric and has few potentially extreme observations. The mean and standard deviation are preferable measures of center and spread in this case.
 
 c. The distribution would be right skewed. Some students would consume no alcohol, and this would be the minimum, since students cannot consume fewer than 0 drinks. A few students would consume many more drinks than their peers, giving the distribution a long right tail. Due to the probably skew, the median and IQR would be the preferable measures.
 
-d. The distribution would be right skewed. Most employees would have a salary that is on the order of the median salary, but we would anticipate that some members of uppermost management makes much, much more. The distribution would have a long right tail, and the median and the IQR would be preferable.
+d. The distribution would be right skewed. Most employees would have a salary on the order of the median salary, but we would anticipate that some members of upper management would make much, much more. The distribution would have a long right tail, and the median and the IQR would be preferable.
 
 e. The distribution would be left skewed, because babies can be born many weeks early, compared to the $38$ to $40$ week "standard" pregnancy length, but there is a much shorter upper boundary. The median and IQR would be preferable.
 
@@ -91,7 +91,9 @@ We would expect this distribution to be left skewed. The mean plus one standard 
 
 ## Exercise 20
 
-The distribution best actress winners ages is right skewed with a median around 30 years. The distribution of best actor winners is also right skewed, though a bit less so, with a median around 40 years. The difference between the peaks of these distributions suggest that best actress winners are typically younger than best actor winners. The ages of best actress winners are more variable than the ages of best actor winners, based on the standard deviations. There are potential outliers on the older end of both distributions, given the skew and the natural range of human ages.
+Recall that quantitative data distributions are characterized by shape, center, spread (variability), and potential outliers. We need to look at all four of these when we compare groups.
+
+The distribution best actress winners ages is right skewed with a median of about 30 years. The distribution of best actor winners is also right skewed, though a bit less so, with a median around 40 years. The difference between the peaks of these distributions suggest that best actress winners are typically younger than best actor winners. The ages of best actress winners are more variable than the ages of best actor winners, based on the standard deviations and likely the IQR. There are potential outliers on the older end of both distributions, given the skew and the natural range of human ages, which makes the means and medians less desirable summary measures.
 
 ## Exercise 22
 
@@ -103,15 +105,15 @@ b. The IQR is a better measure of variability with respect to the amounts earned
 
 a. The distribution of times is unimodal and symmetric. There do not appear to be any counties with unusually high or low (outlier) times. A log transformation is not necessary.
 
-b. Answers will vary. There are some pockets of longer travel time (yellow) around Washington DC, New York City, and some other big cities where people often live far from their jobs. There is also a swath of shorter average commute times (darkest blue) in Midwest farm land, running in a visible band down the center of the country. Many farmers’ homes are near their crop land, so their commutes would be brief and lower the average in their areas.
+b. Answers will vary. There are some pockets of longer travel time (yellow) around Washington DC, New York City, and some other big cities where people often live far from their jobs or there is significant traffic congestion. There is also a swath of shorter average commute times (darkest blue) in Midwest farm land, running in a visible band down the center of the country. Many farmers’ homes are near their crop land, so their commutes would be brief and tend to lower the averages in their areas. The east seems to be generally prone to longer commute times than the west (aside from the far west coast). This might be a function of factors like population density, land use, and urban planning (or lack thereof) in areas of the country that have been inhabited longer.
 
 ## Exercise 26
 
 a. The histogram clearly shows that the distribution is bimodal. It suggests outliers on the right side, but we cannot be sure. In contrast, the boxplox clearly shows that there are at least 4 outliers (there may be several points with the same values), but the bimodality is hidden.
 
-b. It is likely that men and women have different average marathon times.
+b. It is likely that men and women have different distributions of marathon times with different averages, which are producing different modes in the histogram. (We can see in the following plots that this is the case; men are generally faster than women.)
 
-c. The median time is about 2.2 hours for men and about 2.5 hours for women; men are faster on average. The minimum time for men is around 2.1 hours versus 2.4 hours for women. The maximum time for men is close to 2.5 hours and for women it is 3.1 hours. Both distributions have multiple outliers on the high end.
+c. The median time is about 2.2 hours for men and about 2.5 hours for women; men are faster on average. Women have a larger variability, as shown by their wider IQR and larger overall range (including the outliers). The minimum time for men is about 2.1 hours versus 2.4 hours for women. The maximum for men is close to 2.5 hours and for women it is about 3.1 hours. Both distributions have multiple large outliers. It is also notable that all of the women's times, even the fastest, would be above the upper fence of the men's boxplot.
 
 d. It appears that marathon times decreased greatly between 1970 and 1975 and remained fairly steady since. Men have consistently had shorter times than women. From the boxplots of men and women, we could tell that men ran faster “on average”; however, we could not tell that the winning men’s time for each year was faster than the winning women’s time. We also could not tell from the histogram or boxplot how men's and women's times changed across the years. Finally, we could not see the unusual point (with respect to the pattern over time) for the 2020 marathon, which was held virtually due to the COVID-19 pandemic.
 

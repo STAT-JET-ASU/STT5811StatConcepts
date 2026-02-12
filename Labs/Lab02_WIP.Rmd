@@ -1,0 +1,223 @@
+---
+title: 'STT 5811 Lab02: Explanatory Data Analysis'
+subtitle: SOLUTIONS
+date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+fontsize: 12pt
+geometry: margin=0.75in
+output:
+  pdf_document:
+    highlight: zenburn
+    toc: true
+    toc_depth: '2'
+    latex_engine: xelatex
+---
+
+```{r globaloptions, include = FALSE}
+# this block will run but not appear in the knitted doc due to include = FALSE
+knitr::opts_chunk$set(      # set global doc options for knitting
+  message = FALSE,          # suppress R messages when knitting
+  warning = FALSE,          # suppress R warnings when knitting
+  comment = NA              # eliminate leading ## in code output
+)
+```
+
+# Instructions
+
+This data lab is adapted from the [**Intro to R - Flight Delays**](https://openintrostat.github.io/oilabs-tidy/02_intro_to_data/intro_to_data.html) lab in [**Section 6.3**](https://openintro-ims.netlify.app/explore-applications#sec-explore-labs) of the IMS2E textbook. Read the textbook lab (skip the video), then complete your analysis here. Use `tidyverse` tools for your plots, summaries, and calculations. For all plots, add a title and descriptive axis labels using the `labs()` function. You may make other useful customizations to your plots, if you choose. Use complete sentences when answering questions. 
+
+# Packages Used
+
+Load the `tidyverse` and `openintro` packages.
+```{r packages}
+
+```
+
+# `nycflights` Dataset
+
+## Dataset Description
+
+The dataset is a random sample of flights that departed from one of three big New York City (NYC) area airports (JFK, LGA or EWR) in 2013. It was taken from a larger dataset of all 336,776 flights that departed in 2013, found in the `nycflights13` package. Each observation is one flight.
+
+## Explore the Dataset
+
+Assign the `nycflights` dataset to an object in your Environment.
+```{r}
+
+```
+
+Use `names()` to view the variable names.
+```{r}
+
+```
+
+Variable definitions are important for understanding data. View the dataset's codebook by entering `?nycflights` in the Console, or search in the Help tab of the Files pane using the dataset's name. Briefly define each variable in the dataset, including the units of measure for all numerical variables. Search online for the airport names that correspond to the U.S. airport codes JFK, LGA and EWR. Your definitions do not need to be complete sentences.
+
+* year: 
+* month: 
+* day: 
+* dep_time: 
+* dep_delay: 
+* arr_time: 
+* arr_delay: 
+* carrier: 
+* tailnum: 
+* flight: 
+* origin: 
+* dest: 
+* air_time: 
+* distance: 
+* hour: 
+* minute: 
+* JFK: 
+* LGA: 
+* EWR: 
+
+Create a new variable that identifies departures as "on-time" or "delayed," where any flight delayed less than five minutes is considered "on-time." Create a similar variable for arrivals, where "on time" is any flight that was less than five minutes late. Also make a variable that represents the average speed traveled by the plane for each flight, in miles per hour (mph).
+
+```{r}
+
+```
+
+Use `glimpse()` to explore the dataset and verify your new variables.
+```{r}
+
+```
+
+# Categorical Analysis
+
+## Departure Airports
+
+Create a table to show how many flights departed from each airport. Include counts and proportions.
+```{r}
+
+```
+
+Use the `geom_bar()` function to make a barplot showing the proportion of flights from each airport. 
+```{r}
+
+```
+
+## Destination Airports
+
+Use the `n_distinct()` function to find how many different destination airports the data contain. 
+```{r}
+
+```
+
+```{r}
+
+```
+
+Make a table to show the top five destinations for departing flights. Include counts and proportions. Save the result as an object in your Environment, but be sure to display it here as well.
+```{r}
+
+```
+
+Use your saved table and the `geom_col()` function to create a barplot for the top five destinations. Use `reorder()` in the plot aesthetics to sort the bars from largest to smallest.
+```{r}
+
+```
+
+Make a table to show the top three destinations grouped by airport. Include counts and proportions. Save the result as an object in your Environment, but be sure to display it here as well.
+```{r}
+
+```
+
+Using `geom_col(position = position_dodge2(preserve = "single"))`, and `fill = origin` in the overall plot aesthetics, create a barplot for the top three destinations grouped by airport.
+```{r}
+
+```
+
+## Analysis Discussion 1
+
+1. How do total flight departures compare across the three airports? Discuss this as if I cannot see your table or plot (e.g., cite relevant summary statistics)
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+2. What are the top five flight destinations? What fraction of flights do they represent overall? Does this set of destinations make sense to you? Discuss.
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+3. Discuss similarities and differences between the top three destinations for each airport, and make relevant comparisons to the top five overall airports. 
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+# Numerical Analysis
+
+## Departure Delays
+
+Filter the dataset to extract only those flights going to the most frequent destination (overall). Use this extracted set of flights for all analyses involving delays.
+```{r}
+
+```
+
+Make a histogram and boxplot to visualize the distribution of departure delays and identify outliers. Use 120 bins for your histogram.
+```{r fig.height = 2}
+
+```
+
+Calculate the mean and median departure delay, as well as the standard deviation, IQR, and upper and lower fences used to identify outliers in the boxplot.
+```{r}
+
+```
+
+Calculate the same statistics, along with the number of flights, grouped by the origin airport.
+```{r}
+
+```
+
+Find the on-time departure rates for the three origin airports. Arrange them from best to worst.
+```{r}
+
+```
+
+## Departure vs. Arrival Delays
+
+Plot arrival delays (y) versus departure delays (x). Add a line showing y = x using `geom_abline()`. Use `coord_fixed()` so that the x- and y-axis units have the same scaling. 
+```{r }
+
+```
+
+Zoom in on the lower corner of the plot by filtering for cases where both the departure and arrival delays are less than one hour, or by adjusting the axes to only show those observations. Color the points by whether or not the arrival was delayed. Use `alpha` to better visualize overlapping points.
+```{r}
+
+```
+
+
+## Flight Speed vs. Distance
+
+Plot average speed (y) versus distance (x) for the full dataset. Color the points by whether departure was on-time or delayed.
+```{r}
+
+```
+
+## Analysis Discussion 2
+
+1. There are flights in this dataset with negative departure delay times. What does that mean?
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+2. What is the distribution shape for departure delay times? Why does this shape make sense?
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+3. What do the mean and median each tell us about the length of a "typical" flight delay to the chosen destination? Which is a better measure of center, in context? Explain your reasoning.
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+4. If we consider only on-time departure rates and variability in departure delays to the chosen destination, which airport seems to be the best one to fly out of? Explain your reasoning.
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+5. Is there a relationship between departure delays and arrival delays to the chosen destination? If so, describe it. What is the cutoff point for departure delays where you can still reasonably expect to get to the destination on time? Explain your reasoning.
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+6. Describe the relationship between average speed and distance. Given the context, why does this shape make sense? Does average speed seem to be influenced by whether or not a flight was delayed? Explain your reasoning.
+
+# Session Information
+
+```{r}
+sessionInfo()
+```
+
