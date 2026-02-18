@@ -53,25 +53,29 @@ names(flightdata)
 
 Variable definitions are important for understanding data. View the dataset's codebook by entering `?nycflights` in the Console, or search in the Help tab of the Files pane using the dataset's name. Briefly define each variable in the dataset, including the units of measure for all numerical variables. Search online for the airport names that correspond to the U.S. airport codes JFK, LGA and EWR. Your definitions do not need to be complete sentences.
 
-* year: 
-* month: 
-* day: 
-* dep_time: 
-* dep_delay: 
-* arr_time: 
-* arr_delay: 
-* carrier: 
-* tailnum: 
-* flight: 
-* origin: 
-* dest: 
-* air_time: 
-* distance: 
-* hour: 
-* minute: 
-* JFK: 
-* LGA: 
-* EWR: 
+* `year`: the year of the flight departure (2013 in all cases)
+* `month`: the month of the flight departure
+* `day`:  the day of the flight departure
+* `dep_time`: the time the flight departed, per local time zone
+* `dep_delay`: minutes the flight's departure was delayed past its schedule departure time
+* `arr_time`: the time the flight arrived, per local time zone
+* `arr_delay`: minutes the flight's arrival was delayed past its schedule arrival time
+* `carrier`: the two-letter abbreviation for the airline running the flight
+* `tailnum`: the tail number of the plane for the flight
+* `flight`: the flight number for the flight
+* `origin`: the airport from which the flight departed
+* `dest`: the airport to which the flight was headed
+* `air_time`: minutes the plane spend in the air for that flight
+* `distance`: miles the plane flew on that flight
+* `hour`: the hour of the flight departure time (combines with `minute` to get the full time)
+* `minute`: the minute of the flight departure time (combines with `hour` to get the full time)
+* `JFK`: John F. Kennedy International Airport
+* `LGA`: LaGuardia Airport
+* `EWR`: Newark Liberty International Airport
+
+Note: Other wordings are possible/acceptable for these definitions.
+
+---
 
 Create a new variable that identifies departures as "on-time" or "delayed," where any flight delayed less than five minutes is considered "on-time." Create a similar variable for arrivals, where "on time" is any flight that was less than five minutes late. Also make a variable that represents the average speed traveled by the plane for each flight, in miles per hour (mph).
 
@@ -106,7 +110,7 @@ Use the `geom_bar()` function to make a barplot showing the proportion of flight
 ggplot(flightdata, aes(x = origin, y = after_stat(prop), group = 1)) +
   geom_bar() +
   labs(
-    title = "proportion of sampled flights originating from EWR, JFK, and LGA",
+    title = "Proportion of sampled flights originating from EWR, JFK, and LGA",
     x = "originating airport",
     y = "proportion of flights"
   )
@@ -120,7 +124,7 @@ ggplot(flightdata, aes(x = origin, y = after_stat(prop), group = 1)) +
   theme_minimal() +
   theme(panel.grid.major.x = element_blank()) +
   labs(
-    title = "proportion of sampled flights originating from EWR, JFK, and LGA",
+    title = "Proportion of sampled flights originating from EWR, JFK, and LGA",
     x = "originating airport",
     y = "proportion of flights"
   )
@@ -152,7 +156,7 @@ Use your saved table and the `geom_col()` function to create a barplot for the t
 ggplot(top5dest, aes(x = reorder(dest, -n), y = n)) +
   geom_col() +
   labs(
-    title = "top five destinations for flights originating from EWR, JFK, and LGA",
+    title = "Top five destinations for flights originating from EWR, JFK, and LGA",
     x = "originating airport",
     y = "number of flights"
   )
@@ -166,7 +170,7 @@ ggplot(top5dest, aes(x = reorder(dest, -n), y = n)) +
   theme(legend.position = "none") +
   scale_fill_brewer(palette = "Dark2") +
   labs(
-    title = "top five destinations for flights originating from EWR, JFK, and LGA",
+    title = "Top five destinations for flights originating from EWR, JFK, and LGA",
     x = "originating airport",
     y = "number of flights"
   )
@@ -184,23 +188,33 @@ top3dest
 
 Using `geom_col(position = position_dodge2(preserve = "single"))`, and `fill = origin` in the overall plot aesthetics, create a barplot for the top three destinations grouped by airport.
 ```{r fig.height = 2}
+# Minimal required
 ggplot(top3dest, aes(x = dest, y = n, fill = origin)) +
-  geom_col(position = position_dodge2(preserve = "single"))
+  geom_col(position = position_dodge2(preserve = "single")) +
+  labs(
+    title = "Top three destinations by airport from EWR, JFK, and LGA",
+    x = "originating airport",
+    y = "number of flights"
+  )
 ```
 
 ## Analysis Discussion 1
 
 1. How do total flight departures compare across the three airports? Discuss this as if I cannot see your table or plot (e.g., cite relevant summary statistics)
 
-ERASE AND TYPE YOUR ANSWER HERE
+About one-third of the flights originate from each airport. More specifically, a little over $35\%$ take off from EWR, a little under $35\%$ take off from JFK, and about $30\%$ take off from LGA. 
 
 2. What are the top five flight destinations? What fraction of flights do they represent overall? Does this set of destinations make sense to you? Discuss.
 
-ERASE AND TYPE YOUR ANSWER HERE
+The top five destinations are (1 to 5): Atlanta (ATL), New Orleans (ORD), Los Angeles (LAX), Boston (BOS) and Charlotte (CLT). They represent about `r round(100*sum(top5dest$prop))`% of all flights from EWR, JFK, and LGA. This set of destinations makes sense. They are all in major cities, and serve as transfer hubs and/or international departure points. 
 
 3. Discuss similarities and differences between the top three destinations for each airport, and make relevant comparisons to the top five overall airports. 
 
-ERASE AND TYPE YOUR ANSWER HERE
+When looking at the top three destinations for each airport, the set includes all of the overall top five destinations found above, plus San Francisco (SFO). However, each airport has a different set. BOS, CLT, and LAX are among the top three destinations for only one airport each, while ATL, ORD, and SFO are each on two airports' lists. 
+
+* EWR's top three are ORD, ATL, and SFO, with roughly equal numbers of flights (~500 to 600 each).
+* JFK's ordered top three are LAX, SFO, and BOS. LAX has about twice as many flights (~1200) as BOS (~600), with SFO halfway between.
+* LGA's ordered top three are ATL, ORD, and CLT. CLT has about two-thirds as many flights (~600) as ATL (~900), with ORD halfway between. 
 
 # Numerical Analysis
 
@@ -213,11 +227,40 @@ flightdataATL <- flightdata |>
 ```
 
 Make a histogram and boxplot to visualize the distribution of departure delays and identify outliers. Use 120 bins for your histogram.
-```{r fig.height = 2}
+```{r fig.height = 4}
+# Minimal required
 ggplot(flightdataATL, aes(x = dep_delay)) +
-  geom_histogram(bins = 120)
+  geom_histogram(bins = 120) +
+  labs(
+    title = "Distribution of departure delays",
+    x = "departure delay in minutes",
+    y = "number of delays"
+  )
+```
+
+```{r fig.height = 2.2}
+# Minimal required
 ggplot(flightdataATL, aes(x = dep_delay)) +
-  geom_boxplot()
+  geom_boxplot() +
+  labs(
+    title = "Distribution of departure delays",
+    x = "departure delay in minutes"
+  )
+```
+
+```{r fig.height = 2.2}
+# Added formatting
+ggplot(flightdataATL, aes(x = dep_delay)) +
+  geom_boxplot(fill = "lightblue") +
+  labs(
+    title = "Distribution of departure delays",
+    x = "departure delay in minutes"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+  )
 ```
 
 Calculate the mean and median departure delay, as well as the standard deviation, IQR, and upper and lower fences used to identify outliers in the boxplot.
@@ -225,7 +268,7 @@ Calculate the mean and median departure delay, as well as the standard deviation
 flightdataATL |>
   summarize(
     mean_dd = mean(dep_delay),
-    median_dd = median(dep_delay),
+    med_dd = median(dep_delay),
     sd_dd = sd(dep_delay),
     iqr_dd = IQR(dep_delay),
     lf_dd = fivenum(dep_delay)[2] - iqr_dd,
@@ -240,7 +283,7 @@ flightdataATL |>
   summarize(
     n_origin = n(),
     mean_dd = mean(dep_delay),
-    median_dd = median(dep_delay),
+    med_dd = median(dep_delay),
     sd_dd = sd(dep_delay),
     iqr_dd = IQR(dep_delay),
     lf_dd = fivenum(dep_delay)[2] - iqr_dd,
@@ -264,8 +307,7 @@ flightdataATL |>
   ggplot(aes(x = dep_delay, y = arr_delay)) +
   geom_point() +
   geom_abline(slope = 1, intercept = 0) +
-  coord_fixed() +
-  theme_minimal()
+  coord_fixed()
 ```
 
 Zoom in on the lower corner of the plot by filtering for cases where both the departure and arrival delays are less than one hour, or by adjusting the axes to only show those observations. Color the points by whether or not the arrival was delayed. Use `alpha` to better visualize overlapping points.
