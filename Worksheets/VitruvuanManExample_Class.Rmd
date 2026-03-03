@@ -1,0 +1,35 @@
+---
+title: "Regression: Vitruvian Man Example"
+date: "2026-02-12"
+output:
+  html_document:
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globaloptions, include = FALSE}
+# this block will run but not appear in the knitted doc due to include = FALSE
+knitr::opts_chunk$set(      # set global doc options for knitting
+  message = FALSE,          # suppress R messages when knitting
+  warning = FALSE,          # suppress R warnings when knitting
+  comment = NA              # eliminate leading ## in code output
+)
+```
+
+```{r}
+library(tidyverse)
+library(moderndive)
+library(kableExtra)
+```
+
+```{r}
+anthro <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/anthropometric.csv")
+glimpse(anthro)
+```
+
+If we want to try to explain or predict a person's armspan using their height, the simple regression model would have the general form $armspan = \beta_0 + \beta_1 (height) + \epsilon$. If Vitruvius is correct and people are perfect squares, then what would be the model's slope and y-intercept values?
+
+$$armspan = yintercept + slope (height)$$
+
+We will add more here!
+

@@ -1,0 +1,220 @@
+---
+title: "CH11: Hypothesis Testing with Randomization"
+output:
+  html_document:
+    theme: yeti
+    highlight: textmate
+    toc: true
+    toc_depth: 4
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE,
+  comment = NA 
+)
+```
+
+```{r}
+library(tidyverse)
+library(openintro)
+library(janitor)
+library(infer)
+```
+
+## Discrimination Experiment
+
+### Description and Hypotheses
+
+Research question: "Are individuals who identify as female discriminated against in promotion decisions made by bank managers who identify as male?"
+
+Male bank supervisors were asked to assess a personnel file to decide whether or not the person should be promoted to a branch manager position. The files were identical, except that half indicated the candidate identified as male and the other half indicated the candidate identified as female. These files were randomly assigned to the bank managers.
+
+**Null hypothesis** $H_0$: The variables sex and decision are independent. The difference in the observed promotion rates was due to natural variability inherent in the population and the processes of random sampling and/or random assignment.
+
+**Alternative hypothesis** $H_a$: The variables sex and decision are not independent. The difference in observed promotion rates was not due to natural variability; equally qualified female personnel are less likely to be promoted than male personnel.
+
+To test our null hypothesis, we will look at the observed difference between the proportions of people who were promoted in each experimental group ($\hat{p}_{male} - \hat{p}_{female}$) to asses whether or not natural variability (randomness) is a plausible explanation.
+
+Another way to think about this testing process is conditional probability. If we start off assuming $H_0$ is true (i.e., *given* a true $H_0$), what is the probability that we would observe the experimental results just because of natural (random) variability?
+
+### Explore the Dataset
+
+#### Load Data and Glimpse
+```{r}
+# the sex_discrimination dataset is in openintro
+
+discrim <- sex_discrimination
+glimpse(discrim)
+```
+
+#### Summarize and Visualize
+```{r}
+# make a two-way table using the janitor package
+
+discrim |>
+  tabyl(decision, sex)
+```
+
+```{r}
+# convert the counts into proportions in columns
+
+discrim |>
+  tabyl(decision, sex) |>
+  adorn_percentages("col") |>
+  mutate(difference = male - female) |>
+  adorn_rounding(digits = 3)
+```
+
+```{r}
+# visualize the proportion promoted in each group
+
+ggplot(discrim, aes(x = sex, fill = decision)) +
+  geom_bar(position = "fill", width = 0.5, color = "#373737") +
+  theme_minimal() +
+  scale_fill_manual(values = c("skyblue", "orange"))
+```
+
+### Randomization Test Using an Applet
+
+ISI Multiple Proportion Applet: https://www.rossmanchance.com/applets/2021/chisqshuffle/ChiSqShuffle.htm?hideExtras=1 
+
+### Randomization Test Using `infer` Package
+
+#### Find the Observed Difference
+```{r}
+# compute the observed difference in the dataset
+
+obs_diff_prop <- discrim |> 
+  specify(response = decision, explanatory = sex, success = "promoted") |>
+  calculate(stat = "diff in props", order = c("male", "female"))
+
+obs_diff_prop
+
+# An alternative: specify(formula = decision ~ sex, success = "promoted")
+```
+
+#### Explore One Random Shuffling
+```{r}
+# perform one random shuffle of the data
+
+shuffle_1 <- discrim |>
+  specify(response = decision, explanatory = sex, success = "promoted") |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1, type = "permute")
+
+head(shuffle_1)
+
+# tabulate the randomly shuffled data
+
+shuffle_1 |>
+  tabyl(decision, sex) |>
+  adorn_percentages("col") |>
+  mutate(difference = male - female) |>
+  adorn_rounding(digits = 3)
+
+# visualize the randomly shuffled data
+ggplot(shuffle_1, aes(x = sex, fill = decision)) +
+  geom_bar(position = "fill", width = 0.5, color = "#373737") +
+  theme_minimal() +
+  scale_fill_manual(values = c("skyblue", "orange"))
+```
+
+```{r}
+null_dist_raw <- discrim |>
+  specify(response = decision, explanatory = sex, success = "promoted") |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute")
+```
+
+#### Simulate the Null Distribution
+```{r}
+# generate the null distribution of the statistic
+# do 1000 random shuffles and compute group diffs
+
+null_dist <- discrim |>
+  specify(response = decision, explanatory = sex, success = "promoted") |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in props", order = c("male", "female"))
+
+head(null_dist)
+```
+
+#### Assess Statistical Significance
+```{r}
+# calculate the test p-value
+# direction determined by Ha
+
+null_dist |>
+  get_p_value(obs_stat = obs_diff_prop, direction = "greater")
+```
+
+```{r}
+# visualize the p-value calculation
+
+null_dist |>
+  visualize(bins = 12) +
+  shade_p_value(obs_stat = obs_diff_prop, direction = "right") +
+  # all of the lines below are extras
+  scale_x_continuous(breaks = seq(-1, 1, by = 0.10)) +
+  annotate(
+    "label",
+    x = pull(obs_diff_prop) + 0.01,
+    y = 100,
+    label = "observed difference",
+    hjust = 0
+  ) +
+  theme_minimal()
+```
+
+## Opportunity Cost Experiment
+
+### Description and Hypotheses
+
+Do college student consumers always consider that money not spent now can be spent later? In particular, we are interested in whether reminding students about this fact causes them to be more thrifty.
+
+$H_0$: Reminding students that they can save money for later purchases will not have any impact on students’ spending decisions. The two variables are *independent*.
+
+$H_a$: Reminding students that they can save money for later purchases will reduce the chance they will continue with a purchase. The two variables are *dependent*.
+
+### Explore the Dataset
+
+#### Load Data and Glimpse
+```{r}
+oppcost <- opportunity_cost
+glimpse(oppcost)
+```
+
+#### Summarize and Visualize
+```{r}
+
+```
+
+### Randomization Test Using `infer` Package
+
+#### Find the Observed Difference
+```{r}
+
+```
+
+#### Explore One Random Shuffling
+```{r}
+
+```
+
+#### Simulate the Null Distribution
+```{r}
+
+```
+
+#### Assess Statistical Significance
+```{r}
+
+```
+
+```{r}
+
+```
+

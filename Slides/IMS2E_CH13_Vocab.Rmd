@@ -1,0 +1,70 @@
+---
+title: "IMS2E Chapter 14<br>Vocabulary Terms"
+subtitle: "STT 5811 Statistical Concepts and Applications"
+author: "Jill E. Thomley | Appalachian State University"
+date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+
+## 
+
+**<mark>95% confidence interval</mark> :**
+
+**<mark>95% confident</mark> :**
+
+**<mark>Central Limit Theorem</mark> :**
+
+**<mark>margin of error (ME)</mark> :** a multiple of the standard error (SE) of a statistic, used to describe how far observed values of a statistic are are from their mean; if the sampling distribution is normal, then it can be expressed as $ME = z^* \times SE$
+
+##
+
+**<mark>normal curve</mark> :** a symmetric, unimodal, bell-shaped model with two parameters: **mean** ($\mu$) and **standard deviation** ($\sigma$) --- this is what we often hear called "the bell curve" in everyday speech
+
+**<mark>normal distribution</mark> :** another name for the normal probability curve/model
+
+**<mark>normal model</mark> :** another name for the normal curve/distribution
+
+The normal probability distribution or model can be abbreviated as $N(\mu, \sigma)$.
+
+**Note:** In many resources, especially theoretical probability texts, the abbreviation is $N(\mu, \sigma^2)$, giving the variance instead of the standard deviation. Be sure you know which is being used.
+
+**<mark>standard normal distribution</mark> :** a normal distribution that has a mean of $0$ and $\sigma = \sigma^2 = 1$, written as $Z \sim N(0,1)$
+
+
+##
+
+**<mark>normal probability table</mark> :** tabulated values of areas under the normal curve, used to find percentiles and/or probabilities (we more typically use statistical software now, but these are often found in introductory statistics textbooks)
+
+**<mark>null distribution</mark> :** a conditional sampling distribution generated or created under the the assumption that the null hypothesis is true (e.g., $H_0: p = 0.1$, $H_0: p_1 - p_2 = 0$, or $H_a: \mu = 5$)
+
+**<mark>parameter</mark> :** a summary measure for a population, such as the mean (for a numerical variable) or proportion (for a categorical variable); the "true" value of interest
+
+**<mark>percentile</mark> :** the percentage of values in a distribution that are less than or equal to a given value (e.g., the median is the $50^{th}$ percentile); in a normal distribution they equate to areas under the curve or cumulative probabilities 
+
+
+##
+
+**<mark>sampling distribution</mark> :** the distribution of all possible values of a sample statistic from samples of a given sample size ($n$) from a given population; it describes how sample statistics (e.g., $\hat{p}$ or $\bar{x}$) vary from one sample or study to another 
+
+**<mark>standard error (SE)</mark> :** an estimate of the standard deviation (SD) of the sampling distribution of a statistic; in this context, "error" is another term for variation
+
+
+
+##
+
+**<mark>Z score</mark> :** the Z score of a given value is the number of standard deviations it falls above or below the mean of its distribution; ***Z*** is computed as follows, with value $x$, distribution mean $\mu$, and distribution standard deviation $\sigma$ 
+
+$$Z = \frac{x - \mu}{\sigma}$$
+
+**Note:** If $x$ has a normal distribution, then $Z$ will as well. Since it is a linear transformation, it preserves the shape.

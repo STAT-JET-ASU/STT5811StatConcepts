@@ -1,0 +1,32 @@
+---
+title: "IMS2E Chapter 14<br>Vocabulary Terms"
+subtitle: "STT 5811 Statistical Concepts and Applications"
+author: "Jill E. Thomley | Appalachian State University"
+date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+
+## 
+
+**<mark>TERM</mark> :**
+
+**<mark>TERM</mark> :**
+
+**<mark>TERM</mark> :**
+
+**<mark>TERM</mark> :**
+
+**<mark>TERM</mark> :**
+
+**<mark>TERM</mark> :**

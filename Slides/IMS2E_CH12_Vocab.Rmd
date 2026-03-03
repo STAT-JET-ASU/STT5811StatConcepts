@@ -1,0 +1,39 @@
+---
+title: "IMS2E Chapter 12<br>Vocabulary Terms"
+subtitle: "STT 5811 Statistical Concepts and Applications"
+author: "Jill E. Thomley | Appalachian State University"
+date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+
+## 
+
+https://openintro-ims.netlify.app/foundations-bootstrapping#terms
+
+**<mark>bootstrap percentile confidence interval</mark> :**
+
+bootstrap sample
+
+bootstrapping
+
+confidence interval
+
+**<mark>parameter</mark> :** a summary measure for a population, such as the mean (for a numerical variable) or proportion (for a categorical variable); the "true" value of interest
+	
+point estimate
+
+sampling with replacement
+
+**<mark>statistic</mark> :** a summary measure for a sample; commonly used as a point estimate for a parameter
+

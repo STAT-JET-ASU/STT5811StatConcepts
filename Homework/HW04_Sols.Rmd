@@ -1,0 +1,122 @@
+---
+title: "STT 5811 HW04: Linear Regression"
+subtitle: "SOLUTIONS"
+date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+fontsize: 12pt
+geometry: margin=0.75in
+output:
+  pdf_document:
+    toc: true
+    toc_depth: '2'
+    latex_engine: xelatex
+---
+
+# Instructions
+
+Do all even-numbered exercises except 6, 8, 12, 20, 26, and 28 in [**IMS2E Section 7.5**](https://openintro-ims.netlify.app/model-slr#sec-chp7-exercises). Use complete sentences and explain your answers where you are asked to do so. Write mathematics in [**LaTeX**](https://rpruim.github.io/s341/S19/from-class/MathinRmd.html) code when you calculate solutions or express the equations for regression models. 
+
+# Section 7.5 Exercises
+
+## Exercise 2
+
+a. The plot has a fan or cone shape. Residual variability around the regression line increases as $\hat{y}$ increases. Because of this association, a linear model would not be appropriate.
+
+b. The residual plot curves; the sign of the residual is associated with the magnitude of $\hat{y}$ because the data also must be curved. Therefore, linear model would not be appropriate.
+
+## Exercise 4
+
+a. This is a strong but nonlinear relationship; a straight line would *not* be a reasonable fit.
+
+b. This is a strong but nonlinear relationship; a straight line would *not* be a reasonable fit.
+
+c. This is a strong, positive linear relationship; a straight line would be a reasonable fit.
+
+d. This is a weak, positive linear relationship; a straight line would be a reasonable fit.
+
+e. This is a weak, negative linear relationship; a straight line would be a reasonable fit.
+
+f. This is a moderate, negative linear relationship; a straight line would be a reasonable fit.
+
+## Exercise 10
+
+Their correlation coefficient values will be the same, since the correlation coefficient is unitless.
+
+## Exercise 14
+
+a. $salary_{grad} = salary_{nongrad} + 5000$, with $r = 1$
+
+b. $salary_{grad} = 1.25 \times salary_{nongrad}$, with $r = 1$
+
+c. $salary_{grad} = 0.85 \times salary_{nongrad}$, with $r = 1$
+
+## Exercise 16
+
+Large scatter around the regression line (I) leads to greater uncertainty in the slope estimate. The residuals (error terms) would be larger, leading to a larger SSE and smaller Pearson correlation.
+
+## Exercise 18
+
+We underestimated. The residual is calculated as the observed value $y$ minus the predicted value $\hat{y}$, so a positive residual indicates that the observed value is larger than the predicted value.
+
+## Exercise 22
+
+a. Calculate the regression coefficients from the statistics, then use them to write the equation.
+
+* $r = 0.67$
+* $\bar{x} = 107.20$ cm
+* $\bar{y} = 171.14$ cm
+* $s_x = 10.37$ cm
+* $s_y = 9.41$ cm
+* n = 507
+
+$$b_1 = \frac{s_y}{s_x}r = \frac{9.41}{10.37} \times 0.67 = 0.61$$
+
+$$b_0 = \bar{y} - b_1\bar{x} = 171.14 - 0.61 \times 107.20 = 105.75$$
+
+$$\hat{y} = 105.75 + 0.61x$$
+
+b. The slope of $0.61$ *cm height per cm shoulder girth* (remember the units!) means that, for each centimeter increase in shoulder girth, we would expect an average increase of 0.61 centimeters in height. The intercept of $105.75$ *cm height* means that people with a shoulder girth of 0 cm are expected to average 106.39 cm tall. The $y$-intercept serves to properly set the height of the line, but it is otherwise meaningless in this problem context, because $x = 0$ is simply not a possible real-world value for a person's height.
+
+c. $R^2 = (r)^2 = (0.67)^2 = 0.4489$; This means about 45% of the variation in heights is explained by the model (i.e., shoulder girth).
+
+d. Plug $x = 100$ into the equation; $\hat{y} = 105.75 + 0.61x = 105.75 + 0.61 \times 100 = 166.75$ cm.
+
+e. The residual is $y = \hat{y} = 160 - 166.75 = -6.75$ cm.
+
+f. It would be inappropriate. This model is based on people who have shoulder girths between 85 and 135 cm. Predicting a child's height would require extrapolation beyond this data range, and the relationship between shoulder girth and height may not be the same for children. 
+
+## Exercise 24
+
+a. The linear model is $\hat{y} = -0.357 + 4.034x$ or $\widehat{heart\ wt\ (g)} = -0.357 + 4.034 \times body\ wt\ (kg)$.
+
+b. The expected heart weight of a cat with $0$ grams of body weight is the intercept $-0.357$ grams. An actual cat cannot have a weight of $0$ grams, nor could an actual heart weight be negative, so this value is not meaningful in context, aside from properly positioning the line.
+
+c. We would expect a cat's heart weight to increase by 4.034 grams, on average, for each added kilogram of body weight.
+
+d. Body weight of cats (via the linear model) explains $65\%$ of the variability in heart weight.
+
+e. The correlation coefficient is $\sqrt{R} = \sqrt{0.65} = 0.81$.
+
+## Exercise 30
+
+a. There is a weak/moderate, positive, linear association between the height and volume of black cherry trees. There also seems to be some non-constant variance, because the volume is more spread out (variable) for taller trees.
+
+b. There is a strong, positive association between the diameter and volume of black cherry trees. The relationship may be curved slight upward, which would make sense, since diameter and circumference (one component of volume) are nonlinearly related.
+
+c. The relationship between volume and diameter is stronger, so using diameter might be preferred. However, if the relationship is indeed nonlinear, we should a model type that accounts for this rather than our linear model.
+
+## Exercise 32
+
+a. The correlation coefficient is $\sqrt{R} = \sqrt{0.72} = -0.849$.
+
+b. The slope is $\displaystyle b_1 = \frac{s_y}{s_x}r = \frac{16.948}{26.724} \times -0.849 = -0.538$.
+
+   The intercept is $\displaystyle b_0 = \bar{y} - b_1\bar{x} = 30.883 + 0.538 \times 30.833 = 47.471$.
+   
+   The linear regression model for this relationship is therefore $\displaystyle \hat{y} = 47.471 - 0.538x$.
+
+c. For a neighborhood with $0\%$ reduced-fee lunch, we would expect an average of about $47\%$ of the bike riders to wear helmets.
+
+d. For every additional $1\%$ of children receiving reduced-fee lunch, there will be $0.537\%$ fewer bike riders wearing helmets, on average.
+
+e. The residual is $y - \hat{y} = 40 − (47.471 - 0.538 \times 40) = 14.461$. There are about $14\%$ more bike riders wearing helmets in this neighborhood than predicted by the regression model.
+
