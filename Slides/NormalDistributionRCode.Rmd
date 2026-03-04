@@ -1,0 +1,739 @@
+---
+title: "Normal Distribution:<br>Probabilities Using `R`"
+subtitle: "STT 5811 Statistical Concepts and Applications"
+author: "Jill E. Thomley | Appalachian State University"
+date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  comment = NA
+)
+library(tidyverse)
+library(gridExtra)
+library(kableExtra)
+```
+
+
+## Recall: The Normal Model
+
+$$X \sim N(\mu,\sigma^2)\ \text{or}\ X \sim N(\mu,\sigma)$$
+
+$x$ = {-$\infty$ to +$\infty$} 
+
+$\mu$ = the mean of the distribution  
+
+$\sigma^2$ = the variance of the distribution  
+
+$$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$
+
+$$F(x) = \text{no closed-form solution}$$
+
+$$E[X] = \mu \text{ and }Var[X] = \sigma^2$$
+
+
+## Recall: The Empirical Rule
+
+```{r, echo = FALSE, fig.height = 2.25}
+sn_pdf <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Standard Normal Distribution N(0, 1)",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_minimal()
+sn_pdf +
+  geom_vline(
+    xintercept = seq(-3, 3, 1),
+    linetype = "dashed",
+    linewidth = 1.25,
+    color = c("#785EF0", "#DC267F", "#FE6100", "black", "#FE6100", "#DC267F", "#785EF0")
+  )
+```
+
+* approximately <span style="color: #FE6100;">$68\%$</span> of the curve's area is between $\mu \pm 1\sigma$ 
+* approximately <span style="color: #DC267F;">$95\%$</span> of the curve's area is between $\mu \pm 2\sigma$ 
+* approximately <span style="color: #785EF0;">$99.7\%$</span> of the curve's area is between $\mu \pm 3\sigma$ 
+
+The tails extend to $\pm \infty$ ; any value of $x$ is *theoretically* possible. In any given problem context, there will be limits on the values.
+
+
+## Calculating the pmf or $f(x)$
+
+Recall the normal model's probability mass function (pmf).
+
+$$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$
+
+R has a function to solve the pmf for any normal model. Inputs may be single values or vectors. *We only use this for plotting the normal distribution, not for calculating probabilities.*
+
+<center>$f(x)$ = `dnorm(x, mean, sd)`</center><br>
+
+Note that the `R` function uses standard deviation ($\sigma$) rather than the variance ($\sigma^2$) as an input (argument) to the function. 
+
+
+##
+
+```{r, eval = FALSE}
+# plotting the standard normal (Z) pdf
+ggplot() + 
+  stat_function(
+    fun = dnorm, 
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070"
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4), 
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Z ~ N(μ = 0, σ = 1)", 
+    x = "x", 
+    y = "f(x)"
+  ) + 
+  theme_minimal()
+```
+
+
+## 
+
+The results of the code, with the pdf curve, shaded x-axis, and tick marks at $1\sigma$ intervals.
+
+```{r, echo = FALSE}
+ggplot() + 
+  stat_function(
+    fun = dnorm, 
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070"
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4), 
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Z ~ N(μ = 0, σ = 1)", 
+    x = "x", 
+    y = "f(x)"
+  ) + 
+  theme_minimal()
+```
+
+
+## General Plotting Code
+
+The code is split across this slide and the next.
+
+By inputting parameters as variables at the beginning, you only have to edit the labels for the problem context.
+
+```{r, eval = FALSE}
+# set the parameters of the normal model
+mu  <- 0
+sig <- 1
+
+# adapt the labels for the given problem
+ggplot() + 
+  stat_function(
+    fun = dnorm, 
+    args = list(mu, sigma)
+  ) +
+```
+
+
+## 
+
+Continued from the previous slide...
+
+```{r, eval = FALSE}
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(mu - (4 * sig), mu + (4 * sig)),
+    breaks = seq(from = mu - (4 * sig), to = mu + (4 * sig), by = sig)
+  ) +
+  labs(
+    title = "informative plot title", 
+    x = "description and units of x", 
+    y = "F(x)"
+  ) + 
+  theme_linedraw()
+```
+
+## Cumulative Distribution Function (CDF)
+
+Recall also the normal model's CDF.
+
+$$F(x)=P(X \leq x) = \int\limits_{-\infty}^{x} \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}dx$$
+
+$P(X \leq x)$ = `pnorm(q, mean, sd, lower.tail = TRUE)`
+
+$P(X > x)$ = `pnorm(q, mean, sd, lower.tail = FALSE)`
+
+For any continuous distribution $P(X = x) = 0$ (area under a single point is zero). Therefore, $P(X \leq x)$ and $P(X < x)$ are mathematically equivalent. However, we might use a *continuity correction* when approximating discretely measured data.
+
+
+## 
+
+```{r, eval = FALSE}
+# plotting the standard normal (Z) CDF
+ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Z ~ N(μ = 0, σ = 1)", 
+    x = "x", 
+    y = "F(x)"
+  ) +
+  theme_minimal()
+```
+
+
+## 
+
+The results of the code, with the CDF curve, shaded x-axis, and tick marks at $1\sigma$ intervals.
+
+```{r, echo = FALSE}
+ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Z ~ N(μ = 0, σ = 1)", 
+    x = "x", 
+    y = "F(x)"
+  ) +
+  theme_minimal()
+```
+
+
+## General Plotting Code
+
+The code is split across this slide and the next.
+
+By inputting parameters as variables at the beginning, you only have to edit the labels for the problem context.
+
+```{r, eval = FALSE}
+# set the parameters of the normal model
+mu  <- 0
+sig <- 1
+
+# adapt the labels for the given problem
+ggplot() + 
+  stat_function(
+    fun = pnorm, 
+    args = list(mu, sigma)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070") +
+```
+
+## 
+
+Continued from the previous slide...
+
+```{r, eval = FALSE}
+  scale_x_continuous(
+    limits = c(mu - (4 * sig), mu + (4 * sig)),
+    breaks = seq(from = mu - (4 * sig), to = mu + (4 * sig), by = sig)
+  ) +
+  labs(
+    title = "informative plot title", 
+    x = "description and units of x", 
+    y = "F(x)"
+  ) + 
+  theme_linedraw()
+```
+
+
+## Solving for Area Under the Curve #1
+
+```{r, fig.height = 2, echo = FALSE}
+pdf <- ggplot() + 
+  stat_function(
+    fun = dnorm, 
+    args = list(0, 1), 
+    geom = "area", 
+    fill = "#FE6100", 
+    xlim = c(-4, 0)
+  ) + 
+  stat_function(
+    fun = dnorm, 
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-4, 4), 
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Area to the left of x = 0", 
+    x = "x", 
+    y = "f(x)"
+  ) + 
+  theme_minimal()
+
+cdf <- ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Area to the left of x = 0",
+    x = "x",
+    y = "F(x)"
+  ) +
+  geom_segment(
+    aes(
+      x = 0, 
+      xend = 0, 
+      y = 0, 
+      yend = 0.5
+    ),
+    color = "#FE6100",
+    size = 1.25
+  ) +
+  geom_segment(
+    aes(
+      x = 0,
+      xend = -4,
+      y = 0.5,
+      yend = 0.5
+    ),
+    color = "#FE6100",
+    size = 1.25,
+    arrow = arrow(length = unit(0.5, "cm"))
+  ) +
+  theme_minimal()
+
+grid.arrange(pdf, cdf, ncol = 2)
+```
+
+```{r}
+pnorm(q = 0, mean = 0, sd = 1) #lower.tail = TRUE is the default
+pnorm(q = 0, mean = 0, sd = 1, lower.tail = FALSE) #area above 0
+```
+
+
+## Solving for Area Under the Curve #2
+
+```{r, fig.height = 2, echo = FALSE}
+pdf <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    geom = "area",
+    fill = "#648FFF",
+    xlim = c(-4, 1)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Area to the left of x = 1",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_minimal()
+
+cdf <- ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Area to the left of x = 1",
+    x = "x", y = "F(x)"
+  ) +
+  geom_segment(
+    aes(
+      x = 1,
+      xend = 1,
+      y = 0,
+      yend = pnorm(1)
+    ),
+    color = "#648FFF",
+    size = 1.25
+  ) +
+  geom_segment(
+    aes(
+      x = 1,
+      xend = -4,
+      y = pnorm(1),
+      yend = pnorm(1)
+    ),
+    color = "#648FFF",
+    size = 1.25,
+    arrow = arrow(length = unit(0.5, "cm"))
+  ) +
+  theme_minimal()
+
+grid.arrange(pdf, cdf, ncol = 2)
+```
+
+```{r}
+pnorm(q = 1, mean = 0, sd = 1) #lower.tail = TRUE is the default
+pnorm(q = 1, mean = 0, sd = 1, lower.tail = FALSE) # area above 1
+```
+
+
+## Solving for Area Between Two Values
+
+$$P(0 \leq X \leq 1) = \int\limits_{0}^{1}\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}dx$$
+
+```{r, fig.height = 1.8, echo = FALSE}
+P1 <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    geom = "area",
+    fill = "#648FFF",
+    xlim = c(-4, 1)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "area left of 1 minus...",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_minimal()
+
+P2 <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    geom = "area",
+    fill = "#FE6100",
+    xlim = c(-4, 0)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "area left of 0 equals...",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_minimal()
+
+P3 <- ggplot() +
+  stat_function(
+    fun = dnorm, args = list(0, 1),
+    geom = "area",
+    fill = "#DC267F",
+    xlim = c(0, 1)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "area between 0 and 1",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_minimal()
+
+grid.arrange(P1, P2, P3, ncol = 3)
+```
+
+```{r}
+pnorm(q = 1, mean = 0, sd = 1) - pnorm(q = 0, mean = 0, sd = 1)
+```
+
+
+## The Inverse CDF
+
+In the discussions above, we found the area to the left of a given point (or *quantile*) on the x-axis. Sometimes we need to solve the reverse kind of problem: given an area or probability, what is the corresponding quantile or quantiles?
+
+$F^{-1}(x)$ = `qnorm(p, mean, sd, lower.tail = TRUE)` 
+
+If the area is to the right of the unknown value x (the upper tail) rather than to the left (the lower tail), then specify upper tail.
+
+$F^{-1}(x)$ = `qnorm(p, mean, sd, lower.tail = FALSE)`
+
+If we know $\mu$, $\sigma$, and either the value(s) of x or the area(s)...
+
+`qnorm(p, mean, sd) = q` $\Longleftrightarrow$ `pnorm(q, mean, sd) = p`
+
+
+## Solving for the Quantile
+
+```{r, fig.height = 2, echo = FALSE}
+pdf <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    geom = "area",
+    fill = "#FE6100",
+    xlim = c(-4, qnorm(0.75))
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "What is the value of x?",
+    x = "x",
+    y = "f(x)"
+  ) +
+  annotate("label",
+    x = 0,
+    y = 0.1,
+    label = "area = 0.75"
+  ) +
+  theme_minimal()
+
+cdf <- ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "What is the value of x?",
+    x = "x", y = "F(x)"
+  ) +
+  geom_segment(
+    aes(
+      x = qnorm(0.75),
+      xend = qnorm(0.75),
+      y = 0.75,
+      yend = 0
+    ),
+    color = "#648FFF",
+    size = 1.25,
+    arrow = arrow(length = unit(0.5, "cm"))
+  ) +
+  geom_segment(
+    aes(
+      x = -4,
+      xend = 0.75,
+      y = 0.75,
+      yend = 0.75
+    ),
+    color = "#648FFF",
+    size = 1.25
+  ) +
+  theme_minimal()
+
+grid.arrange(pdf, cdf, ncol = 2)
+```
+
+```{r}
+(x_val <- qnorm(p = .75, mean = 0, sd = 1))
+pnorm(q = x_val, mean = 0, sd = 1)   # check the x, we get the area
+```
+
+
+## Sampling from a Normal Distribution
+
+In addition to calculating probabilities, we can simulate random normal values in `R` using `rnorm(n, mean, sd)`.
+
+*n* = the number of random values (sample size)
+
+*mean* = the mean of the distribution
+    
+*sd* = the standard deviation of the distribution
+
+As with the other *norm* functions, the default parameter settings in `rnorm()` are `mean = 0` and `sd = 1`. 
+
+If we want a sample from the standard normal distribution, we only need to enter a value for sample size, `rnorm(n)`.
+
+
+## 
+
+```{r}
+rnorm(5)
+rnorm(10)
+rnorm(25)
+```
+
+
+## Plotting the Sample
+
+```{r, include = FALSE}
+set.seed(0)
+```
+
+```{r, eval = FALSE}
+random_sample <- rnorm(100)
+
+ggplot(NULL, aes(x = random_sample)) +
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 20,
+    fill = "skyblue",
+    color = "white"
+  ) +
+  geom_density(linetype = "dashed") +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-5, 5),
+    breaks = seq(from = -5, to = 5, by = 1)
+  ) +
+  theme_minimal()
+```
+
+
+## Sample of Size 100
+
+```{r, echo = FALSE}
+random_sample <- rnorm(100)
+
+ggplot(NULL, aes(x = random_sample)) +
+  geom_histogram(
+    aes(y = after_stat(density)), 
+    bins = 20, 
+    fill = "skyblue", 
+    color = "white"
+  ) +
+  geom_density(linetype = "dashed") +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-5, 5), 
+    breaks = seq(from = -5, to = 5, by = 1)
+  ) +
+  theme_minimal()
+```
+
+
+## Sample of Size 1000
+
+```{r, include = FALSE}
+set.seed(0)
+```
+
+```{r, echo = FALSE}
+random_sample <- rnorm(1000)
+
+ggplot(NULL, aes(x = random_sample)) +
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 20,
+    fill = "skyblue",
+    color = "white"
+  ) +
+  geom_density(linetype = "dashed") +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-5, 5),
+    breaks = seq(from = -5, to = 5, by = 1)
+  ) +
+  theme_minimal()
+```
+
+
+## Sample of Size 1,000,000
+
+```{r, include = FALSE}
+set.seed(0)
+```
+
+```{r, echo = FALSE}
+random_sample <- rnorm(1000000)
+
+ggplot(NULL, aes(x = random_sample)) +
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 20,
+    fill = "skyblue",
+    color = "white"
+  ) +
+  geom_density(linetype = "dashed") +
+  geom_hline(yintercept = 0, color = "#707070") +
+  scale_x_continuous(
+    limits = c(-5, 5),
+    breaks = seq(from = -5, to = 5, by = 1)
+  ) +
+  theme_minimal()
+```
+
+
+## Sample of Size 1,000,000
+
+```{r}
+tibble(x = random_sample) |>
+  summarize(
+    mean_x = mean(x),
+    sd_x   = sd(x),
+    min_x  = min(x),
+    max_s  = max(x),
+    plusminus_1SD  = sum(x >= -1 & x <= 1)/length(x),
+    plusminus_2SD  = sum(x >= -2 & x <= 2)/length(x),
+    plusminus_3SD  = sum(x >= -3 & x <= 3)/length(x)
+  ) |>
+kable(digits = 3, align = "c")
+```
+

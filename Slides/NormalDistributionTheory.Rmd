@@ -1,0 +1,689 @@
+---
+title: "Normal Distribution:<br>Theory / Mathematics"
+subtitle: "STT 5811 Statistical Concepts and Applications"
+author: "Jill E. Thomley | Appalachian State University"
+date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  comment = NA,
+  echo = FALSE
+)
+library(tidyverse)
+library(gridExtra)
+# IBM colorblind-friendly color palette 
+# https://davidmathlogic.com/colorblind/#%23D81B60-%231E88E5-%23FFC107-%23004D40
+```
+
+
+## Notation and Parameters
+
+The normal distribution is a continuous probability distribution. Very few concepts in real life are truly normally distributed, but many are _approximately_ normal. The normal is also the limiting distribution for many common statistics and distributions, such as the binomial distribution when $n \rightarrow \infty$.
+
+$$X \sim N(\mu,\sigma^2)$$
+
+$x$ = {-$\infty$ to +$\infty$} = *the sample space*  
+
+$\mu$ = the mean of the distribution (expected value)
+
+$\sigma^2$ = the variance of the distribution  
+
+The **standard normal** distribution $Z$ has $\mu$ = 0 and $\sigma^2$ = $\sigma$ = 1.
+
+
+## Alternative Notation
+
+In probability theory, we tend to discuss the expected value and variance of random variables, and this is echoed in the common shorthand notation for the normal model, $N(\mu,\sigma^2)$.
+
+Standard deviation is the square root of variance, $\sigma = \sqrt{\sigma^2}$.
+
+For the normal distribution, standard deviation is connected to certain properties of the curve. Among other things, the values $\mu \pm \sigma$ are the inflection points where the concavity of the curve changes from being concave down to concave up.
+
+<hr>
+
+[The IMS2E textbook](https://openintro-ims.netlify.app/foundations-mathematical#normal-distribution-model) and `R` use $\sigma$ rather than $\sigma^2$ in their normal curve notation, using the shorthand notation $N(\mu,\sigma)$. 
+
+*In a new source or text, always check what notation they are using!*
+
+
+## Probability Density Function (pdf)
+
+Unlike the pmfs in discrete distributions, the probability density function (pdf) of a continuous distribution does not compute a probability, because the area under a point is zero. Instead, the pdf tells us the height of the function (y) at x. Below is the pdf of the normal distribution. 
+
+$$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$
+
+The shape is a "bell curve". The critical parameters $\mu$ and $\sigma$ will determine the location, height, and width. The area beneath a normal distribution is always 1.
+
+The mean can be any real number, and the standard deviation can be any positive real number. 
+
+
+## Standard Normal Density Function
+
+Again, the standard normal distribution has $\mu = 0$ and $\sigma = 1$. This simplifies the normal pdf expression.
+
+$$
+\begin{aligned}
+f(x) &= \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2} \\[0.75em]
+f(x) &= \frac{1}{\sqrt{2\pi}\times1}e^{-\frac{1}{2}\left(\frac{x-0}{1}\right)^2} \\[0.75em]
+f(x) &= \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2} \\[0.75em]
+\end{aligned}
+$$
+
+It is symmetric around $x = 0$, with height = $1/\sqrt{2\pi} = 0.3989$.
+
+## Visualizing the Standard Normal
+
+```{r, fig.height = 4.25}
+sn_pdf <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Standard Normal Distribution N(0, 1)",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_minimal()
+sn_pdf
+```
+
+Notice that there is very little area under the curve outside ± $3$.
+
+
+## Another Normal Distribution
+
+```{r, fig.height = 4.25}
+mu <- 69
+sigma <- 3
+ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(mu, sigma)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(mu - (4 * sigma), mu + (4 * sigma)),
+    breaks = seq(mu - (4 * sigma), mu + (4 * sigma), sigma)
+  ) +
+  labs(
+    title = "US Adult Male Heights ~ N(μ = 69, σ = 9)",
+    x = "inches",
+    y = "f(x)"
+  ) +
+  theme_minimal() +
+  annotate("label",
+    x = 69,
+    y = 0.05,
+    label = "same area"
+  ) +
+  annotate("label",
+    x = 62.0,
+    y = 0.10,
+    label = "different scaling"
+  ) +
+  geom_segment(aes(
+    x = c(59.5, 63),
+    xend = c(57, 66),
+    y = c(0.10, 0.0925),
+    yend = c(0.10, 0.001)
+  ),
+  arrow = arrow(length = unit(0.5, "cm")),
+  color = "#FE6100", size = 1.25
+  )
+```
+
+Notice that there is very little area under the curve outside ± $3\sigma$.
+
+
+## The Empirical Rule
+
+```{r, fig.height = 2.25}
+sn_pdf <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Standard Normal Distribution N(0, 1)",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_minimal()
+sn_pdf +
+  geom_vline(
+    xintercept = seq(-3, 3, 1),
+    linetype = "dashed",
+    linewidth = 1.25,
+    color = c("#785EF0", "#DC267F", "#FE6100", "black", "#FE6100", "#DC267F", "#785EF0")
+  )
+```
+
+* approximately <span style="color: #FE6100;">$68\%$</span> of the curve's area is between $\mu \pm 1\sigma$ 
+* approximately <span style="color: #DC267F;">$95\%$</span> of the curve's area is between $\mu \pm 2\sigma$ 
+* approximately <span style="color: #785EF0;">$99.7\%$</span> of the curve's area is between $\mu \pm 3\sigma$ 
+
+The tails extend to $\pm \infty$ ; any value of $x$ is *theoretically* possible. In any given problem context, there will be limits on the values.
+
+
+## Cumulative Distribution Function (CDF)
+
+The probability of the random variable $X$ taking on a value less than or equal to a specific value $x$ is found using the CDF, which integrates the area under the curve. This is similar to summing a discrete distribution like the binomial or calculating an empirical cumulative distribution function for a sample of data. 
+
+$$F(x) = P(X \leq x) = \int\limits_{-\infty}^{x}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}dx$$
+
+The normal distribution has no closed-form solution for $F(x)$. `R` has a function for the normal CDF (and its inverse, which we will discuss later). Prior to digital technology, people used [tables of solutions](http://www.z-table.com/) computed for the standard normal curve Z.
+
+
+## Visualizing the Standard Normal
+
+```{r, fig.height = 4.25}
+sn_cdf <- ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Standard Normal Distribution N(0, 1)",
+    x = "x",
+    y = "F(x)"
+  ) +
+  theme_minimal()
+sn_cdf
+```
+
+Notice the logistic (S) shape with the inflection point at $\mu = 0$.
+
+
+## Another Normal Distribution
+
+```{r, fig.height = 4.25}
+mu <- 69
+sigma <- 3
+ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(mu, sigma)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(mu - (4 * sigma), mu + (4 * sigma)),
+    breaks = seq(mu - (4 * sigma), mu + (4 * sigma), sigma)
+  ) +
+  labs(
+    title = "US Adult Male Heights ~ N(μ = 69, σ = 9)",
+    x = "inches",
+    y = "F(x)"
+  ) +
+  theme_minimal()
+```
+
+Notice the logistic (S) shape with the inflection point at $\mu = 69$.
+
+## 
+
+```{r, fig.height = 4.50}
+grid.arrange(sn_pdf, sn_cdf)
+```
+
+Notice how the two normal distribution plots correspond. Recall that CDF $F(x)$ is the integral of the pdf $f(x)$.
+
+
+## 
+
+```{r, fig.height = 2.6}
+ggplot() +
+  stat_function(
+    fun = dnorm, args = list(0, 1),
+    geom = "area",
+    fill = "#FE6100",
+    xlim = c(-4, 0)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "How much area under the curve is to the left of x = 0?",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_minimal()
+```
+
+```{r, fig.height = 2.6}
+ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Question is answered by evaluating the CDF at x = 0.",
+    x = "x", y = "F(x)"
+  ) +
+  geom_segment(aes(
+    x = 0,
+    xend = 0,
+    y = 0,
+    yend = 0.5
+  ),
+  color = "#FE6100",
+  size = 1.25
+  ) +
+  geom_segment(aes(
+    x = 0,
+    xend = -4,
+    y = 0.5,
+    yend = 0.5
+  ),
+  color = "#FE6100",
+  size = 1.25,
+  arrow = arrow(length = unit(0.5, "cm"))
+  ) +
+  theme_minimal()
+```
+
+
+## 
+
+```{r, fig.height = 2.6}
+ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    geom = "area",
+    fill = "#648FFF",
+    xlim = c(-4, 1)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "How much area under the curve is to the left of x = 1?",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_minimal()
+```
+
+```{r, fig.height = 2.6}
+ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Question is answered by evaluating the CDF at x = 1.",
+    x = "x", y = "F(x)"
+  ) +
+  geom_segment(aes(
+    x = 1,
+    xend = 1,
+    y = 0,
+    yend = pnorm(1)
+  ),
+  color = "#648FFF",
+  size = 1.25
+  ) +
+  geom_segment(aes(
+    x = 1,
+    xend = -4,
+    y = pnorm(1),
+    yend = pnorm(1)
+  ),
+  color = "#648FFF",
+  size = 1.25,
+  arrow = arrow(length = unit(0.5, "cm"))
+  ) +
+  theme_minimal()
+```
+
+
+## 
+
+```{r, fig.height = 2.6}
+ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    geom = "area",
+    fill = "#DC267F",
+    xlim = c(0, 1)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "How much area under the curve is between x = 0 and x = 1?",
+    x = "x", y = "f(x)"
+  ) +
+  theme_minimal()
+```
+
+```{r, fig.height = 2.6}
+ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Evaluate the CDF at both points and subtract the lower area.",
+    x = "x", y = "F(x)"
+  ) +
+  geom_segment(aes(
+    x = 0,
+    xend = 0,
+    y = 0,
+    yend = 0.5
+  ),
+  color = "#FE6100",
+  size = 1.25
+  ) +
+  geom_segment(aes(
+    x = 0,
+    xend = -4,
+    y = 0.5,
+    yend = 0.5
+  ),
+  color = "#FE6100",
+  size = 1.25,
+  arrow = arrow(length = unit(0.5, "cm"))
+  ) +
+  geom_segment(aes(
+    x = 1,
+    xend = 1,
+    y = 0,
+    yend = pnorm(1)
+  ),
+  color = "#648FFF",
+  size = 1.25
+  ) +
+  geom_segment(aes(
+    x = 1,
+    xend = -4,
+    y = pnorm(1),
+    yend = pnorm(1)
+  ),
+  color = "#648FFF",
+  size = 1.25,
+  arrow = arrow(length = unit(0.5, "cm"))
+  ) +
+  theme_minimal()
+```
+
+
+##
+
+In other words, solving is the equivalent of integrating between 0 and 1 using the standard normal CDF with $\mu = 0$ and $\sigma = 1$.
+
+$$P(0 \leq X \leq 1) = \int\limits_{x_1}^{x_2}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}dx = \int\limits_{0}^{1}\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}dx$$
+
+$$0.8413477 - 0.5 = 0.3413477$$
+
+```{r, fig.height = 2.3}
+P1 <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    geom = "area",
+    fill = "#648FFF",
+    xlim = c(-4, 1)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "area left of 1 minus...",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_minimal()
+
+P2 <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    geom = "area",
+    fill = "#FE6100",
+    xlim = c(-4, 0)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "area left of 0 equals...",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_minimal()
+
+P3 <- ggplot() +
+  stat_function(
+    fun = dnorm, args = list(0, 1),
+    geom = "area",
+    fill = "#DC267F",
+    xlim = c(0, 1)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "area between 0 and 1",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_minimal()
+
+gridExtra::grid.arrange(P1, P2, P3, ncol = 3)
+```
+
+
+## Finding the Quantiles
+
+```{r, fig.height = 2.25}
+ggplot() +
+  stat_function(
+    fun = dnorm, args = list(0, 1),
+    geom = "area",
+    fill = "#FE6100",
+    xlim = c(-4, 1)
+  ) +
+  stat_function(
+    fun = dnorm, 
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "What value of x has the given area to the left of it?",
+    x = "x",
+    y = "f(x)"
+  ) +
+  annotate("label",
+    x = 0,
+    y = 0.1,
+    label = "area = 0.8413447..."
+  ) +
+  theme_minimal()
+```
+
+```{r, fig.height = 2.25}
+ggplot() +
+  stat_function(
+    fun = pnorm, 
+    args = list(0, 1)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#707070"
+    ) +
+  scale_x_continuous(limits = c(-4, 4), breaks = seq(from = -4, to = 4, by = 1)) +
+  labs(
+    title = "Question is answered by taking the inverse of the CDF.",
+    x = "x", y = "F(x)"
+  ) +
+  geom_segment(aes(
+    x = 1,
+    xend = 1,
+    y = pnorm(1),
+    yend = 0
+  ),
+  color = "#648FFF",
+  size = 1.25,
+  arrow = arrow(length = unit(0.5, "cm"))
+  ) +
+  geom_segment(aes(
+    x = -4,
+    xend = 1,
+    y = pnorm(1),
+    yend = pnorm(1)
+  ),
+  color = "#648FFF",
+  size = 1.25
+  ) +
+  theme_minimal()
+```
+
+
+## More on Quantiles
+
+The quantiles are the cumulative percentages and percentiles labeled on the image below. Note the cumulative percentages associated with the Empirical Rule ($1\sigma$, $2\sigma$, and $3\sigma$ above and below $\mu$). These are true for all normal distributions.
+
+```{r, echo = FALSE, fig.align = "center"}
+knitr::include_graphics("images/normaldist.jpg", dpi = 75)
+```
+
+
+## But what about $P(X = x)?$
+
+The normal distribution is a continuous function, so the area under a point is zero and $P(X = x)$ is technically zero.
+
+Many variables are theoretically continuous, but measurements are always inherently discrete---we round all our measurements to some number of decimal places. 
+
+We treat $P(X = x)$ as a narrow area beneath the curve rather than a single point. For example, if I measure people's height in inches and round to two decimal places, the probability that a person is 70.00 inches tall (5'10") is modeled as the probability that they are between 69.995 and 70.005 inches.
+
+We *never* use the pmf to compute probabilities; it only maps the function, with $f(x)$ = the height of the curve at $x$.
+
+
+## Expected Value and Variance
+
+The theoretical expected value and variance for any distribution are generally found as follows. We cannot integrate $f(x)$, but it can be demonstrated that [expected value](https://statproofbook.github.io/P/norm-mean) and [variance](https://statproofbook.github.io/P/norm-var) simplify to the parameters $\mu$ and $\sigma^2$ for the normal distribution.
+
+$$E[X] = \int\limits_{-\infty}^{+\infty} x f(x) \rightarrow \mu$$
+
+$$Var[X] = \int\limits_{-\infty}^{+\infty} (x - \mu)^2 f(x) \rightarrow \sigma^2$$

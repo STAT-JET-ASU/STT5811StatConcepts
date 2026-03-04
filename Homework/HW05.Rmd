@@ -1,0 +1,97 @@
+---
+title: "STT 5811 HW05: Randomization and Bootstrapping"
+subtitle: "PUT YOUR NAME HERE"
+date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+fontsize: 12pt
+geometry: margin=0.75in
+output:
+  pdf_document:
+    toc: true
+    toc_depth: '2'
+    latex_engine: xelatex
+---
+
+# Instructions
+
+Do all even-numbered exercises in [**IMS2E Section 11.5**](https://openintro-ims.netlify.app/foundations-randomization#sec-chp11-exercises) and [**IMS2E Section 12.5**](https://openintro-ims.netlify.app/foundations-bootstrapping#sec-chp12-exercises). Use complete sentences and explain your answers where you are asked to do so. Write mathematics in [**LaTeX**](https://rpruim.github.io/s341/S19/from-class/MathinRmd.html) code when writing symbols $H_0$ and $H_a$, Greek letters like $\alpha$, or summaries like $\hat{p}_T$ or $\hat{p}_{control}$. 
+
+# Section 11.5 Exercises
+
+## Exercise 2
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
+e. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 4
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 6
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 8
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. Answer the three parts below. For ii, fill in the blanks using ALL CAPS.
+
+   i. ERASE AND TYPE YOUR ANSWER HERE
+
+   ii. We write *alive* on ___ cards representing patients who were alive at the end of the study, and *deceased* on ___ cards representing patients who were not. Then, we shuffle these cards and split them into two groups: one group of size ___ representing treatment, and another group of size ___ representing control. We calculate the difference between the proportion of cards in the treatment and control groups (treatment -- control) and record this value. We repeat this 100 times to build a distribution centered at ___ . Lastly, we calculate the proportion of simulations where the simulated differences in proportions are ___ . If this proportion is low, we conclude that it is unlikely to have observed such an outcome by chance and that the null hypothesis should be rejected in favor of the alternative.
+
+   iii. ERASE AND TYPE YOUR ANSWER HERE
+
+# Section 12.5 Exercises
+
+## Exercise 2
+
+ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 4
+
+A. ERASE AND TYPE YOUR ANSWER HERE
+
+B. ERASE AND TYPE YOUR ANSWER HERE
+
+C. ERASE AND TYPE YOUR ANSWER HERE
+
+D. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 6
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
+d. ERASE AND TYPE YOUR ANSWER HERE
+
+e. ERASE AND TYPE YOUR ANSWER HERE
+
+## Exercise 8
+
+a. ERASE AND TYPE YOUR ANSWER HERE
+
+b. ERASE AND TYPE YOUR ANSWER HERE
+
+c. ERASE AND TYPE YOUR ANSWER HERE
+
