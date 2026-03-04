@@ -1,0 +1,146 @@
+---
+title: "CH11: Inference with Mathematical Models"
+subtitle: "Working With the Normal Distribution"
+output:
+  html_document:
+    theme: yeti
+    highlight: textmate
+    toc: true
+    toc_depth: 4
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE,
+  comment = NA 
+)
+```
+
+```{r}
+library(tidyverse)
+library(openintro)
+```
+
+The `normTail` function: https://openintrostat.github.io/openintro/reference/normTail.html
+
+The normal distribution functions in `R`: https://rdrr.io/r/stats/Normal.html
+
+## SAT and ACT Scores Examples
+
+SAT scores follow a nearly normal distribution with a mean of 1500 points and a standard deviation of 300 points. ACT scores also follow a nearly normal distribution with mean of 21 points and a standard deviation of 5 points. Suppose Mel scored 1800 points on their SAT and Sian scored 24 points on their ACT. Who performed better?
+
+Note: This refers to the three-section version of the SAT (used in 2005–2015), where Math, Critical Reading, and Writing were each worth 800 points.
+
+### Mel's SAT Percentile, Z-score, and Plots
+```{r}
+melsat  <- 1800
+satmean <- 1500
+satsd   <- 300
+```
+
+```{r}
+# create the raw score plot
+
+```
+
+```{r}
+# find the raw score percentile
+
+```
+
+```{r}
+# calculate the z-score
+
+```
+
+```{r}
+# create the standardized score plot
+
+```
+
+```{r}
+# find the z-score from the percentile
+
+```
+
+### Sian's ACT Percentile, Z-score, and Plots
+```{r}
+sianact <- 24
+actmean <- 21
+actsd   <- 5
+```
+
+```{r}
+# create the raw score plot
+
+```
+
+```{r}
+# find the raw score percentile
+
+```
+
+```{r}
+# calculate the z-score
+
+```
+
+```{r}
+# create the standardized score plot
+
+```
+
+```{r}
+# find the z-score from the percentile
+
+```
+
+### Mel's ACT Percentile
+
+Suppose Mel also took the ACT and scored at the exact same percentile as his SAT score. What would be his ACT raw score?
+```{r}
+# plot of the percentile
+
+```
+
+```{r}
+# raw score calculation
+
+```
+
+### Shannon's SAT Performance
+
+Shannon is a randomly chosen SAT taker; nothing is known about their aptitude. What is the probability they score at least 1630?
+```{r}
+# plot of the raw scores
+
+```
+
+```{r}
+# raw probability calculation
+
+```
+
+```{r}
+# z-scores calculations
+
+```
+
+```{r}
+# plot of the z-scores
+
+```
+
+```{r}
+# z-scores probability calculation
+
+```
+
+### Random Score Generation
+
+Generate scores for 100 randomly selected SAT-takers.
+```{r}
+
+```
+
