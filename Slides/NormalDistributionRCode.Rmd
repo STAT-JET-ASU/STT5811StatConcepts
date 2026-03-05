@@ -75,9 +75,9 @@ sn_pdf +
 The tails extend to $\pm \infty$ ; any value of $x$ is *theoretically* possible. In any given problem context, there will be limits on the values.
 
 
-## Calculating the pmf or $f(x)$
+## Calculating the pdf or $f(x)$
 
-Recall the normal model's probability mass function (pmf).
+Recall the normal model's probability density function (pdf).
 
 $$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$
 
@@ -172,7 +172,7 @@ Continued from the previous slide...
     x = "description and units of x", 
     y = "F(x)"
   ) + 
-  theme_linedraw()
+  theme_minimal()
 ```
 
 ## Cumulative Distribution Function (CDF)
@@ -269,7 +269,7 @@ Continued from the previous slide...
     x = "description and units of x", 
     y = "F(x)"
   ) + 
-  theme_linedraw()
+  theme_minimal()
 ```
 
 

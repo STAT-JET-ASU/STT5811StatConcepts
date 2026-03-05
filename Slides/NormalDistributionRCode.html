@@ -3221,7 +3221,7 @@ line-height: 1.9;
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Wednesday, March 04, 2026 @ 03:57 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Thursday, March 05, 2026 @ 06:19 PM</p>
           </hgroup>
   </slide>
 
@@ -3256,9 +3256,9 @@ line-height: 1.9;
 
 <p>The tails extend to \(\pm \infty\) ; any value of \(x\) is <em>theoretically</em> possible. In any given problem context, there will be limits on the values.</p>
 
-</article></slide><slide class=""><hgroup><h2>Calculating the pmf or \(f(x)\)</h2></hgroup><article  id="calculating-the-pmf-or-fx">
+</article></slide><slide class=""><hgroup><h2>Calculating the pdf or \(f(x)\)</h2></hgroup><article  id="calculating-the-pdf-or-fx">
 
-<p>Recall the normal model’s probability mass function (pmf).</p>
+<p>Recall the normal model’s probability density function (pdf).</p>
 
 <p>\[f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\]</p>
 
@@ -3332,7 +3332,7 @@ ggplot() +
     x = &quot;description and units of x&quot;, 
     y = &quot;F(x)&quot;
   ) + 
-  theme_linedraw()</pre>
+  theme_minimal()</pre>
 
 </article></slide><slide class=""><hgroup><h2>Cumulative Distribution Function (CDF)</h2></hgroup><article  id="cumulative-distribution-function-cdf">
 
@@ -3403,7 +3403,7 @@ ggplot() +
     x = &quot;description and units of x&quot;, 
     y = &quot;F(x)&quot;
   ) + 
-  theme_linedraw()</pre>
+  theme_minimal()</pre>
 
 </article></slide><slide class=""><hgroup><h2>Solving for Area Under the Curve #1</h2></hgroup><article  id="solving-for-area-under-the-curve-1">
 
@@ -3483,20 +3483,20 @@ ggplot() +
 
 <pre class = 'prettyprint lang-r'>rnorm(5)</pre>
 
-<pre >[1]  0.8017681 -0.3333459 -0.1365105  0.6007050 -1.2364020</pre>
+<pre >[1] -0.42514667  0.15827522 -0.20057130  0.01225451 -0.92287730</pre>
 
 <pre class = 'prettyprint lang-r'>rnorm(10)</pre>
 
-<pre > [1]  0.7362646 -0.0732448 -0.2410188  0.6738524  1.9663735  0.8705494
- [7]  2.9713978  0.5497942 -0.7200550 -0.9640003</pre>
+<pre > [1]  1.75780673 -0.58020883 -0.55042599 -0.54447430  1.08569283  0.06235409
+ [7]  0.54166563  1.87304871 -1.00001485 -0.98251053</pre>
 
 <pre class = 'prettyprint lang-r'>rnorm(25)</pre>
 
-<pre > [1] -1.194403124  0.632993305 -1.046176134 -1.153984554 -0.366713277
- [6] -0.203972507  0.758315446  0.126025843 -0.380860698  0.292659288
-[11]  1.348265606 -0.010838975  0.009196095 -1.463401926 -0.565555622
-[16]  2.468634197  0.209365548  0.434049047  0.541479813  1.643131656
-[21]  0.412179353  0.458289075 -0.997426316  1.095911451 -0.311990372</pre>
+<pre > [1]  1.22676241 -0.43496777  0.15487137  0.21800597 -0.44683226  1.52815509
+ [7]  0.46053517  1.39036003  1.37975240  0.53907259  1.94746553  2.59787604
+[13] -0.02126329 -2.53493990  1.40718155  0.48992743 -1.18371818 -0.05677691
+[19]  0.85645504  2.44968554 -0.26330551 -0.69185786  0.68962177 -0.15054483
+[25] -0.55356120</pre>
 
 </article></slide><slide class=""><hgroup><h2>Plotting the Sample</h2></hgroup><article  id="plotting-the-sample">
 
